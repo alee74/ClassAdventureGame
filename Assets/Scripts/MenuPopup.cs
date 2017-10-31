@@ -6,27 +6,19 @@ using UnityEngine.UI;
 public class MenuPopup : MonoBehaviour {
 
 	public GameObject menuPopup;
-	bool menuIsUp;
+	private bool isShowing;
 
 	// Use this for initialization
 	void Start () {
-		menuPopup.SetActive (false); 
-		menuIsUp = false; 
+		isShowing = false;
+		menuPopup.SetActive (isShowing); 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetButtonDown ("Inventory")) {
-			if (menuIsUp == false) {
-				menuPopup.SetActive (true); 
-				menuIsUp = true; 
-			}
-		}
-		if (Input.GetButtonDown("Inventory")){
-			if (menuIsUp == true) {
-				menuPopup.SetActive (false); 
-				menuIsUp = false; 
-			}
+			isShowing = !isShowing;
+			menuPopup.SetActive (isShowing); 
 		}
 	}
 }
