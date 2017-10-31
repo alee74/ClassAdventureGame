@@ -1,9 +1,9 @@
 ﻿
 public static class ResourceInfo
 {
-    private static int foodStock;
-    private static int waterStock;
-    private static int woodStock;
+    private static int foodStock = 0;
+    private static int waterStock = 0;
+    private static int woodStock = 0;
 
     //get methods
     public static int getFoodStock()
