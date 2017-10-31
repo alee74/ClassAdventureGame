@@ -220,7 +220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &483385403
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -436,7 +436,8 @@ GameObject:
   - component: {fileID: 1620240559}
   - component: {fileID: 1620240558}
   - component: {fileID: 1620240562}
-  m_Layer: 0
+  - component: {fileID: 1620240563}
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,6 +555,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d79e92e3ca476047b0a00508efddb14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1620240563
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1620240557}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9d79e41e236a6e24296d8e0730aeff8b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &1881026824
 Prefab:
   m_ObjectHideFlags: 0
