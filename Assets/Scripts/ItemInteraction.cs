@@ -29,9 +29,21 @@ public class ItemInteraction : MonoBehaviour {
 			Destroy (resource);
 			wood++;
 		} else if (resource.gameObject.tag == "NPC") {
+			//NPCInteraction();
 			//launch interaction with NPC, maybe check whether friendly or hostile instead?
 		} else if(resource.gameObject.tag == "Event"){
 			//launch event, OR could just tag as water or wood
 		}
+	}
+
+	void NPCInteraction(){
+		//generate a random number
+		//choose between a series of interactions
+		//maybe generate whether it was positive or negative here?
+	}
+
+	void EventInteraction(){
+		//generate a random nubmer
+		//choose between a series of events
 	}
 }
