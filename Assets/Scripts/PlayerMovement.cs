@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour {
 	float speed = 5.0f;   
 	float inputX;
 	float inputY;
+	private Animator anim;
 
 
 	bool facingRight = true;
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Start () {
 		//pos = transform.position; 
 		theRigidBody = GetComponent<Rigidbody2D> ();
-
+		anim = GetComponent<Animator> ();
 
 	}
 
@@ -36,17 +37,26 @@ public class PlayerMovement : MonoBehaviour {
         if (notHittingObst)
         {
         */
-		if (Mathf.Abs(inputX) > 0)
-		{
-			theRigidBody.velocity = new Vector3(inputX * speed, 0f, 0f);
+		if (inputX > 0) {
+			theRigidBody.velocity = new Vector3 (inputX * speed, 0f, 0f);
+			anim.SetBool ("movingSide", true);
+		} else if (inputX < 0) {
+			theRigidBody.velocity = new Vector3 (inputX * speed, 0f, 0f);
+			anim.SetBool ("movingSide", true);
+		} else if (inputY < 0) {
+			theRigidBody.velocity = new Vector3 (0f, inputY * speed, 0f);
+			anim.SetBool ("movingDown", true);
+		} else if (inputY > 0) {
+			theRigidBody.velocity = new Vector3 (0f, inputY * speed, 0f);
+			anim.SetBool ("movingUp", true);
+		} else if (inputX == 0 && inputY == 0) {
+			anim.SetBool ("movingDown", false);
+			anim.SetBool ("movingUp", false);
+			anim.SetBool ("movingSide", false);
+			theRigidBody.velocity = new Vector3 (0f, 0f, 0f);
+		}
 
-			//pos += Vector3.right * inputX * Time.deltaTime * speed;
-		}
-		else
-		{
-			//pos += Vector3.up * inputY * Time.deltaTime * speed;
-			theRigidBody.velocity = new Vector3(0f, inputY * speed, 0f);
-		}
+
 		//}
 
 
