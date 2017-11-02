@@ -6,16 +6,18 @@ public class CharInfo : MonoBehaviour {
 
     public static List<CharInfo> characters = new List<CharInfo>();
     private string name;
-    private int health = 100;
-    private int strength = 10;
-    private int stamina = 100;
+    public int health = 100;
+    public int strength = 10;
+    public int stamina = 100;
 
-    private int maxHealth = 100;
-    private int maxStrength = 10;
-    private int maxStamina = 100;
+    public int maxHealth = 100;
+    public int maxStrength = 10;
+    public int maxStamina = 100;
 
-	// Use this for initialization
-	void Start () {
+   // public GameObject player;
+
+    // Use this for initialization
+    void Start () {
         name = "temp temper";
         characters.Add(this);
 	}
@@ -29,12 +31,10 @@ public class CharInfo : MonoBehaviour {
         if(newHealth > maxHealth)
         {
             health = maxHealth;
-            return;
         }
         if(newHealth < 0)
         {
             health = 0;
-            return;
         }
         health = newHealth;
     }
@@ -43,12 +43,10 @@ public class CharInfo : MonoBehaviour {
         if (newStamina > maxStamina)
         {
             stamina = maxStamina;
-            return;
         }
         if (newStamina < 0)
         {
             stamina = 0;
-            return;
         }
         stamina = newStamina;
     }
@@ -57,12 +55,10 @@ public class CharInfo : MonoBehaviour {
         if (health+changeHealth > maxHealth)
         {
             health = maxHealth;
-            return;
         }
         if (health+changeHealth <= 0)
         {
             health = 0;
-            return;
         }
         health += changeHealth;
     }
@@ -71,22 +67,26 @@ public class CharInfo : MonoBehaviour {
         if (stamina+changeStamina > maxStamina)
         {
             stamina = maxStamina;
-            return;
         }
         if (stamina+changeStamina <= 0)
         {
             stamina = 0;
-            return;
         }
         stamina += changeStamina;
     }
     public void addStrength(int changeStrength)
     {
-        if(changeStrength+strength <= 0)
+        if (strength + changeStrength > maxStrength)
+        {
+            strength = maxStrength;
+        }
+        if (strength + changeStrength <= 0)
         {
             strength = 0;
-            return;
         }
         strength += changeStrength;
     }
+
+
+
 }

@@ -9,8 +9,10 @@ public class Armory : MonoBehaviour {
         character.addStrength(1);
     }
 
+    /*
     void subOneStrength(CharInfo character)
     {
-        character.addStrength(-1);
+        character.increaseStamina(1);
     }
+    */
 }
