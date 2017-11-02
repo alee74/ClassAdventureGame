@@ -23,13 +23,13 @@ public class Barracks : MonoBehaviour {
         //character = GetComponent<CharInfo>();
         if (col.gameObject.tag == "Player")
         {
-            Debug.Log("Player Entered");
+            Debug.Log("Player Entered Barracks");
         }
         
         if (character.stamina < 100)
         {
             character.stamina += character.maxStamina - character.stamina;
-
+            Debug.Log("Stamina restored");
         }
         else
         {

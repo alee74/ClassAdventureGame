@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,13 +8,14 @@ public BarStats health;
 	public GameObject Char;
 
 
+    private int health;
+	private int maxhealth = 100;
 
 	// Use this for initialization
 
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.A)) {
 
 			Debug.Log("Health Restored");
 
@@ -28,21 +29,30 @@ public BarStats health;
 
 
 		// Restore Player Health
-		if(health.currentVal > health.maxVal) {
 
-			FindObjectOfType<HealthBar> ().FillBar ();
-		}
+
+
 
 
 	}
-		public void ReplinishHealth(CharInfo character)
-		{
-			character.addHealth(1);
-		}
-
-
 
 	//add method to view inventory
 
+	public void OnTriggerEnter2D(Collider2D col) {
+
+        character = col.gameObject.GetComponent<CharInfo>();
+        //character = GetComponent<CharInfo>();
+        if (col.gameObject.tag == "Player")
+        {
+            Debug.Log("Player Entered Hospital");
+        }
+
+        if (character.health < 100)
+        {
+            character.health += character.maxHealth - character.health;
+            Debug.Log("Player healed");
+        }
+        else
+        {
 
 }
