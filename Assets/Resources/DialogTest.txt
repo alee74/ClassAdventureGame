@@ -1,0 +1,4 @@
+Dialog One	Testing One	1	1	1
+Dialog Two	Testing Two	1	1	1
+Dialog Three	Testing Three	1	1	1
+Bandit One	I'm gonna steal your stuff, noob.	-1	-1	-1
