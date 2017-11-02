@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour {
     Rigidbody2D rgb;
     Animator anim;
     State state;
+	public int currentState;
     float speed = 5f;
     float jumpPower = 300f;
     bool isFacingRight;
@@ -32,6 +33,8 @@ public class PlayerScript : MonoBehaviour {
         state = State.Stand;
         jumpCheck = transform.Find("JumpCheck");
         grounded = false;
+
+		currentState = 0;
 	}
 	
 	// Update is called once per frame
@@ -41,22 +44,27 @@ public class PlayerScript : MonoBehaviour {
         //Debug.Log(grounded);
         DirectionFacing();
         HandleInput();
+
 	}
 
     void HandleInput()
     {
         switch (state)
         {
-            case State.Stand:
+			case State.Stand:
+				currentState = 0;
                 Stand();
                 break;
             case State.Walk:
+				currentState = 1;
                 Walk();
                 break;
             case State.Jump:
+				currentState = 1;
                 Jump();
                 break;
 			case State.Punch:
+				currentState = 3;
 				Punch ();
                 break;
         }
@@ -138,11 +146,11 @@ public class PlayerScript : MonoBehaviour {
 		bool inF = Input.GetKey(KeyCode.F);
 		if (inX == 0) {
 			ChangeState (State.Stand);
-		} else if (inX > 0) {
-			rgb.velocity = new Vector2 (inX*speed, 0);
-		} else if (inX < 0) {
+		} else {
 			rgb.velocity = new Vector2 (inX*speed, 0);
 		} 
+
+
         if (inY && grounded)
         {
             ChangeState(State.Jump);
@@ -152,8 +160,8 @@ public class PlayerScript : MonoBehaviour {
 
 		if (inF) {
 			ChangeState (State.Punch);
-			return;
 			Debug.Log("punch while walk");
+			return;
 		}
 
     }
