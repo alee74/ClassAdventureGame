@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Hospital : MonoBehaviour {
 
+    CharInfo character;
 
-	private int health; 
+    private int health; 
 	private int maxhealth = 100;
 
 	// Use this for initialization
@@ -34,20 +35,29 @@ public class Hospital : MonoBehaviour {
 
 	//add method to view inventory
 
-	public void OnTriggerEnter2D(Collider2D Player) {
-	
-		if (health <= 100) {
-			health += maxhealth - health;
-		
-		} else {
-			
-			Debug.Log ("Your Health Is Full");
-		
-		}
-			
+	public void OnTriggerEnter2D(Collider2D col) {
+
+        character = col.gameObject.GetComponent<CharInfo>();
+        //character = GetComponent<CharInfo>();
+        if (col.gameObject.tag == "Player")
+        {
+            Debug.Log("Player Entered Hospital");
+        }
+
+        if (character.health < 100)
+        {
+            character.health += character.maxHealth - character.health;
+            Debug.Log("Player healed");
+        }
+        else
+        {
+
+            Debug.Log("Your HP Is Full");
+
+        }
 
 
-	
-	}
+
+    }
 
 }
