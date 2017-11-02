@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using UnityEditor;
 
+
 public class TextReader : MonoBehaviour {
 
     GameObject textBox;
@@ -13,7 +14,7 @@ public class TextReader : MonoBehaviour {
     TextAsset binData;
     string[] dialogs;
     string[][] dialogLines;
-
+    string[] adjectives = new string[] { "old", "green", "squaemous" };
 	// Use this for initialization
 	void Start () {
         binData = Resources.Load("DialogTest") as TextAsset;
@@ -34,14 +35,14 @@ public class TextReader : MonoBehaviour {
     public string GetDialog(string dialogTitle) {
 
         bool found = false;
-        string storedResult = "NotFound2";
+        //string storedResult = "NotFound2";
 
         for (int i = 0; i < dialogLines.Length; i++) {
 
             if (dialogLines[i][0].Equals(dialogTitle))
             {
-                return dialogLines[i][1];
                 found = true;
+                return dialogLines[i][1].Replace("ADJECTIVE", adjectives[UnityEngine.Random.Range(0,3)]);
             }
 
         }
