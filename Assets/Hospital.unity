@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9409f83e8be7b4c76b02083a8169f7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillAmnt: 0.69
+  fillAmnt: 1
   fillcontent: {fileID: 576473945}
 --- !u!114 &48460054
 MonoBehaviour:
