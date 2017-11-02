@@ -1,21 +1,24 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class Hospital : MonoBehaviour {
 
+public BarStats health;
 
-	private int health; 
-	private int maxhealth = 100;
+
+
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown(KeyCode.A)) {
 
+			Debug.Log("Health Restored");
+		
+		}
 
 		// Resource menu Buy or upgrade health Items
 
@@ -25,29 +28,23 @@ public class Hospital : MonoBehaviour {
 
 
 		// Restore Player Health
-	
+		if(health.currentVal > health.maxVal) {
 
-
+			FindObjectOfType<HealthBar> ().FillBar ();
+		}
 
 
 	}
+		public void ReplinishHealth(CharInfo character)
+		{
+			character.addHealth(1);
+		}
+
+
 
 	//add method to view inventory
 
-	public void OnTriggerEnter2D(Collider2D Player) {
-	
-		if (health <= 100) {
-			health += maxhealth - health;
-		
-		} else {
-			
-			Debug.Log ("Your Health Is Full");
-		
-		}
-			
-
-
-	
-	}
 
 }
+
+
