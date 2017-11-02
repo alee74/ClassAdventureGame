@@ -132,7 +132,7 @@ public class PlayerScript : MonoBehaviour {
 
     void Walk()
     {
-		Debug.Log ("walking");
+		//Debug.Log ("walking");
         float inX = Input.GetAxis("Horizontal");
         bool inY = Input.GetKeyDown("space");
 		bool inF = Input.GetKey(KeyCode.F);
