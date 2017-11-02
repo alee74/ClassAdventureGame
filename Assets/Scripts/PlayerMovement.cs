@@ -39,20 +39,28 @@ public class PlayerMovement : MonoBehaviour {
         */
 		if (inputX > 0) {
 			theRigidBody.velocity = new Vector3 (inputX * speed, 0f, 0f);
-			anim.SetBool ("movingSide", true);
-		} else if (inputX < 0) {
+			anim.SetBool("movingSide", true);
+            anim.SetBool("movingUp", false);
+            anim.SetBool("movingDown", false);
+        } else if (inputX < 0) {
 			theRigidBody.velocity = new Vector3 (inputX * speed, 0f, 0f);
-			anim.SetBool ("movingSide", true);
-		} else if (inputY < 0) {
+			anim.SetBool("movingSide", true);
+            anim.SetBool("movingUp", false);
+            anim.SetBool("movingDown", false);
+        } else if (inputY < 0) {
 			theRigidBody.velocity = new Vector3 (0f, inputY * speed, 0f);
-			anim.SetBool ("movingDown", true);
-		} else if (inputY > 0) {
+			anim.SetBool("movingDown", true);
+            anim.SetBool("movingUp", false);
+            anim.SetBool("movingSide", false);
+        } else if (inputY > 0) {
 			theRigidBody.velocity = new Vector3 (0f, inputY * speed, 0f);
-			anim.SetBool ("movingUp", true);
-		} else if (inputX == 0 && inputY == 0) {
-			anim.SetBool ("movingDown", false);
-			anim.SetBool ("movingUp", false);
-			anim.SetBool ("movingSide", false);
+			anim.SetBool("movingUp", true);
+            anim.SetBool("movingDown", false);
+            anim.SetBool("movingSide", false);
+        } else if (inputX == 0 && inputY == 0) {
+			anim.SetBool("movingDown", false);
+			anim.SetBool("movingUp", false);
+			anim.SetBool("movingSide", false);
 			theRigidBody.velocity = new Vector3 (0f, 0f, 0f);
 		}
 

@@ -23,8 +23,8 @@ public class ItemsInInventory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        waterTxt.text = "Water: " + water;
-        foodTxt.text = "Food: " + food;
-        woodTxt.text = "Wood: " + wood;
+        waterTxt.text = "x" + water;
+        foodTxt.text = "x" + food;
+        woodTxt.text = "x" + wood;
 	}
 }
