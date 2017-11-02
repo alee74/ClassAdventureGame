@@ -37,8 +37,8 @@ public class PlayerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
-        Debug.Log(state);
-        Debug.Log(grounded);
+        //Debug.Log("State: " + state);
+        //Debug.Log(grounded);
         DirectionFacing();
         HandleInput();
 	}
@@ -56,7 +56,8 @@ public class PlayerScript : MonoBehaviour {
             case State.Jump:
                 Jump();
                 break;
-            case State.Punch:
+			case State.Punch:
+				Punch ();
                 break;
         }
     }
@@ -107,9 +108,11 @@ public class PlayerScript : MonoBehaviour {
 
     void Stand()
     {
+		//Debug.Log ("standing");
 		//rgb.velocity = new Vector2 (0, 0);
         float inX = Input.GetAxis("Horizontal");
         bool inY = Input.GetKeyDown("space");
+		bool inF = Input.GetKey(KeyCode.F);
         if (inX != 0)
         {
             ChangeState(State.Walk);
@@ -119,12 +122,20 @@ public class PlayerScript : MonoBehaviour {
             rgb.velocity = new Vector2(rgb.velocity.x, 0f);
             rgb.AddForce(new Vector2(0, jumpPower));
         }
+
+		if (inF) {
+			Debug.Log ("Should punch1");
+			ChangeState(State.Punch);
+			return;
+		}
     }
 
     void Walk()
     {
+		Debug.Log ("walking");
         float inX = Input.GetAxis("Horizontal");
         bool inY = Input.GetKeyDown("space");
+		bool inF = Input.GetKey(KeyCode.F);
 		if (inX == 0) {
 			ChangeState (State.Stand);
 		} else if (inX > 0) {
@@ -139,21 +150,24 @@ public class PlayerScript : MonoBehaviour {
             rgb.AddForce(new Vector2(0, jumpPower));
         }
 
+		if (inF) {
+			ChangeState (State.Punch);
+			return;
+			Debug.Log("punch while walk");
+		}
+
     }
 
     void Jump()
     {
+		Debug.Log ("jumping");
         float inX = Input.GetAxis("Horizontal");
-        if (inX > 0)
-        {
-            rgb.velocity = new Vector2(inX * speed, rgb.velocity.y);
-        }
-        else if (inX < 0)
-        {
-            rgb.velocity = new Vector2(inX * speed, rgb.velocity.y);
-        }
+		rgb.velocity = new Vector2(inX * speed, rgb.velocity.y);
+		grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
+
         if (grounded)
         {
+			Debug.Log ("Grounded!");
             ChangeState(State.Stand);
         }
 
@@ -162,7 +176,19 @@ public class PlayerScript : MonoBehaviour {
 
     void Punch()
     {
-        
+		//Punch!
+		Debug.Log("Punch");
+
+		//Need to change state?
+		float inX = Input.GetAxis("Horizontal");
+		bool inY = Input.GetKeyDown("space");
+
+		if (inX == 0) {
+			ChangeState (State.Stand);
+		} else {
+			rgb.velocity = new Vector2 (inX * speed, 0);
+			ChangeState (State.Walk);
+		}
     }
 
 }
