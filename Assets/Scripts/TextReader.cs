@@ -15,8 +15,9 @@ public class TextReader : MonoBehaviour {
     string[] dialogs;
     string[][] dialogLines;
     string[] adjectives = new string[] { "old", "green", "squaemous" };
-	// Use this for initialization
-	void Start () {
+    string[] nouns = new string[] { "dog", "cat", "bird" };
+    // Use this for initialization
+    void Start () {
         binData = Resources.Load("DialogTest") as TextAsset;
         //Debug.Log(binData);
         //string initialLines = binData.text;
@@ -42,7 +43,7 @@ public class TextReader : MonoBehaviour {
             if (dialogLines[i][0].Equals(dialogTitle))
             {
                 found = true;
-                return dialogLines[i][1].Replace("ADJECTIVE", adjectives[UnityEngine.Random.Range(0,3)]);
+                return dialogLines[i][1].Replace("ADJECTIVE", adjectives[UnityEngine.Random.Range(0,adjectives.Length)]).Replace("NOUN", nouns[UnityEngine.Random.Range(0, nouns.Length)]);
             }
 
         }
