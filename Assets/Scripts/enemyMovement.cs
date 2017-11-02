@@ -11,9 +11,13 @@ enum enemyState
 
 public class enemyMovement : MonoBehaviour {
 
-	PlayerScript playerScript;
+	Rigidbody2D rgb;
+	enemyState myState;
 
-	State enemyState;
+	PlayerScript playerScript;
+	GameObject player;
+
+	public float speed = 10f;
 
 	int maxHealth = 3;
 	int curHealth;
@@ -21,13 +25,35 @@ public class enemyMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		curHealth = maxHealth;
+		player = GameObject.FindGameObjectWithTag ("Player");
 		playerScript = GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ();
+		rgb = GetComponent<Rigidbody2D> ();
+
+		myState = enemyState.Walk;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (curHealth == 0) {
 			Destroy (gameObject);
+		}
+
+		HandleInput ();
+	}
+
+	void HandleInput()
+	{
+		switch (myState)
+		{
+		case enemyState.Stand:
+			//Stand();
+			break;
+		case enemyState.Walk:
+			Walk();
+			break;
+		case enemyState.Punch:
+			//Punch ();
+			break;
 		}
 	}
 
@@ -43,6 +69,15 @@ public class enemyMovement : MonoBehaviour {
 				curHealth = curHealth - 1;
 				Debug.Log (curHealth);
 			//}
+		}
+	}
+
+	void Walk() {
+		bool playerIsLeft = false;
+		if (transform.position.x > player.transform.position.x) {
+			rgb.velocity = new Vector2 (-0.1f*speed, 0);
+		} else {
+			rgb.velocity = new Vector2 (0.1f* speed, 0);
 		}
 	}
 }
