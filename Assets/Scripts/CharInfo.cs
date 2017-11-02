@@ -29,10 +29,12 @@ public class CharInfo : MonoBehaviour {
         if(newHealth > maxHealth)
         {
             health = maxHealth;
+            return;
         }
         if(newHealth < 0)
         {
             health = 0;
+            return;
         }
         health = newHealth;
     }
@@ -41,10 +43,12 @@ public class CharInfo : MonoBehaviour {
         if (newStamina > maxStamina)
         {
             stamina = maxStamina;
+            return;
         }
         if (newStamina < 0)
         {
             stamina = 0;
+            return;
         }
         stamina = newStamina;
     }
@@ -53,10 +57,12 @@ public class CharInfo : MonoBehaviour {
         if (health+changeHealth > maxHealth)
         {
             health = maxHealth;
+            return;
         }
         if (health+changeHealth <= 0)
         {
             health = 0;
+            return;
         }
         health += changeHealth;
     }
@@ -65,11 +71,22 @@ public class CharInfo : MonoBehaviour {
         if (stamina+changeStamina > maxStamina)
         {
             stamina = maxStamina;
+            return;
         }
         if (stamina+changeStamina <= 0)
         {
             stamina = 0;
+            return;
         }
         stamina += changeStamina;
+    }
+    public void addStrength(int changeStrength)
+    {
+        if(changeStrength+strength <= 0)
+        {
+            strength = 0;
+            return;
+        }
+        strength += changeStrength;
     }
 }
