@@ -20,13 +20,14 @@ public class ItemInteraction : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D resource){
 		if (resource.gameObject.tag == "Food") {
-			Destroy (resource);
+			Destroy (resource.gameObject);
 			food++;
 		} else if (resource.gameObject.tag == "Water") {
-			Destroy (resource);
+			Destroy (resource.gameObject);
 			water++;
+			Debug.Log ("water");
 		} else if (resource.gameObject.tag == "Wood") {
-			Destroy (resource);
+			Destroy (resource.gameObject);
 			wood++;
 		} else if (resource.gameObject.tag == "NPC") {
 			//NPCInteraction();
