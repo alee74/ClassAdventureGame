@@ -3,14 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemInteraction : MonoBehaviour {
+
+    private ItemsInInventory itemsInInventoryScript;
+
+    /*
 	private int water;
 	private int food;
 	private int wood;
+    */
+
 	// Use this for initialization
 	void Start () {
-		water = 0;
+        itemsInInventoryScript = GameObject.Find("Inventory").GetComponent<ItemsInInventory>();
+        /*
+        water = 0;
 		food = 0;
 		wood = 0;
+        */
 	}
 	
 	// Update is called once per frame
@@ -21,14 +30,17 @@ public class ItemInteraction : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D resource){
 		if (resource.gameObject.tag == "Food") {
 			Destroy (resource.gameObject);
-			food++;
+            itemsInInventoryScript.food += 1;
+			//food++;
 		} else if (resource.gameObject.tag == "Water") {
 			Destroy (resource.gameObject);
-			water++;
+            //water++;
+            itemsInInventoryScript.water += 1;
 			Debug.Log ("water");
 		} else if (resource.gameObject.tag == "Wood") {
 			Destroy (resource.gameObject);
-			wood++;
+            itemsInInventoryScript.wood += 1;
+			//wood++;
 		} else if (resource.gameObject.tag == "NPC") {
 			//NPCInteraction();
 			//launch interaction with NPC, maybe check whether friendly or hostile instead?
