@@ -1,25 +1,22 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class Hospital : MonoBehaviour {
 
-public BarStats health;
-	public GameObject Char;
+    CharInfo character;
 
-
-    private int health;
+    private int health; 
 	private int maxhealth = 100;
 
 	// Use this for initialization
-
-
+	void Start () {
+		
+	}
+	
 	// Update is called once per frame
 	void Update () {
 
-			Debug.Log("Health Restored");
-
-		}
 
 		// Resource menu Buy or upgrade health Items
 
@@ -29,7 +26,7 @@ public BarStats health;
 
 
 		// Restore Player Health
-
+	
 
 
 
@@ -54,5 +51,13 @@ public BarStats health;
         }
         else
         {
+
+            Debug.Log("Your HP Is Full");
+
+        }
+
+
+
+    }
 
 }
