@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class ItemsInInventory : MonoBehaviour {
 
     private Text waterTxt;
-    public int water = 0;
+    public int num_water = 0;
 
     private Text foodTxt;
-    public int food = 0;
+    public int num_food = 0;
 
     private Text woodTxt;
-    public int wood = 0;
+	public int num_wood = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -23,8 +23,8 @@ public class ItemsInInventory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        waterTxt.text = "x" + water;
-        foodTxt.text = "x" + food;
-        woodTxt.text = "x" + wood;
+        waterTxt.text = "x" + num_water;
+        foodTxt.text = "x" + num_food;
+        woodTxt.text = "x" + num_wood;
 	}
 }
