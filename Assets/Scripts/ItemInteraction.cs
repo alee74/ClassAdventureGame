@@ -6,6 +6,9 @@ public class ItemInteraction : MonoBehaviour {
 
     private ItemsInInventory itemsInInventoryScript;
 
+	public List<GameObject> inv; 
+	private int max = 5; 
+
     /*
 	private int water;
 	private int food;
@@ -29,17 +32,26 @@ public class ItemInteraction : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D resource){
 		if (resource.gameObject.tag == "Food") {
-			Destroy (resource.gameObject);
-            itemsInInventoryScript.food += 1;
+			if (inv.Count < max) {
+				Destroy (resource.gameObject);
+				itemsInInventoryScript.num_food += 1; 
+				inv.Add (gameObject);
+			}
 			//food++;
 		} else if (resource.gameObject.tag == "Water") {
-			Destroy (resource.gameObject);
-            //water++;
-            itemsInInventoryScript.water += 1;
+			if (inv.Count < max) {
+				Destroy (resource.gameObject);
+				//water++;
+				itemsInInventoryScript.num_water += 1;
+				inv.Add (gameObject);
+			}
 			Debug.Log ("water");
 		} else if (resource.gameObject.tag == "Wood") {
-			Destroy (resource.gameObject);
-            itemsInInventoryScript.wood += 1;
+			if (inv.Count < max) {
+				Destroy (resource.gameObject);
+				itemsInInventoryScript.num_wood += 1;
+				inv.Add (gameObject); 
+			}
 			//wood++;
 		} else if (resource.gameObject.tag == "NPC") {
 			//NPCInteraction();
