@@ -5,24 +5,13 @@ using UnityEngine;
 public class ItemInteraction : MonoBehaviour {
 
     private ItemsInInventory itemsInInventoryScript;
+    private int itemsCarried = 0;
 
-	public List<GameObject> inv; 
-	private int max = 5; 
-
-    /*
-	private int water;
-	private int food;
-	private int wood;
-    */
-
+    public int max = 5;
+    
 	// Use this for initialization
 	void Start () {
         itemsInInventoryScript = GameObject.Find("Inventory").GetComponent<ItemsInInventory>();
-        /*
-        water = 0;
-		food = 0;
-		wood = 0;
-        */
 	}
 	
 	// Update is called once per frame
@@ -32,27 +21,23 @@ public class ItemInteraction : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D resource){
 		if (resource.gameObject.tag == "Food") {
-			if (inv.Count < max) {
+            if (itemsCarried < max) { 
 				Destroy (resource.gameObject);
-				itemsInInventoryScript.num_food += 1; 
-				inv.Add (gameObject);
+				itemsInInventoryScript.num_food += 1;
+                itemsCarried++;
 			}
-			//food++;
 		} else if (resource.gameObject.tag == "Water") {
-			if (inv.Count < max) {
-				Destroy (resource.gameObject);
-				//water++;
+            if (itemsCarried < max) {
+                Destroy (resource.gameObject);
 				itemsInInventoryScript.num_water += 1;
-				inv.Add (gameObject);
-			}
-			Debug.Log ("water");
+                itemsCarried++;
+            }
 		} else if (resource.gameObject.tag == "Wood") {
-			if (inv.Count < max) {
-				Destroy (resource.gameObject);
+            if (itemsCarried < max) {
+                Destroy (resource.gameObject);
 				itemsInInventoryScript.num_wood += 1;
-				inv.Add (gameObject); 
-			}
-			//wood++;
+                itemsCarried++;
+            }
 		} else if (resource.gameObject.tag == "NPC") {
 			//NPCInteraction();
 			//launch interaction with NPC, maybe check whether friendly or hostile instead?
@@ -68,7 +53,7 @@ public class ItemInteraction : MonoBehaviour {
 	}
 
 	void EventInteraction(){
-		//generate a random nubmer
+		//generate a random number
 		//choose between a series of events
 	}
 }
