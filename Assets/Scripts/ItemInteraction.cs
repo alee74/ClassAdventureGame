@@ -11,7 +11,7 @@ public class ItemInteraction : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
-	//	itemsInInventoryScript = GameObject.Find("Inventory").GetComponent<ItemsInInventory>();
+		itemsInInventoryScript = GameObject.Find("Inventory").GetComponent<ItemsInInventory>();
 	}
 	
 	// Update is called once per frame
@@ -23,19 +23,19 @@ public class ItemInteraction : MonoBehaviour {
 		if (resource.gameObject.tag == "Food") {
             if (itemsCarried < max) { 
 				Destroy (resource.gameObject);
-			//	itemsInInventoryScript.num_food += 1;
+				itemsInInventoryScript.num_food += 1;
                 itemsCarried++;
 			}
 		} else if (resource.gameObject.tag == "Water") {
             if (itemsCarried < max) {
                 Destroy (resource.gameObject);
-			//	itemsInInventoryScript.num_water += 1;
+				itemsInInventoryScript.num_water += 1;
                 itemsCarried++;
             }
 		} else if (resource.gameObject.tag == "Wood") {
             if (itemsCarried < max) {
                 Destroy (resource.gameObject);
-			//	itemsInInventoryScript.num_wood += 1;
+				itemsInInventoryScript.num_wood += 1;
                 itemsCarried++;
             }
 		} else if (resource.gameObject.tag == "NPC") {

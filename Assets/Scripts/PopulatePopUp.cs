@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class PopulatePopUp : MonoBehaviour {
 
-    public Image popUp;
-    private Text popUpTxt;
+    public Text popUpTxt;
 
 	// Use this for initialization
 	void Start () {
-        popUpTxt = popUp.GetComponentInChildren<Text>();
+
 	}
 	
 	// Update is called once per frame
@@ -18,9 +17,10 @@ public class PopulatePopUp : MonoBehaviour {
 		
 	}
 
+    // tells PopUp (thru ItemOption) which ItemButton tag user clicked on...
     public void FillPopUpWithItemOptions()
     {
-        // here we can check what was selected based on tags......!
+        ItemOptions.currItemTag = gameObject.tag;
         popUpTxt.text = gameObject.tag + " was selected.";
     }
 }
