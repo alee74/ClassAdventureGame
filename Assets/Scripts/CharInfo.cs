@@ -6,14 +6,14 @@ using UnityEngine;
 public class CharInfo : MonoBehaviour {
 
     public static List<CharInfo> characters = new List<CharInfo>();
-    private string name;
-    private int health = 100;
-    private int strength = 10;
-    private int stamina = 100;
+    public string name;
+	public int health = 100;
+	public int strength = 10;
+	public int stamina = 100;
 
-    private int maxHealth = 100;
-    private int maxStrength = 10;
-    private int maxStamina = 100;
+	public int maxHealth = 100;
+	public int maxStrength = 10;
+	public int maxStamina = 100;
 
 	// Use this for initialization
 	void Start () {
@@ -73,4 +73,17 @@ public class CharInfo : MonoBehaviour {
         }
         stamina += changeStamina;
     }
+	public void addStrength(int changeStrength)
+	{
+		if (strength + changeStrength > maxStrength)
+		{
+			strength = maxStrength;
+		}
+		if (strength + changeStrength <= 0)
+		{
+			strength = 0;
+		}
+		strength++;
+	}
+
 }

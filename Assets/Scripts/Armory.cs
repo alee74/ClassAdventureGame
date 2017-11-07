@@ -22,10 +22,4 @@ public class Armory : MonoBehaviour {
         Debug.Log("Added strength to player");
     }
 
-    /*
-    void subOneStrength(CharInfo character)
-    {
-        character.increaseStamina(1);
-    }
-    */
 }
