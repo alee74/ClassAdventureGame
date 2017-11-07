@@ -19,7 +19,7 @@ public class enemyMovement : MonoBehaviour {
 
 	public float speed = 10f;
 
-	int maxHealth = 3;
+	int maxHealth = 10;
 	int curHealth;
 
 	// Use this for initialization
