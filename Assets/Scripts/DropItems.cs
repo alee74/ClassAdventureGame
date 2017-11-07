@@ -21,13 +21,18 @@ public class DropItems : MonoBehaviour {
 	public void dropResource(GameObject resource){
 		Instantiate (resource, new Vector3 (transform.position.x+1, transform.position.y, transform.position.z), Quaternion.identity);
 		if (resource.gameObject.tag == "Food") {
-			itemsInInventoryScript.num_food -= 1;
+            //itemsInInventoryScript.num_food -= 1;
+
+            ItemsInInventory.num_food -= 1;
+
 			Debug.Log (GameObject.Find ("food(Clone)").gameObject.transform.position);
 			//	Debug.Log (itemsInInventoryScript.food);
 		} else if (resource.gameObject.tag == "Wood") {
-			itemsInInventoryScript.num_wood -= 1;
+            //itemsInInventoryScript.num_wood -= 1;
+            ItemsInInventory.num_wood -= 1;
 		} else if (resource.gameObject.tag == "Water") {
-			itemsInInventoryScript.num_water -= 1;
+            //itemsInInventoryScript.num_water -= 1;
+            ItemsInInventory.num_water -= 1;
 		}
 	}
 
