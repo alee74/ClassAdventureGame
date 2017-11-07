@@ -206,6 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1613789630}
   - component: {fileID: 1613789631}
+  - component: {fileID: 1613789632}
   m_Layer: 0
   m_Name: WorldGenCtrl
   m_TagString: Untagged
@@ -239,5 +240,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initString: ABC
   fwdDist: 5
-  iterations: 13
+  iterations: 16
   roadTile: {fileID: 1887153398033988, guid: b3bd0c05c47cb454bbe019a9a8af6dd6, type: 2}
+--- !u!114 &1613789632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1613789629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c5b2388f36ae541aaa88937c0d4c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treefab: {fileID: 1857971025636802, guid: 63eee001837cd9b4ab64f15ff76470d7, type: 2}
+  treeZoneSize: 200
+  numForests: 30
+  treeRad: 10
+  treeChance: 0.5
+  treeIters: 10
+  maxTrees: 500
