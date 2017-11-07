@@ -489,6 +489,11 @@ Prefab:
       propertyPath: m_TagString
       value: Water
       objectReference: {fileID: 0}
+    - target: {fileID: 114970821862780940, guid: 38d7e2d9b8657c04cb7daba96688144e,
+        type: 2}
+      propertyPath: popUpTxt
+      value: 
+      objectReference: {fileID: 956032930}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38d7e2d9b8657c04cb7daba96688144e, type: 2}
   m_IsPrefabParent: 0
@@ -1222,6 +1227,11 @@ Prefab:
       propertyPath: m_Name
       value: WoodTxt
       objectReference: {fileID: 0}
+    - target: {fileID: 114970821862780940, guid: 38d7e2d9b8657c04cb7daba96688144e,
+        type: 2}
+      propertyPath: popUpTxt
+      value: 
+      objectReference: {fileID: 956032930}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38d7e2d9b8657c04cb7daba96688144e, type: 2}
   m_IsPrefabParent: 0
