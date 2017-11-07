@@ -6,11 +6,10 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour {
 
-	[SerializeField]
-	private float fillAmnt;
 
-	[SerializeField]
-	private Image fillcontent; // Image Used to Fill bar
+	public float fillAmnt;
+
+	public Image fillcontent; // Image Used to Fill bar
 
 
 	public float Maxvalue { get; set; }
@@ -18,6 +17,7 @@ public class HealthBar : MonoBehaviour {
 	public float Value { 
 		set {
 			fillAmnt = CalculatedStats (value, 0, Maxvalue, 0, 1); 
+			Debug.Log ("Value");
 		} 
 	}
 
@@ -30,6 +30,7 @@ public class HealthBar : MonoBehaviour {
 	void Update () {
 
 		FillBar ();  //Updates the bar to fill the image	
+		
 
 
 	}

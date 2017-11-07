@@ -6,21 +6,24 @@ public class Hospital : MonoBehaviour {
 
     CharInfo character;
 
-    private int health; 
-	private int maxhealth = 100;
 
+    private int health; 
+	public BarStats bar;
 	// Use this for initialization
-	void Start () {
-		
+	private void awake() {
+		bar.Intialize();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-
+		if (Input.GetKeyDown (KeyCode.A)) {
+			bar.currVal -= 10f;
+		
+		}
 		// Resource menu Buy or upgrade health Items
 
-
+	
 		// Inventory
 
 
@@ -48,7 +51,8 @@ public class Hospital : MonoBehaviour {
         {
             character.health += character.maxHealth - character.health;
             Debug.Log("Player healed");
-        }
+			bar.currVal += 10f;
+		}
         else
         {
 

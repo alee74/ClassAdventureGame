@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class BarStats {
 
 	public HealthBar bar;
@@ -32,4 +34,9 @@ public class BarStats {
 		}
 	}
 
+	public void Intialize() {
+	
+		this.MaxVal = maxVal;
+		this.currVal = currentVal;
+	}
 }
