@@ -11,11 +11,13 @@ public class ItemOptions : MonoBehaviour {
     public GameObject food;
     public GameObject water;
     public GameObject wood;
-    
+
+    private GameObject player;
 
     // Use this for initialization
     void Start () {
         currItemTag = "null";
+        player = GameObject.Find("Player");
 	}
 
     public void OnClick()
@@ -32,30 +34,30 @@ public class ItemOptions : MonoBehaviour {
 
     public void OnDrop()
     {
+        Vector3 newPos = new Vector3(player.transform.position.x + 1, player.transform.position.y, player.transform.position.z);
         switch (currItemTag)
         {
             case "Food":
-                //Instantiate(food, player.transform.position, Quaternion.identity);
                 if (ItemsInInventory.num_food > 0)
                 {
                     ItemsInInventory.num_food--;
-                    Instantiate(food, new Vector3(0, 0, 0), Quaternion.identity);
+                    Instantiate(food, newPos, Quaternion.identity);
+
                 }
                 break;
             case "Water":
-                //Instantiate(water, player.transform.position, Quaternion.identity);
                 if (ItemsInInventory.num_water > 0)
                 {
                     ItemsInInventory.num_water--;
-                    Instantiate(water, new Vector3(0, 0, 0), Quaternion.identity);
+                    Instantiate(water, newPos, Quaternion.identity);
                 }
                 break;
             case "Wood":
-                //Instantiate(wood, player.transform.position, Quaternion.identity);
                 if (ItemsInInventory.num_wood > 0)
                 {
                     ItemsInInventory.num_wood--;
-                    Instantiate(wood, new Vector3(0, 0, 0), Quaternion.identity);
+                    Instantiate(wood, newPos, Quaternion.identity);
+
                 }
                 break;
         }
