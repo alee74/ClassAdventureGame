@@ -34,7 +34,9 @@ static public class EventSystem {
     {
         UnityEngine.Random.InitState(day);
         int numEvents = (int)(UnityEngine.Random.value * (maxEvents));
+        List<CampEvent> events = new List<CampEvent>(numEvents);
         // TODO: generate random camp events
+        return events;
     }
 	
 }

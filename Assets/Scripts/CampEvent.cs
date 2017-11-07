@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-class CampEvent
+public class CampEvent
 {
     public string name;
     public string message;
