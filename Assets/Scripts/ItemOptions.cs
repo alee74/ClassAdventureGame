@@ -24,7 +24,7 @@ public class ItemOptions : MonoBehaviour {
     {
         gameObject.SetActive(true);
         //transform.position = Input.mousePosition;
-        transform.position = new Vector3(Input.mousePosition.x + 100, Input.mousePosition.y, Input.mousePosition.z);
+        transform.position = new Vector3(Input.mousePosition.x - 25, Input.mousePosition.y, Input.mousePosition.z);
     }
 
     public void OnClose()
