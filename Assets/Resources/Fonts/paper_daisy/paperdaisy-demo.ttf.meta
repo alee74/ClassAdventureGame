@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 06fed22d94a214f2aafcc525bdf6f2e7
+timeCreated: 1510086711
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Paper Daisy
+  fontNames:
+  - Paper Daisy
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
