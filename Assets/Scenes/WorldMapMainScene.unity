@@ -241,7 +241,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: febf72c4f63bdf041a09f1bc38a5334a, type: 3}
+    m_Font: {fileID: 12800000, guid: 06fed22d94a214f2aafcc525bdf6f2e7, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
@@ -494,6 +494,12 @@ Prefab:
       propertyPath: popUpTxt
       value: 
       objectReference: {fileID: 956032930}
+    - target: {fileID: 114295067373884990, guid: 38d7e2d9b8657c04cb7daba96688144e,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 06fed22d94a214f2aafcc525bdf6f2e7,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38d7e2d9b8657c04cb7daba96688144e, type: 2}
   m_IsPrefabParent: 0
@@ -717,6 +723,12 @@ Prefab:
       propertyPath: m_Name
       value: FoodUIBttn
       objectReference: {fileID: 0}
+    - target: {fileID: 114295067373884990, guid: 38d7e2d9b8657c04cb7daba96688144e,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 06fed22d94a214f2aafcc525bdf6f2e7,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38d7e2d9b8657c04cb7daba96688144e, type: 2}
   m_IsPrefabParent: 0
@@ -1232,6 +1244,12 @@ Prefab:
       propertyPath: popUpTxt
       value: 
       objectReference: {fileID: 956032930}
+    - target: {fileID: 114295067373884990, guid: 38d7e2d9b8657c04cb7daba96688144e,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 06fed22d94a214f2aafcc525bdf6f2e7,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 38d7e2d9b8657c04cb7daba96688144e, type: 2}
   m_IsPrefabParent: 0
