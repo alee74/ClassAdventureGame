@@ -18,7 +18,7 @@ public class RoadGen : MonoBehaviour {
     /// </summary>
     public int iterations = 13;
 
-	public int distFromRoad = 2;
+	public float distFromRoad = 1.16f;
 
     public GameObject roadTile;
 	public GameObject buildingTile;
@@ -76,7 +76,9 @@ public class RoadGen : MonoBehaviour {
     }
 
 	private void PlaceBuilding(Vector2 pos){
-		Instantiate (buildingTile, pos, Quaternion.identity);
+		if (Random.Range (0f, 1f) > 0.85f) {
+			Instantiate (buildingTile, pos, Quaternion.identity);
+		}
 	}
 
     /// <summary>

@@ -212,7 +212,7 @@ MonoBehaviour:
   initString: ABC
   fwdDist: 5
   iterations: 13
-  distFromRoad: 1
+  distFromRoad: 1.16
   roadTile: {fileID: 1887153398033988, guid: b3bd0c05c47cb454bbe019a9a8af6dd6, type: 2}
   buildingTile: {fileID: 1048077656158398, guid: 1f3221a70310fb64da3f3bbeaf5dd150,
     type: 2}
