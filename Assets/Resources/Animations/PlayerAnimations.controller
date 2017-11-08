@@ -289,7 +289,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 1
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 19fac121a9b07d9479800279ddaf8733, type: 2}
+  m_Motion: {fileID: 7400000, guid: 9024f7ab02e455740a6fdff9424679a2, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: isFacingRight
@@ -301,7 +301,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PlayerStand
-  m_Speed: 1
+  m_Speed: 0.25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101766345063906626}
@@ -315,7 +315,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 90247e0578e048b45a52fc785419ab03, type: 2}
+  m_Motion: {fileID: 7400000, guid: 91692c514a0c17b4ab61ca5f0d9073db, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
