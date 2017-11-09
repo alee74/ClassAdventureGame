@@ -19,6 +19,7 @@ ExportedObj/
 *.svd
 .vs
 .vs/
+storage.ide
 /.vs/
 
 # Unity3D generated meta files
@@ -81,3 +82,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+Assets/Resources/Sprites/Thumbs.db.meta
