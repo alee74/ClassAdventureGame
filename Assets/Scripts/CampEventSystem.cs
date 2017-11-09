@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 public static class CampEventSystem
 {
-    public static XElement campEventXML = XElement.Load(@"CampEvents.xml");
+    public static XElement campEventXML = XElement.Load(@"Assets/Scripts/CampEvents.xml");
 
     public static CampEvent GetRandomCampEvent(float rand)
     {
