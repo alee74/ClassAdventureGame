@@ -19,7 +19,10 @@ static public class EventSystem {
         UnityEngine.Random.InitState(day);
         int numEvents = Math.Max(minEvents, (int)(UnityEngine.Random.value * maxEvents));
         List<CampEvent> events = new List<CampEvent>(numEvents);
-        // TODO: generate random camp events
+        for(int i = 0; i < numEvents; ++i)
+        {
+            events[i] = CampEventSystem.GenerateRandomCampEvent();
+        }
         return events;
     }
 
