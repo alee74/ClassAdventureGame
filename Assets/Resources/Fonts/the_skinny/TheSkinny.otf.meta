@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 22191fe8283c9470086697b10f530d81
+timeCreated: 1510086711
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: The Skinny
+  fontNames:
+  - The Skinny
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 025d839c4043845328a36085500a0a92, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
