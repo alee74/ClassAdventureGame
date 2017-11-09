@@ -4,13 +4,4 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/WorldMapToCampLife.unity
-    guid: 064a4f6ce92eb4ab18498df88be193b0
-  - enabled: 1
-    path: Assets/Scenes/BarracksTest.unity
-    guid: f0c79564f6289b24da22b990974d2072
-  - enabled: 1
-    path: Assets/Scenes/2dFighting.unity
-    guid: cd1f17989ef74e7448a35e04d55340f9
+  m_Scenes: []
