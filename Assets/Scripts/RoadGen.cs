@@ -18,6 +18,14 @@ public class RoadGen : MonoBehaviour {
     /// </summary>
     public int iterations = 13;
 
+	/// <summary>
+	/// Layer masks for the layers building and road are on.
+	/// </summary>
+	public LayerMask buildingMask;
+	public LayerMask roadMask;
+
+	public BoxCollider2D buildingBox;
+
 	public float distFromRoad = 1.16f;
 
     public GameObject roadTile;
@@ -76,8 +84,11 @@ public class RoadGen : MonoBehaviour {
     }
 
 	private void PlaceBuilding(Vector2 pos){
-		if (Random.Range (0f, 1f) > 0.85f) {
+		bool buildingCollide = Physics2D.OverlapBox(pos, buildingBox.size, buildingMask);
+		if (Random.Range (0f, 1f) > 0.85f && !buildingCollide) {
+			
 			Instantiate (buildingTile, pos, Quaternion.identity);
+
 		}
 	}
 

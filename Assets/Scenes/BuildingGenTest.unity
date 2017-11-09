@@ -212,6 +212,14 @@ MonoBehaviour:
   initString: ABC
   fwdDist: 5
   iterations: 13
+  buildingMask:
+    serializedVersion: 2
+    m_Bits: 16
+  roadMask:
+    serializedVersion: 2
+    m_Bits: 16
+  buildingBox: {fileID: 61692611562174816, guid: 1f3221a70310fb64da3f3bbeaf5dd150,
+    type: 2}
   distFromRoad: 1.16
   roadTile: {fileID: 1887153398033988, guid: b3bd0c05c47cb454bbe019a9a8af6dd6, type: 2}
   buildingTile: {fileID: 1048077656158398, guid: 1f3221a70310fb64da3f3bbeaf5dd150,
