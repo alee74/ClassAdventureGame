@@ -253,8 +253,8 @@ GameObject:
   - component: {fileID: 249050177}
   - component: {fileID: 249050176}
   - component: {fileID: 249050179}
-  - component: {fileID: 249050178}
   - component: {fileID: 249050180}
+  - component: {fileID: 249050178}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -318,8 +318,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &249050178
-BoxCollider2D:
+--- !u!70 &249050178
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -331,18 +331,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.78}
-    newSize: {x: 0.5, y: 0.78}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.78}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.36, y: 0.7}
+  m_Direction: 0
 --- !u!50 &249050179
 Rigidbody2D:
   serializedVersion: 4
@@ -616,7 +606,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &483385403
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1260,9 +1250,9 @@ GameObject:
   - component: {fileID: 1620240561}
   - component: {fileID: 1620240560}
   - component: {fileID: 1620240559}
-  - component: {fileID: 1620240558}
   - component: {fileID: 1620240562}
   - component: {fileID: 1620240563}
+  - component: {fileID: 1620240558}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1270,8 +1260,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &1620240558
-BoxCollider2D:
+--- !u!70 &1620240558
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1283,18 +1273,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.78}
-    newSize: {x: 0.5, y: 0.78}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.78}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.36, y: 0.7}
+  m_Direction: 0
 --- !u!50 &1620240559
 Rigidbody2D:
   serializedVersion: 4

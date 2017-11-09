@@ -29,8 +29,9 @@ public class PlayerScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        character = (CharInfo.characters[0]);
-        health = character.health;
+       // character = (CharInfo.characters[0]);
+       // health = character.health;
+		health = 100;
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         state = State.Stand;
@@ -198,7 +199,7 @@ public class PlayerScript : MonoBehaviour {
 
     void SaveCharInfo()
     {
-        character.health = health;
+       // character.health = health;
     }
 
 }
