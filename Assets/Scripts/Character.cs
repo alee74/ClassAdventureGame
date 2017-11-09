@@ -98,9 +98,9 @@ public class Character
         // TODO: add some way to pick a GameObject for character
     }
 
-    public static Character GenerateRandomCharacter(float random)
+    public static Character GenerateRandom(float random)
     {
-        string[] names = System.IO.File.ReadAllLines(@"CharacterNames.txt");
+        string[] names = System.IO.File.ReadAllLines(@"Assets/Scripts/CharacterNames.txt");
         string name = names[(int)(random * names.Length)];
         int health;
         int stamina;
