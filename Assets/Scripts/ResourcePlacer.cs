@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ResourcePlacer : MonoBehaviour {
 
-
+	public float resourceRate = 0.99f;
+	public int resourceRadius = 500;
 
 	public GameObject foodPrefab;
 	public GameObject woodPrefab;
@@ -12,9 +13,9 @@ public class ResourcePlacer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Vector2 pos = new Vector2(-500, -500);
-		for (int i = -500; i < 500; i++) {
-				for(int j = -500; j < 500; j++){
+		Vector2 pos = new Vector2(-resourceRadius, -resourceRadius);
+		for (int i = -resourceRadius; i < resourceRadius; i++) {
+			for(int j = -resourceRadius; j < resourceRadius; j++){
 					if (Random.Range (0f, 1f) > 0.99f){
 						placeResource (pos);
 					}
