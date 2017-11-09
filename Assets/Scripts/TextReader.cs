@@ -9,8 +9,8 @@ using UnityEditor;
 
 public class TextReader : MonoBehaviour {
 
-    GameObject textBox;
-    Text postedDialog;
+    //GameObject textBox;
+    //Text postedDialog;
     TextAsset binData;
     string[] dialogs;
     string[][] dialogLines;
@@ -24,8 +24,8 @@ public class TextReader : MonoBehaviour {
         dialogs = binData.text.Split('\n');
         dialogLines = new string[dialogs.Length][];
         for (int j = 0; j < dialogs.Length; j++) {dialogLines[j] = dialogs[j].Split('\t'); }
-        textBox = GameObject.Find("MainText");
-        postedDialog = textBox.GetComponent<Text>();
+        //textBox = GameObject.Find("MainText");
+        //postedDialog = textBox.GetComponent<Text>();
     }
 	
 	// Update is called once per frame
@@ -56,21 +56,6 @@ public class TextReader : MonoBehaviour {
         }
 
         return "NotFound2";
-
-    }
-
-    public void ShowDialog(string dialog){
-
-        postedDialog.text = dialog;
-
-    }
-
-    public void SetSelectedDialog(string targetDialog)
-    {
-
-        string suppliedString = GetDialog(targetDialog);
-
-        ShowDialog(suppliedString);
 
     }
 
