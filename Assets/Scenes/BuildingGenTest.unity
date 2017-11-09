@@ -267,6 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f2ba4cc63180f42a98768258e7cc3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceRate: 0.99
+  resourceRadius: 200
   foodPrefab: {fileID: 1969242786035230, guid: 29c61792f2df74404890c9e1124bf989, type: 2}
   woodPrefab: {fileID: 1265768160282354, guid: a14ac0d24dcbd4b2b809f95c979b3fc4, type: 2}
   waterPrefab: {fileID: 1449739745534148, guid: 2f6e19e2d0f29bc45a2195bbfee10371,
