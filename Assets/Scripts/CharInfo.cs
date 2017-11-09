@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CharInfo : MonoBehaviour {
 
+
+    public static int currentCharacter = 0;
     public static List<CharInfo> characters = new List<CharInfo>();
     public string name;
 	public int health = 100;
