@@ -9,6 +9,7 @@ TagManager:
   - Food
   - NPC
   - Event
+  - CampLife
   layers:
   - Default
   - TransparentFX
