@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class Hospital : MonoBehaviour {
-
-    CharInfo character;
-
 	
 	// Update is called once per frame
 	void Update () {
@@ -29,13 +26,13 @@ public class Hospital : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D col) {
 
-        character = col.gameObject.GetComponent<CharInfo>();
+        Character character = CharInfo.getCurrentCharacter();
         if (col.gameObject.tag == "Player")
         {
             Debug.Log("Player Entered Hospital");
             if (character.health < 100)
             {
-                character.health += character.maxHealth - character.health;
+                character.health += 100;
                 Debug.Log("Player healed");
             }
             else

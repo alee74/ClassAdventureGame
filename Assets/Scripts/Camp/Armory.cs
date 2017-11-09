@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Armory : MonoBehaviour {
 
-    CharInfo character;
 
+    
     public void OnTriggerEnter2D(Collider2D col)
     {
-        character = col.gameObject.GetComponent<CharInfo>();
         if (col.gameObject.tag == "Player")
         {
+            addOneStrength(CharInfo.getCurrentCharacter());
             Debug.Log("Player Entered Armory");
         }
-        addOneStrength(character);
+        
     }
 
-    void addOneStrength(CharInfo character)
+    void addOneStrength(Character character)
     {
-        character.addStrength(1);
+        character.strength += 1;
         Debug.Log("Added strength to player");
     }
 
