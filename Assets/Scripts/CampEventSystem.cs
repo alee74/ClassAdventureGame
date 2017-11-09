@@ -15,7 +15,8 @@ public static class CampEventSystem
         IEnumerable<XElement> events = campEventXML.DescendantsAndSelf("Event");
         XElement xmlEvent = events.ElementAt(eventIdx);
         CampEvent campEvent = new CampEvent();
-
+        //TODO!!!!
+        return campEvent;
     }
 
     public static int GetNumberOfEvents()
