@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 enum State
 {
@@ -22,8 +23,11 @@ public class PlayerScript : MonoBehaviour {
     public LayerMask groundMask;
     private bool grounded;
     public float groundRadius = 0.1f;
-    private int health;
+    private float health;
+	private float maxHealth;
     private CharInfo character;
+
+	public Slider healthSlider;
 
 
 
@@ -31,16 +35,20 @@ public class PlayerScript : MonoBehaviour {
     void Start () {
        // character = (CharInfo.characters[0]);
        // health = character.health;
-		health = 100;
+		health = 50;
+		maxHealth = 100;
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         state = State.Stand;
         jumpCheck = transform.Find("JumpCheck");
         grounded = false;
+
+		healthSlider =  GameObject.Find ("PlayerHealth").GetComponent <Slider> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		healthSlider.value = health / maxHealth;
         grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
         //Debug.Log("State: " + state);
         //Debug.Log(grounded);

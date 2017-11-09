@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 enum enemyState
 {
@@ -17,23 +18,29 @@ public class enemyMovement : MonoBehaviour {
 	PlayerScript playerScript;
 	GameObject player;
 
+	public Slider healthSlider;
+
 	public float speed = 10f;
 
-	int maxHealth = 10;
-	int curHealth;
+	float maxHealth = 5;
+	float curHealth;
 
 	// Use this for initialization
 	void Start () {
-		curHealth = maxHealth;
+		curHealth = 5;
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerScript = GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ();
 		rgb = GetComponent<Rigidbody2D> ();
+		healthSlider =  GameObject.Find ("EnemyHealth").GetComponent <Slider> ();
 
 		myState = enemyState.Walk;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		healthSlider.value = curHealth / maxHealth;
+
 		if (curHealth == 0) {
 			Destroy (gameObject);
 		}
