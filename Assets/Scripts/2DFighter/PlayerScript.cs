@@ -83,7 +83,8 @@ public class PlayerScript : MonoBehaviour {
                switch (state)
                {
                    case State.Stand:
-                       anim.SetInteger("action", 0);
+                        rgb.velocity = new Vector2(0f, 0f);
+                        anim.SetInteger("action", 0);
                        break;
                    case State.Walk:
 					   anim.SetInteger("action", 1);
