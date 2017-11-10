@@ -22,11 +22,15 @@ public class PlayerScript : MonoBehaviour {
     public LayerMask groundMask;
     private bool grounded;
     public float groundRadius = 0.1f;
+    private int health;
+    private CharInfo character;
 
 
 
     // Use this for initialization
     void Start () {
+        character = (CharInfo.characters[0]);
+        health = character.health;
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         state = State.Stand;
@@ -190,6 +194,11 @@ public class PlayerScript : MonoBehaviour {
 			rgb.velocity = new Vector2 (inX * speed, 0);
 			ChangeState (State.Walk);
 		}
+    }
+
+    void SaveCharInfo()
+    {
+        character.health = health;
     }
 
 }
