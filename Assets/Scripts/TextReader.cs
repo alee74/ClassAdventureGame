@@ -7,17 +7,18 @@ using System.IO;
 using UnityEditor;
 
 
-public class TextReader : MonoBehaviour {
+public static class TextReader{
 
     //GameObject textBox;
     //Text postedDialog;
-    TextAsset binData;
-    string[] dialogs;
-    string[][] dialogLines;
-    string[] adjectives = new string[] { "old", "green", "squaemous" };
-    string[] nouns = new string[] { "dog", "cat", "bird" };
-    // Use this for initialization
-    void Start () {
+    static TextAsset binData;
+    static string[] dialogs;
+    static string[][] dialogLines;
+    static string[] adjectives = new string[] { "old", "green", "squaemous" };
+    static string[] nouns = new string[] { "dog", "cat", "bird" };
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void Initialize () {
         binData = Resources.Load("DialogTest") as TextAsset;
         //Debug.Log(binData);
         //string initialLines = binData.text;
@@ -27,36 +28,21 @@ public class TextReader : MonoBehaviour {
         //textBox = GameObject.Find("MainText");
         //postedDialog = textBox.GetComponent<Text>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    public string GetDialog(string dialogTitle) {
-
+    public static string GetDialog(string dialogTitle) {
         bool found = false;
         //string storedResult = "NotFound2";
-
         for (int i = 0; i < dialogLines.Length; i++) {
-
             if (dialogLines[i][0].Equals(dialogTitle))
             {
                 found = true;
                 return dialogLines[i][1].Replace("ADJECTIVE", adjectives[UnityEngine.Random.Range(0,adjectives.Length)]).Replace("NOUN", nouns[UnityEngine.Random.Range(0, nouns.Length)]);
             }
-
         }
-
         if (found == false)
         {
-
             return "NotFound ";
-
         }
-
         return "NotFound2";
-
     }
-
 }
