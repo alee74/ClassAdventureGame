@@ -7,7 +7,7 @@ public class WorldMapTransition : MonoBehaviour
 {
     public void OnTriggerEnter2D(Collider2D col)
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("WorldMapMainScene");
     }
 
 }
