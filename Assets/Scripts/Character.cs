@@ -95,6 +95,9 @@ public class Character
         _maxHealth = maxHealth;
         _maxStamina = maxStamina;
         _maxStrength = maxStrength;
+        health = maxHealth;
+        stamina = maxStamina;
+        strength = maxStrength;
         // TODO: add some way to pick a GameObject for character
     }
 
