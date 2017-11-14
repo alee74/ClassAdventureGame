@@ -16,7 +16,7 @@ public class CampEvent : Event
     {
         CampEvent result = new CampEvent();
         // TODO
-        // result.message = TextReader.GetDialog(TODO);
+        result.message = TextReader.GetDialog("Story Popup");
         return result;
     }
 }
