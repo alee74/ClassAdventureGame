@@ -100,7 +100,7 @@ public class Character
 
     public static Character GenerateRandomCharacter(float random)
     {
-        string[] names = System.IO.File.ReadAllLines(@"CharacterNames.txt");
+        string[] names = System.IO.File.ReadAllLines(@"Assets/Scripts/CharacterNames.txt");
         string name = names[(int)(random * names.Length)];
         int health;
         int stamina;
