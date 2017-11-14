@@ -25,7 +25,7 @@ public class PlayerScript : MonoBehaviour {
     public float groundRadius = 0.1f;
     private float health;
 	private float maxHealth;
-    private CharInfo character;
+    private Character character;
 
 	public Slider healthSlider;
 
@@ -33,9 +33,8 @@ public class PlayerScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-       // character = (CharInfo.characters[0]);
-       // health = character.health;
-		health = 50;
+        character = CharInfo.getCurrentCharacter();
+        health = character.health;
 		maxHealth = 100;
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
