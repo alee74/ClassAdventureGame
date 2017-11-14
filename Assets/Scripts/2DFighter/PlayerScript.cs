@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 enum State
 {
@@ -15,7 +16,6 @@ public class PlayerScript : MonoBehaviour {
     Rigidbody2D rgb;
     Animator anim;
     State state;
-	public int currentState;
     float speed = 5f;
     float jumpPower = 300f;
     bool isFacingRight;
@@ -23,22 +23,31 @@ public class PlayerScript : MonoBehaviour {
     public LayerMask groundMask;
     private bool grounded;
     public float groundRadius = 0.1f;
+    private float health;
+	private float maxHealth;
+    private Character character;
+
+	public Slider healthSlider;
 
 
 
     // Use this for initialization
     void Start () {
+        character = CharInfo.getCurrentCharacter();
+        health = character.health;
+		maxHealth = 100;
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         state = State.Stand;
         jumpCheck = transform.Find("JumpCheck");
         grounded = false;
 
-		currentState = 0;
+		healthSlider =  GameObject.Find ("PlayerHealth").GetComponent <Slider> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		healthSlider.value = health / maxHealth;
         grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
         //Debug.Log("State: " + state);
         //Debug.Log(grounded);
@@ -52,19 +61,15 @@ public class PlayerScript : MonoBehaviour {
         switch (state)
         {
 			case State.Stand:
-				currentState = 0;
                 Stand();
                 break;
             case State.Walk:
-				currentState = 1;
                 Walk();
                 break;
             case State.Jump:
-				currentState = 1;
                 Jump();
                 break;
 			case State.Punch:
-				currentState = 3;
 				Punch ();
                 break;
         }
@@ -77,7 +82,8 @@ public class PlayerScript : MonoBehaviour {
                switch (state)
                {
                    case State.Stand:
-                       anim.SetInteger("action", 0);
+                        rgb.velocity = new Vector2(0f, 0f);
+                        anim.SetInteger("action", 0);
                        break;
                    case State.Walk:
 					   anim.SetInteger("action", 1);
@@ -197,6 +203,11 @@ public class PlayerScript : MonoBehaviour {
 			rgb.velocity = new Vector2 (inX * speed, 0);
 			ChangeState (State.Walk);
 		}
+    }
+
+    void SaveCharInfo()
+    {
+       // character.health = health;
     }
 
 }
