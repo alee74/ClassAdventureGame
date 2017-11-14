@@ -10,7 +10,7 @@ public static class CharInfo {
     {
         if(currentCharacter == -1)
         {
-            characters.Add(Character.GenerateRandomCharacter(Random.value));
+            characters.Add(Character.GenerateRandom(Random.value));
             currentCharacter = 0;
         }
         return characters[currentCharacter];
