@@ -19,6 +19,7 @@ ExportedObj/
 *.svd
 .vs
 .vs/
+storage.ide
 /.vs/
 storage.ide
 
@@ -82,3 +83,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+Assets/Resources/Sprites/Thumbs.db.meta

@@ -18,8 +18,18 @@ public class RoadGen : MonoBehaviour {
     /// </summary>
     public int iterations = 13;
 
-    public GameObject roadTile;
+	/// <summary>
+	/// Layer masks for the layers building and road are on.
+	/// </summary>
+	public LayerMask buildingMask;
+	public LayerMask roadMask;
 
+	public BoxCollider2D buildingBox;
+
+	public float distFromRoad = 1.16f;
+
+    public GameObject roadTile;
+	public GameObject buildingTile;
     void Start() {
         GenerateRoads();
     }
@@ -37,6 +47,25 @@ public class RoadGen : MonoBehaviour {
                 Vector2 delta = new Vector2(Mathf.Cos(ang * Mathf.Deg2Rad), Mathf.Sin(ang * Mathf.Deg2Rad));
                 for (int i = 0; i < fwdDist; ++i) {
                     PlaceTile(pos);
+					if (i == (int)fwdDist / 2) {
+						//print ((int)Mathf.Abs (ang) % 360);
+						switch ((int)Mathf.Abs(ang)%360) {
+							case 90:
+								PlaceBuilding (pos + new Vector2 (distFromRoad, 0));
+								break;
+							case 0:
+							PlaceBuilding (pos + new Vector2 (0, distFromRoad));
+								break;
+							case 270:
+							PlaceBuilding (pos + new Vector2 (-distFromRoad, 0));
+								break;
+							case 180:
+							PlaceBuilding (pos + new Vector2 (0, -distFromRoad));
+								break;
+								
+						}
+						//PlaceBuilding (pos);
+					}
                     pos += delta;
                 }
             } else if (c == '+') {
@@ -53,6 +82,15 @@ public class RoadGen : MonoBehaviour {
     private void PlaceTile(Vector2 pos) {
         Instantiate(roadTile, pos, Quaternion.identity);
     }
+
+	private void PlaceBuilding(Vector2 pos){
+		bool buildingCollide = Physics2D.OverlapBox(pos, buildingBox.size, buildingMask);
+		if (Random.Range (0f, 1f) > 0.85f && !buildingCollide) {
+			
+			Instantiate (buildingTile, pos, Quaternion.identity);
+
+		}
+	}
 
     /// <summary>
     /// Runs n iterations of the L-system.
