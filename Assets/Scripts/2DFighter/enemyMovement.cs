@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 enum enemyState
 {
@@ -42,6 +43,7 @@ public class enemyMovement : MonoBehaviour {
 		healthSlider.value = curHealth / maxHealth;
 
 		if (curHealth == 0) {
+            SceneManager.LoadScene("WorldMapMainScene");
 			Destroy (gameObject);
 		}
 
@@ -80,7 +82,7 @@ public class enemyMovement : MonoBehaviour {
 	}
 
 	void Walk() {
-		bool playerIsLeft = false;
+		//bool playerIsLeft = false;
 		if (transform.position.x > player.transform.position.x) {
 			rgb.velocity = new Vector2 (-0.1f*speed, 0);
 		} else {
