@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 
 enum enemyState
 {
-	Stand,
+	//Stand,
+	//Walk,
+	//Punch
 	Walk,
-	Punch
+	Attack,
+	Air
 }
 
 public class enemyMovement : MonoBehaviour {
@@ -22,6 +25,8 @@ public class enemyMovement : MonoBehaviour {
 	public Slider healthSlider;
 
 	public float speed = 10f;
+	public float attackXDistance = 1f;
+	public float attackYDistance = 2f;
 
 	float maxHealth = 5;
 	float curHealth;
@@ -50,17 +55,36 @@ public class enemyMovement : MonoBehaviour {
 		HandleInput ();
 	}
 
+	void ChangeState(enemyState newState)
+	{
+		myState = newState;
+
+		switch (myState)
+		{
+		case enemyState.Walk:
+			//rgb.velocity = new Vector2(0f, 0f);
+			//anim.SetInteger("action", 0);
+			break;
+		case enemyState.Attack:
+			//anim.SetInteger("action", 1);
+			break;
+		case enemyState.Air:
+			//anim.SetInteger("action", 3);
+			break;
+		}
+	}
+
 	void HandleInput()
 	{
 		switch (myState)
 		{
-		case enemyState.Stand:
-			//Stand();
-			break;
 		case enemyState.Walk:
 			Walk();
 			break;
-		case enemyState.Punch:
+		case enemyState.Attack:
+			Attack ();
+			break;
+		case enemyState.Air:
 			//Punch ();
 			break;
 		}
@@ -72,12 +96,11 @@ public class enemyMovement : MonoBehaviour {
 			Debug.Log ("Touched Player");
 
 		
-			//THIS WILL CHECK IF THE PLAYER IS IN PUNCH STATE   
-			//if (playerScript.currentState == 3) {
-				Debug.Log ("Lost Health!");
-				curHealth = curHealth - 1;
-				Debug.Log (curHealth);
-			//}
+
+			Debug.Log ("Lost Health!");
+			curHealth = curHealth - 1;
+			Debug.Log (curHealth);
+
 		}
 	}
 
@@ -87,6 +110,18 @@ public class enemyMovement : MonoBehaviour {
 			rgb.velocity = new Vector2 (-0.1f*speed, 0);
 		} else {
 			rgb.velocity = new Vector2 (0.1f* speed, 0);
+		}
+
+		if (((Mathf.Abs(transform.position.x - player.transform.position.x)) <= attackXDistance) & ((Mathf.Abs(transform.position.y - player.transform.position.y)) <= attackYDistance)) {
+			ChangeState(enemyState.Attack);
+		}
+	}
+
+	void Attack() {
+		//Attack
+		Debug.Log ("Attack");
+		if (((Mathf.Abs(transform.position.x - player.transform.position.x)) >= attackXDistance) || ((Mathf.Abs(transform.position.y - player.transform.position.y)) >= attackYDistance)) {
+			ChangeState(enemyState.Walk);
 		}
 	}
 }
