@@ -1,5 +1,5 @@
-Hostile	Time to die.	-1	-1	-1
-Hostile	For the lord of the ADJECTIVE castle!	-1	0	-1
-Nonhostile	He sleeps below the golden oak.	1	1	1
-Hostile	The end draws near!.	-1	-1	-1
-Story Popup	You encounter a ADJECTIVE NOUN.	0	0	1
+Hostile	Time to die.
+Hostile	For the lord of the ADJECTIVE castle!
+Nonhostile	He sleeps below the golden oak.
+Hostile	The end draws near!.
+Story Popup	You encounter a ADJECTIVE NOUN.
