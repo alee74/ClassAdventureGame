@@ -18,6 +18,12 @@ public class enemyMovement : MonoBehaviour {
 
 	Rigidbody2D rgb;
 	enemyState myState;
+	Animator enemyAnim;
+	bool enemyFacingRight;
+	//private Transform enemyJumpCheck;
+	//public LayerMask groundMask;
+	//private bool enemyGrounded;
+	//public float groundRadius = 0.1f;
 
 	PlayerScript playerScript;
 	GameObject player;
@@ -26,7 +32,7 @@ public class enemyMovement : MonoBehaviour {
 
 	public float speed = 10f;
 	public float attackXDistance = 1f;
-	public float attackYDistance = 2f;
+	public float attackYDistance = 1f;
 
 	float maxHealth = 5;
 	float curHealth;
@@ -37,9 +43,12 @@ public class enemyMovement : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerScript = GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ();
 		rgb = GetComponent<Rigidbody2D> ();
+		enemyAnim = GetComponent<Animator>();
 		healthSlider =  GameObject.Find ("EnemyHealth").GetComponent <Slider> ();
 
 		myState = enemyState.Walk;
+		//enemyGrounded = false;
+
 
 	}
 	
@@ -47,12 +56,38 @@ public class enemyMovement : MonoBehaviour {
 	void Update () {
 		healthSlider.value = curHealth / maxHealth;
 
+		//enemyGrounded = Physics2D.OverlapCircle (enemyJumpCheck.position, groundRadius, groundMask);
+
 		if (curHealth == 0) {
             SceneManager.LoadScene("WorldMapMainScene");
 			Destroy (gameObject);
 		}
 
+
+		DirectionFacing ();
 		HandleInput ();
+	}
+
+	void DirectionFacing()
+	{
+		float inX = rgb.velocity.x;
+		if (inX > 0)
+		{
+			//anim.SetBool("isFacingRight", true);
+			enemyFacingRight = true;
+		}
+		else if (inX < 0)
+		{
+			//anim.SetBool("isFacingRight", false);
+			enemyFacingRight = false;
+		}
+
+		if(enemyFacingRight) {
+			rgb.transform.localScale = new Vector3 (Mathf.Abs(rgb.transform.localScale.x), rgb.transform.localScale.y, rgb.transform.localScale.z);
+		}
+		else {
+			rgb.transform.localScale = new Vector3 (-Mathf.Abs(rgb.transform.localScale.x), rgb.transform.localScale.y, rgb.transform.localScale.z);
+		}
 	}
 
 	void ChangeState(enemyState newState)
@@ -63,10 +98,12 @@ public class enemyMovement : MonoBehaviour {
 		{
 		case enemyState.Walk:
 			//rgb.velocity = new Vector2(0f, 0f);
+			enemyAnim.SetInteger("enemyAction", 0);
 			//anim.SetInteger("action", 0);
 			break;
 		case enemyState.Attack:
 			//anim.SetInteger("action", 1);
+			enemyAnim.SetInteger("enemyAction", 1);
 			break;
 		case enemyState.Air:
 			//anim.SetInteger("action", 3);

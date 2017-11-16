@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 249050179}
   - component: {fileID: 249050180}
   - component: {fileID: 249050178}
+  - component: {fileID: 249050181}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -311,7 +312,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 249050175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0424156, y: -2.5653248, z: 0}
+  m_LocalPosition: {x: 2.4, y: -1.95, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 1394284621}
@@ -364,7 +365,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc627ac7338c406baf1976d777a3d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
   speed: 10
+  attackXDistance: 1
+  attackYDistance: 2
+--- !u!95 &249050181
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 249050175}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cd862ae91691045328dd0d6f65acc655, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &282399403
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +677,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 483385402}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.44, y: 0.141, z: 0}
+  m_LocalPosition: {x: 0.44, y: 0.141, z: 1}
   m_LocalScale: {x: 2.63424, y: 2.3686957, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1344,7 +1365,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1620240557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.03, y: -2.55, z: 0}
+  m_LocalPosition: {x: -2.51, y: -2.74, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 656161363}
@@ -1366,6 +1387,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   groundRadius: 0.1
+  healthSlider: {fileID: 0}
 --- !u!95 &1620240563
 Animator:
   serializedVersion: 3
