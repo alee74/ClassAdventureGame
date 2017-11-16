@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: 665e7e152c12b5d439e9a5dc163be03b
-timeCreated: 1509136382
+timeCreated: 1510691212
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - buildingBox: {fileID: 61692611562174816, guid: 1f3221a70310fb64da3f3bbeaf5dd150,
+      type: 2}
+  - roadTile: {fileID: 1887153398033988, guid: b3bd0c05c47cb454bbe019a9a8af6dd6, type: 2}
+  - buildingTile: {fileID: 1048077656158398, guid: 1f3221a70310fb64da3f3bbeaf5dd150,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
