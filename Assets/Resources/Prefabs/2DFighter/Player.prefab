@@ -87,7 +87,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -141,7 +141,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   groundRadius: 0.1
-  healthSlider: {fileID: 0}
 --- !u!114 &114796467438300492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,7 +156,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   groundRadius: 0.1
-  healthSlider: {fileID: 0}
 --- !u!212 &212982880867142908
 SpriteRenderer:
   m_ObjectHideFlags: 1
