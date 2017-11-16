@@ -41,6 +41,7 @@ public class PlayerScript : MonoBehaviour {
         state = State.Stand;
         jumpCheck = transform.Find("JumpCheck");
         grounded = false;
+		//groundMask = 9;
 
 		healthSlider =  GameObject.Find ("PlayerHealth").GetComponent <Slider> ();
 	}

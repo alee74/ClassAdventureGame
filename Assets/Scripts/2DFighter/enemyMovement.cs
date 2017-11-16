@@ -20,10 +20,11 @@ public class enemyMovement : MonoBehaviour {
 	enemyState myState;
 	Animator enemyAnim;
 	bool enemyFacingRight;
-	//private Transform enemyJumpCheck;
-	//public LayerMask groundMask;
-	//private bool enemyGrounded;
-	//public float groundRadius = 0.1f;
+	private Transform enemyJumpCheck;
+	private CapsuleCollider2D enemyCollider;
+	public LayerMask groundMask;
+	private bool enemyGrounded;
+	public float enemyGroundRadius = 0.1f;
 
 	PlayerScript playerScript;
 	GameObject player;
@@ -44,11 +45,12 @@ public class enemyMovement : MonoBehaviour {
 		playerScript = GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ();
 		rgb = GetComponent<Rigidbody2D> ();
 		enemyAnim = GetComponent<Animator>();
+		enemyCollider = GetComponent<CapsuleCollider2D> ();
 		healthSlider =  GameObject.Find ("EnemyHealth").GetComponent <Slider> ();
 
 		myState = enemyState.Walk;
-		//enemyGrounded = false;
-
+		enemyGrounded = false;
+		enemyJumpCheck = transform.Find("enemyJumpCheck");
 
 	}
 	
@@ -56,7 +58,14 @@ public class enemyMovement : MonoBehaviour {
 	void Update () {
 		healthSlider.value = curHealth / maxHealth;
 
-		//enemyGrounded = Physics2D.OverlapCircle (enemyJumpCheck.position, groundRadius, groundMask);
+		if (enemyCollider.IsTouchingLayers (groundMask)) {
+			enemyGrounded = true;
+		} else {
+			enemyGrounded = false;
+		}
+		if (enemyGrounded) {
+			Debug.Log ("Grounded!!!");
+		}
 
 		if (curHealth == 0) {
             SceneManager.LoadScene("WorldMapMainScene");
@@ -73,12 +82,10 @@ public class enemyMovement : MonoBehaviour {
 		float inX = rgb.velocity.x;
 		if (inX > 0)
 		{
-			//anim.SetBool("isFacingRight", true);
 			enemyFacingRight = true;
 		}
 		else if (inX < 0)
 		{
-			//anim.SetBool("isFacingRight", false);
 			enemyFacingRight = false;
 		}
 
@@ -99,14 +106,12 @@ public class enemyMovement : MonoBehaviour {
 		case enemyState.Walk:
 			//rgb.velocity = new Vector2(0f, 0f);
 			enemyAnim.SetInteger("enemyAction", 0);
-			//anim.SetInteger("action", 0);
 			break;
 		case enemyState.Attack:
-			//anim.SetInteger("action", 1);
 			enemyAnim.SetInteger("enemyAction", 1);
 			break;
 		case enemyState.Air:
-			//anim.SetInteger("action", 3);
+			//enemyAnim.SetInteger("enemyAction", 2);
 			break;
 		}
 	}
@@ -142,16 +147,18 @@ public class enemyMovement : MonoBehaviour {
 	}
 
 	void Walk() {
-		//bool playerIsLeft = false;
-		if (transform.position.x > player.transform.position.x) {
-			rgb.velocity = new Vector2 (-0.1f*speed, 0);
-		} else {
-			rgb.velocity = new Vector2 (0.1f* speed, 0);
+		if (enemyGrounded) {
+			if (transform.position.x > player.transform.position.x) {
+				rgb.velocity = new Vector2 (-0.1f*speed, 0);
+			} else {
+				rgb.velocity = new Vector2 (0.1f* speed, 0);
+			}
+
+			if (((Mathf.Abs(transform.position.x - player.transform.position.x)) <= attackXDistance) & ((Mathf.Abs(transform.position.y - player.transform.position.y)) <= attackYDistance)) {
+				ChangeState(enemyState.Attack);
+			}
 		}
 
-		if (((Mathf.Abs(transform.position.x - player.transform.position.x)) <= attackXDistance) & ((Mathf.Abs(transform.position.y - player.transform.position.y)) <= attackYDistance)) {
-			ChangeState(enemyState.Attack);
-		}
 	}
 
 	void Attack() {

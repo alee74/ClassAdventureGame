@@ -365,6 +365,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc627ac7338c406baf1976d777a3d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 512
+  enemyGroundRadius: 0.1
   healthSlider: {fileID: 0}
   speed: 10
   attackXDistance: 1
