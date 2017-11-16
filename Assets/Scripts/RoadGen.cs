@@ -36,17 +36,9 @@ public class RoadGen : MonoBehaviour {
 
     private int w = 2000;
     private int h = 2000;
-    public int[,] map;
+
     void Start()
     {
-        map = new int[h, w];
-        for(int i = 0; i<h; i++)
-        {
-            for(int j = 0; j<w; j++)
-            {
-                map[i, j] = 0;
-            }
-        }
         GenerateRoads();
     }
 
@@ -62,28 +54,22 @@ public class RoadGen : MonoBehaviour {
                 Vector2 delta = new Vector2(Mathf.Cos(ang * Mathf.Deg2Rad), Mathf.Sin(ang * Mathf.Deg2Rad));
                 for (int i = 0; i < fwdDist; ++i) {
                     PlaceTile(pos);
-                    map[(int) Mathf.Abs(pos.x)+w/2, (int) Mathf.Abs(pos.y)+h/2] = 1;
                     if (i == (int)fwdDist / 2) {
 						//print ((int)Mathf.Abs (ang) % 360);
 						switch ((int)Mathf.Abs(ang)%360) {
 							case 90:
 								PlaceBuilding (pos + new Vector2 (distFromRoad, 0));
-                                map[(int)(Mathf.Abs(pos.x) + w / 2 + distFromRoad), (int)Mathf.Abs(pos.y) + h / 2] = 2;
                                 break;
 							case 0:
 							    PlaceBuilding (pos + new Vector2 (0, distFromRoad));
-                                map[(int)(Mathf.Abs(pos.x) + w / 2 + distFromRoad), (int)Mathf.Abs(pos.y) + h / 2] = 2;
                                 break;
 							case 270:
 							    PlaceBuilding (pos + new Vector2 (-distFromRoad, 0));
-                                map[(int)(Mathf.Abs(pos.x) + w / 2 + distFromRoad), (int)Mathf.Abs(pos.y) + h / 2] = 2;
                                 break;
 							case 180:
 							    PlaceBuilding (pos + new Vector2 (0, -distFromRoad));
-                                map[(int)(Mathf.Abs(pos.x) + w / 2 + distFromRoad), (int)Mathf.Abs(pos.y) + h / 2] = 2;
                                 break;
 						}
-						//PlaceBuilding (pos);
 					}
                     pos += delta;
                 }
@@ -99,15 +85,15 @@ public class RoadGen : MonoBehaviour {
     /// Places a road tile at the given position.
     /// </summary>
     private void PlaceTile(Vector2 pos) {
-        Instantiate(roadTile, pos, Quaternion.identity);
+        var road = Instantiate(roadTile, pos, Quaternion.identity);
+        road.transform.parent = transform;
     }
 
 	private void PlaceBuilding(Vector2 pos){
 		bool buildingCollide = Physics2D.OverlapBox(pos, buildingBox.size, buildingMask);
 		if (Random.Range (0f, 1f) > 0.85f && !buildingCollide) {
-			
-			Instantiate (buildingTile, pos, Quaternion.identity);
-
+			var building = Instantiate (buildingTile, pos, Quaternion.identity);
+            building.transform.parent = transform;
 		}
 	}
 
