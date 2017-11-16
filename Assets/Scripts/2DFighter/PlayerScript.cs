@@ -27,7 +27,7 @@ public class PlayerScript : MonoBehaviour {
 	private float maxHealth;
     private Character character;
 
-	public Slider healthSlider;
+	private Slider healthSlider;
 
 
 

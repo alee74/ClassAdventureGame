@@ -29,7 +29,7 @@ public class enemyMovement : MonoBehaviour {
 	PlayerScript playerScript;
 	GameObject player;
 
-	public Slider healthSlider;
+	private Slider healthSlider;
 
 	public float speed = 10f;
 	public float attackXDistance = 1f;
