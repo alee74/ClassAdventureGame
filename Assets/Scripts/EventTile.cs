@@ -12,13 +12,4 @@ public class EventTile : MonoBehaviour {
         triggerCollider = gameObject.GetComponent<BoxCollider2D>();
     }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
