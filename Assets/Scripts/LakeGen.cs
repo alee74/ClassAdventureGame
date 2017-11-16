@@ -23,7 +23,8 @@ public class LakeGen : MonoBehaviour {
                 float sample = Mathf.PerlinNoise(map(i,-lakeZoneSize, lakeZoneSize,0,lakeZoneSize*lakeZoneSize)/100f, map(j,-lakeZoneSize, lakeZoneSize,0,lakeZoneSize*lakeZoneSize)/100f);
                 if(sample > lakeChance)
                 {
-                    Instantiate(seafab, new Vector3(i + seafab.GetComponent<BoxCollider2D>().size.x, j + seafab.GetComponent<BoxCollider2D>().size.y, 3), Quaternion.identity);
+                    var lake = Instantiate(seafab, new Vector3(i + seafab.GetComponent<BoxCollider2D>().size.x, j + seafab.GetComponent<BoxCollider2D>().size.y, 3), Quaternion.identity);
+                    lake.transform.parent = transform;
                 }
             }
         } 

@@ -38,7 +38,8 @@ public class TreeGen : MonoBehaviour {
         }
 
         foreach (var pos in forest) {
-            Instantiate(treefab, pos, Quaternion.identity);
+            var tree = Instantiate(treefab, pos, Quaternion.identity);
+            tree.transform.parent = transform;
         }
     }
 
