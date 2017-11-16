@@ -40,7 +40,7 @@ public class Character
         }
         set
         {
-            if (value < _maxHealth)
+            if (value <= _maxHealth)
             {
                 _health = value;
             }
@@ -59,7 +59,7 @@ public class Character
         }
         set
         {
-            if(value < _maxStamina)
+            if(value <= _maxStamina)
             {
                 _stamina = value;
             }
@@ -78,7 +78,7 @@ public class Character
         }
         set
         {
-            if(value < _maxStrength)
+            if(value <= _maxStrength)
             {
                 _strength = value;
             }
@@ -88,13 +88,27 @@ public class Character
             }
         }
     }
-
+    public int getMaxHealth()
+    {
+        return _maxHealth;
+    }
+    public int getMaxStamina()
+    {
+        return _maxStamina;
+    }
+    public int getMaxStrength()
+    {
+        return _maxStrength;
+    }
     public Character(string name, int maxHealth, int maxStamina, int maxStrength)
     {
         _name = name;
         _maxHealth = maxHealth;
         _maxStamina = maxStamina;
         _maxStrength = maxStrength;
+        _health = maxHealth;
+        _stamina = maxStamina;
+        _strength = maxStrength;
         // TODO: add some way to pick a GameObject for character
     }
 
