@@ -30,7 +30,23 @@ public class RoadGen : MonoBehaviour {
 
     public GameObject roadTile;
 	public GameObject buildingTile;
-    void Start() {
+
+    public int width = 200;
+    public int height = 200;
+
+    private int w = 2000;
+    private int h = 2000;
+    public int[,] map;
+    void Start()
+    {
+        map = new int[h, w];
+        for(int i = 0; i<h; i++)
+        {
+            for(int j = 0; j<w; j++)
+            {
+                map[i, j] = 0;
+            }
+        }
         GenerateRoads();
     }
 
@@ -40,29 +56,32 @@ public class RoadGen : MonoBehaviour {
     private void GenerateRoads() {
         Vector2 pos = new Vector2(0, 0);
         float ang = 0;
-
         string lsys = IterateN(initString, iterations);
         foreach (char c in lsys) {
             if (c == 'F') {
                 Vector2 delta = new Vector2(Mathf.Cos(ang * Mathf.Deg2Rad), Mathf.Sin(ang * Mathf.Deg2Rad));
                 for (int i = 0; i < fwdDist; ++i) {
                     PlaceTile(pos);
-					if (i == (int)fwdDist / 2) {
+                    map[(int) Mathf.Abs(pos.x)+w/2, (int) Mathf.Abs(pos.y)+h/2] = 1;
+                    if (i == (int)fwdDist / 2) {
 						//print ((int)Mathf.Abs (ang) % 360);
 						switch ((int)Mathf.Abs(ang)%360) {
 							case 90:
 								PlaceBuilding (pos + new Vector2 (distFromRoad, 0));
-								break;
+                                map[(int)(Mathf.Abs(pos.x) + w / 2 + distFromRoad), (int)Mathf.Abs(pos.y) + h / 2] = 2;
+                                break;
 							case 0:
-							PlaceBuilding (pos + new Vector2 (0, distFromRoad));
-								break;
+							    PlaceBuilding (pos + new Vector2 (0, distFromRoad));
+                                map[(int)(Mathf.Abs(pos.x) + w / 2 + distFromRoad), (int)Mathf.Abs(pos.y) + h / 2] = 2;
+                                break;
 							case 270:
-							PlaceBuilding (pos + new Vector2 (-distFromRoad, 0));
-								break;
+							    PlaceBuilding (pos + new Vector2 (-distFromRoad, 0));
+                                map[(int)(Mathf.Abs(pos.x) + w / 2 + distFromRoad), (int)Mathf.Abs(pos.y) + h / 2] = 2;
+                                break;
 							case 180:
-							PlaceBuilding (pos + new Vector2 (0, -distFromRoad));
-								break;
-								
+							    PlaceBuilding (pos + new Vector2 (0, -distFromRoad));
+                                map[(int)(Mathf.Abs(pos.x) + w / 2 + distFromRoad), (int)Mathf.Abs(pos.y) + h / 2] = 2;
+                                break;
 						}
 						//PlaceBuilding (pos);
 					}
