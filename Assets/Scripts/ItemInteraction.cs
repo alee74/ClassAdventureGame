@@ -6,10 +6,23 @@ using UnityEngine.SceneManagement;
 public class ItemInteraction : MonoBehaviour {
     
     public int max = 5;
-    
-	void OnTriggerEnter2D(Collider2D resource){
+
+
+    private void Start()
+    {
+		//PlayerPrefs.DeleteKey("X");
+		//PlayerPrefs.DeleteKey("Y");
+		//PlayerPrefs.DeleteKey("Z");
+		//PlayerPrefs.SetFloat("X", 0);
+		//PlayerPrefs.SetFloat("Y", 0);
+		//PlayerPrefs.SetFloat("Z", -1);
+        transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), PlayerPrefs.GetFloat("Z"));
+            //transform.position = new Vector3(0, 0, -1);
+    }
+    void OnTriggerEnter2D(Collider2D resource){
 		if (resource.gameObject.tag == "NPC") {
-			NPCInteraction ();
+            Destroy(resource.gameObject);
+            NPCInteraction();
 		} else if (resource.gameObject.tag == "CampLife") {
 
 			SceneManager.LoadScene ("TestCamp");
@@ -46,6 +59,9 @@ public class ItemInteraction : MonoBehaviour {
 		//generate a random number
 		//choose between a series of interactions
 		//maybe generate whether it was positive or negative here?
+        PlayerPrefs.SetFloat("X", transform.position.x);
+		PlayerPrefs.SetFloat("Y", transform.position.y);
+		PlayerPrefs.SetFloat("Z", transform.position.z);
 		SceneManager.LoadScene ("2dFighting");
 	}
 
@@ -53,4 +69,8 @@ public class ItemInteraction : MonoBehaviour {
 		//generate a random number
 		//choose between a series of events
 	}
+    /*private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }*/
 }
