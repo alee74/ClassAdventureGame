@@ -13,21 +13,30 @@ enum State
 
 public class PlayerScript : MonoBehaviour {
 
+    //Local variables
     Rigidbody2D rgb;
     Animator anim;
     State state;
-    float speed = 5f;
-    float jumpPower = 300f;
+    float speed = 5f;        //will probably move to Dependent Variables
+    float jumpPower = 300f;  //will probably move to Dependent Variables
     bool isFacingRight;
+
+    //Child Objects 
     private Transform jumpCheck;
+    private GameObject punchBox;
+
+    //Layers and Ground
     public LayerMask groundMask;
     private bool grounded;
     public float groundRadius = 0.1f;
+
+    //Dependent Variables
     private float health;
 	private float maxHealth;
     private Character character;
 
-	private Slider healthSlider;
+    //UI variables
+    private Slider healthSlider;
 
 
 
@@ -40,6 +49,7 @@ public class PlayerScript : MonoBehaviour {
         anim = GetComponent<Animator>();
         state = State.Stand;
         jumpCheck = transform.Find("JumpCheck");
+        punchBox = transform.Find("PunchBox").gameObject;
         grounded = false;
 		//groundMask = 9;
 
@@ -194,8 +204,9 @@ public class PlayerScript : MonoBehaviour {
 		//Punch!
 		Debug.Log("Punch");
 
-		//Need to change state?
-		float inX = Input.GetAxis("Horizontal");
+        StartCoroutine(PunchFunc());
+        //Need to change state?
+        float inX = Input.GetAxis("Horizontal");
 		bool inY = Input.GetKeyDown("space");
 
 		if (inX == 0) {
@@ -204,6 +215,17 @@ public class PlayerScript : MonoBehaviour {
 			rgb.velocity = new Vector2 (inX * speed, 0);
 			ChangeState (State.Walk);
 		}
+    }
+
+    IEnumerator PunchFunc()
+    {
+
+        yield return new WaitForSeconds(.25f);
+        punchBox.transform.SetPositionAndRotation(new Vector3(transform.position.x + 0.75f, transform.position.y, 0), new Quaternion(0,0,0,0));
+        punchBox.SetActive(true);
+        yield return new WaitForSeconds(.15f);
+        punchBox.SetActive(false);
+        punchBox.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y, 0), new Quaternion(0, 0, 0, 0));
     }
 
     void SaveCharInfo()
