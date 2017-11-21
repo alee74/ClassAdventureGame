@@ -69,9 +69,10 @@ public class enemyMovement : MonoBehaviour
         {
             enemyGrounded = false;
         }
+
         if (enemyGrounded)
         {
-            Debug.Log("Grounded!!!");
+            //Debug.Log("Grounded!!!");
         }
 
         if (curHealth == 0)

@@ -554,6 +554,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 5156f95b112fbb140bf41ed345fb14bc,
         type: 3}
+    - target: {fileID: 114796467438300492, guid: 7b410e4dafce25d4da850d5938209d7c,
+        type: 2}
+      propertyPath: groundMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7b410e4dafce25d4da850d5938209d7c, type: 2}
   m_IsPrefabParent: 0

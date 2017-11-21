@@ -24,6 +24,7 @@ public class PlayerScript : MonoBehaviour {
     //Child Objects 
     private Transform jumpCheck;
     private GameObject punchBox;
+	private CapsuleCollider2D playerCollider;
 
     //Layers and Ground
     public LayerMask groundMask;
@@ -47,6 +48,7 @@ public class PlayerScript : MonoBehaviour {
 		maxHealth = 100;
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+		playerCollider = GetComponent<CapsuleCollider2D>();
         state = State.Stand;
         jumpCheck = transform.Find("JumpCheck");
         punchBox = transform.Find("PunchBox").gameObject;
@@ -59,12 +61,24 @@ public class PlayerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		healthSlider.value = health / maxHealth;
-        grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
-        //Debug.Log("State: " + state);
-        //Debug.Log(grounded);
+
+		CheckGrounded ();
         DirectionFacing();
         HandleInput();
 
+	}
+
+	void CheckGrounded () {
+		if (playerCollider.IsTouchingLayers(groundMask))
+		{
+			grounded = true;
+			//Debug.Log("Grounded!!!");
+		}
+		else
+		{
+			grounded = false;
+			//Debug.Log(" Not Grounded!!!");
+		}
 	}
 
     void HandleInput()
@@ -113,12 +127,10 @@ public class PlayerScript : MonoBehaviour {
         float inX = Input.GetAxis("Horizontal");
         if (inX > 0)
         {
-			//anim.SetBool("isFacingRight", true);
             isFacingRight = true;
         }
         else if (inX < 0)
         {
-			//anim.SetBool("isFacingRight", false);
             isFacingRight = false;
         }
 
@@ -138,10 +150,13 @@ public class PlayerScript : MonoBehaviour {
         float inX = Input.GetAxis("Horizontal");
         bool inY = Input.GetKeyDown("space");
 		bool inF = Input.GetKey(KeyCode.F);
-        if (inX != 0)
+        
+		if (inX != 0)
         {
             ChangeState(State.Walk);
-        } if (inY && grounded)
+        } 
+
+		if (inY && grounded)
         {
             ChangeState(State.Jump);
             rgb.velocity = new Vector2(rgb.velocity.x, 0f);
@@ -188,7 +203,10 @@ public class PlayerScript : MonoBehaviour {
 		Debug.Log ("jumping");
         float inX = Input.GetAxis("Horizontal");
 		rgb.velocity = new Vector2(inX * speed, rgb.velocity.y);
+
+
 		grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
+
 
         if (grounded)
         {
