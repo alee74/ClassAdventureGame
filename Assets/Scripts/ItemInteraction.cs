@@ -10,12 +10,6 @@ public class ItemInteraction : MonoBehaviour {
 
     private void Start()
     {
-		//PlayerPrefs.DeleteKey("X");
-		//PlayerPrefs.DeleteKey("Y");
-		//PlayerPrefs.DeleteKey("Z");
-		//PlayerPrefs.SetFloat("X", 0);
-		//PlayerPrefs.SetFloat("Y", 0);
-		//PlayerPrefs.SetFloat("Z", -1);
         transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), PlayerPrefs.GetFloat("Z"));
             //transform.position = new Vector3(0, 0, -1);
     }
@@ -24,7 +18,9 @@ public class ItemInteraction : MonoBehaviour {
             Destroy(resource.gameObject);
             NPCInteraction();
 		} else if (resource.gameObject.tag == "CampLife") {
-
+            PlayerPrefs.SetFloat("X", 0);
+            PlayerPrefs.SetFloat("Y", 0);
+            PlayerPrefs.SetFloat("Z", -1);
 			SceneManager.LoadScene ("TestCamp");
 
 		} else if (resource.gameObject.tag == "Event"){
@@ -69,8 +65,12 @@ public class ItemInteraction : MonoBehaviour {
 		//generate a random number
 		//choose between a series of events
 	}
-    /*private void Awake()
+
+    private void OnApplicationQuit()
     {
-        DontDestroyOnLoad(this);
-    }*/
+        PlayerPrefs.SetFloat("X", 0);
+        PlayerPrefs.SetFloat("Y", 0);
+        PlayerPrefs.SetFloat("Z", -1);
+    }
+
 }
