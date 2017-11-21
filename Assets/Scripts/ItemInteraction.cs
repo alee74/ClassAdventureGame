@@ -10,7 +10,7 @@ public class ItemInteraction : MonoBehaviour {
 
     private void Start()
     {
-        transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), PlayerPrefs.GetFloat("Z"));
+       // transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), PlayerPrefs.GetFloat("Z"));
             //transform.position = new Vector3(0, 0, -1);
     }
     void OnTriggerEnter2D(Collider2D resource){
@@ -18,9 +18,9 @@ public class ItemInteraction : MonoBehaviour {
             Destroy(resource.gameObject);
             NPCInteraction();
 		} else if (resource.gameObject.tag == "CampLife") {
-            PlayerPrefs.SetFloat("X", 0);
-            PlayerPrefs.SetFloat("Y", 0);
-            PlayerPrefs.SetFloat("Z", -1);
+            //PlayerPrefs.SetFloat("X", 0);
+            //PlayerPrefs.SetFloat("Y", 0);
+            //PlayerPrefs.SetFloat("Z", -1);
 			SceneManager.LoadScene ("TestCamp");
 
 		} else if (resource.gameObject.tag == "Event"){
@@ -55,9 +55,9 @@ public class ItemInteraction : MonoBehaviour {
 		//generate a random number
 		//choose between a series of interactions
 		//maybe generate whether it was positive or negative here?
-        PlayerPrefs.SetFloat("X", transform.position.x);
-		PlayerPrefs.SetFloat("Y", transform.position.y);
-		PlayerPrefs.SetFloat("Z", transform.position.z);
+  //      PlayerPrefs.SetFloat("X", transform.position.x);
+		//PlayerPrefs.SetFloat("Y", transform.position.y);
+		//PlayerPrefs.SetFloat("Z", transform.position.z);
 		SceneManager.LoadScene ("2dFighting");
 	}
 
@@ -68,9 +68,9 @@ public class ItemInteraction : MonoBehaviour {
 
     private void OnApplicationQuit()
     {
-        PlayerPrefs.SetFloat("X", 0);
-        PlayerPrefs.SetFloat("Y", 0);
-        PlayerPrefs.SetFloat("Z", -1);
+        //PlayerPrefs.SetFloat("X", 0);
+        //PlayerPrefs.SetFloat("Y", 0);
+        //PlayerPrefs.SetFloat("Z", -1);
     }
 
 }
