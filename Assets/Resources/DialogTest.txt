@@ -6,6 +6,8 @@ Nonhostile	Do you remember?
 Nonhostile	History is but a name.
 Hostile	The end draws near!
 Hostile	I taste sunset!
+Hostile	What do you hope to accomplish?
+Nonhostile	What do you hope to accomplish?
 Story Popup	You encounter a ADJECTIVE NOUN.
 Story Popup	"...but as the Zookeeper prepared to make the final strike, the youth took the opportunity, lashing out with the great blade..."
 Story Popup	In the end, desperate measures were needed to save the pandas. And the cost may have been too great.
