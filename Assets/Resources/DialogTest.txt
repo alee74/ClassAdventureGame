@@ -1,5 +1,16 @@
 Hostile	Time to die.
 Hostile	For the lord of the ADJECTIVE castle!
 Nonhostile	He sleeps below the golden oak.
-Hostile	The end draws near!.
+Nonhostile	We will aid you as best we can.
+Nonhostile	Do you remember?
+Nonhostile	History is but a name.
+Hostile	The end draws near!
+Hostile	I taste sunset!
 Story Popup	You encounter a ADJECTIVE NOUN.
+Story Popup	"...but as the Zookeeper prepared to make the final strike, the youth took the opportunity, lashing out with the great blade..."
+Story Popup	In the end, desperate measures were needed to save the pandas. And the cost may have been too great.
+Story Popup	"...with a wet, meaty sound, the Zookeeper collapsed in a crimson puddle, prompting a chorus of yelling and hooting from all the cages, save for the large cage in the center, from which came only a slow, methodical *chewing*."
+Story Popup	"But Romeo, our parents will never consent!" "Fear not, fair Juliet, for I have the Stone of Aristotile and the Shield of Simpson at my side, and together we shall..."
+Story Popup	The ADJECTIVE texts of the lost times speak of a great NOUN that once ruled the sky.
+Story Popup	At the end of history, the historians were burned.
+Story Popup	You've been playing quite a while! Why not take a break? 
