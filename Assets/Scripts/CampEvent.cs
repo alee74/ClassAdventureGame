@@ -11,4 +11,12 @@ public class CampEvent : Event
     public int food;
     public int water;
     public int wood;
+
+    public static CampEvent GenerateRandom()
+    {
+        CampEvent result = new CampEvent();
+        // TODO
+        result.message = TextReader.GetDialog("Story Popup");
+        return result;
+    }
 }

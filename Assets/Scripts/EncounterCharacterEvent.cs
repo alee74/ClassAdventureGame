@@ -7,6 +7,7 @@ using UnityEngine;
 public class EncounterCharacterEvent : Event
 {
     public Character character;
+    public string encounterDialog;
 
     public static EncounterCharacterEvent GenerateRandom(int day)
     {
