@@ -11,9 +11,7 @@ public class ItemInteraction : MonoBehaviour {
 		if (resource.gameObject.tag == "NPC") {
 			NPCInteraction ();
 		} else if (resource.gameObject.tag == "CampLife") {
-
 			SceneManager.LoadScene ("TestCamp");
-
 		} else if (resource.gameObject.tag == "Event"){
             EventInteraction();
         } else
