@@ -37,8 +37,18 @@ public class RoadGen : MonoBehaviour {
     private int w = 2000;
     private int h = 2000;
 
+    private int[,] arr = new int[2000,2000];
+
     void Start()
     {
+        for(int i = 0; i < w; i++)
+        {
+            for(int j = 0; j < h; j++)
+            {
+                arr[i, j] = 0;
+            }
+        }
+        print(arr[0, 0]);
         GenerateRoads();
     }
 
@@ -53,6 +63,7 @@ public class RoadGen : MonoBehaviour {
             if (c == 'F') {
                 Vector2 delta = new Vector2(Mathf.Cos(ang * Mathf.Deg2Rad), Mathf.Sin(ang * Mathf.Deg2Rad));
                 for (int i = 0; i < fwdDist; ++i) {
+                    //arr[(int)Mathf.Round(pos.x), (int)Mathf.Round(pos.y)];
                     PlaceTile(pos);
                     if (i == (int)fwdDist / 2) {
 						//print ((int)Mathf.Abs (ang) % 360);
