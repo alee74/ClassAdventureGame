@@ -39,8 +39,11 @@ public class RoadGen : MonoBehaviour {
 
     private int[,] arr = new int[2000,2000];
 
+    private WorldPersist persist;
+
     void Start()
     {
+        persist = GetComponent<WorldPersist>();
         for(int i = 0; i < w; i++)
         {
             for(int j = 0; j < h; j++)
@@ -105,14 +108,14 @@ public class RoadGen : MonoBehaviour {
     /// </summary>
     private void PlaceTile(Vector2 pos) {
         var road = Instantiate(roadTile, pos, Quaternion.identity);
-        road.transform.parent = transform;
+        persist.PersistObject(road);
     }
 
 	private void PlaceBuilding(Vector2 pos){
 		bool buildingCollide = Physics2D.OverlapBox(pos, buildingBox.size, buildingMask);
 		if (Random.Range (0f, 1f) > 0.85f && !buildingCollide) {
 			var building = Instantiate (buildingTile, pos, Quaternion.identity);
-            building.transform.parent = transform;
+            persist.PersistObject(building);
 		}
 	}
 

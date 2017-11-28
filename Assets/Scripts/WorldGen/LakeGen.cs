@@ -7,16 +7,18 @@ public class LakeGen : MonoBehaviour {
     public GameObject seafab;
     public int lakeZoneSize = 700;
     public float lakeChance = 0.99f;
+    private WorldPersist persist;
 
 	// Use this for initialization
 	void Start () {
+        persist = GetComponent<WorldPersist>();
         GenLake();
 	}
 	
         
     void GenLake()
     {
-       for (int i = -lakeZoneSize; i <= lakeZoneSize; i++)
+        for (int i = -lakeZoneSize; i <= lakeZoneSize; i++)
         {
             for ( int j = -lakeZoneSize; j <= lakeZoneSize; j++)
             {
@@ -24,7 +26,7 @@ public class LakeGen : MonoBehaviour {
                 if(sample > lakeChance)
                 {
                     var lake = Instantiate(seafab, new Vector3(i + seafab.GetComponent<BoxCollider2D>().size.x, j + seafab.GetComponent<BoxCollider2D>().size.y, 3), Quaternion.identity);
-                    lake.transform.parent = transform;
+                    persist.PersistObject(lake);
                 }
             }
         } 

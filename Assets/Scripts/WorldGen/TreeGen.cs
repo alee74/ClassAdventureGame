@@ -21,7 +21,10 @@ public class TreeGen : MonoBehaviour {
 
     public int maxTrees = 500;
 
+    private WorldPersist persist;
+
     void Start() {
+        persist = GetComponent<WorldPersist>();
         for (int i = 0; i < numForests; ++i) {
             var pos = new Vector2(Random.Range(-treeZoneSize, treeZoneSize),
                                   Random.Range(-treeZoneSize, treeZoneSize));
@@ -39,7 +42,7 @@ public class TreeGen : MonoBehaviour {
 
         foreach (var pos in forest) {
             var tree = Instantiate(treefab, pos, Quaternion.identity);
-            tree.transform.parent = transform;
+            persist.PersistObject(tree);
         }
     }
 
