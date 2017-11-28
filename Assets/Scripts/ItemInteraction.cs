@@ -14,7 +14,7 @@ public class ItemInteraction : MonoBehaviour {
         //ONLY UNCOMMENT IF NEEDED FOR TESTING //transform.position = new Vector3(0, 0, -1);
     }
     void OnTriggerEnter2D(Collider2D resource){
-		if (resource.gameObject.tag == "NPC") {
+        if (resource.gameObject.tag == "NPC") {
             Destroy(resource.gameObject);
             NPCInteraction();
 		} else if (resource.gameObject.tag == "CampLife") {
@@ -28,7 +28,7 @@ public class ItemInteraction : MonoBehaviour {
         } else
         {
             // Item has been touched!
-            if (ItemsInInventory.GetTotalItems() < max)
+            if (ItemsInInventory.GetTotalItems() < max && resource.gameObject.tag != "Tree")
             {
                 // if you can still carry stuff
                 Destroy(resource.gameObject);
