@@ -6,15 +6,25 @@ using UnityEngine.SceneManagement;
 
 enum enemyState
 {
-	Stand,
+	//Stand,
+	//Walk,
+	//Punch
 	Walk,
-	Punch
+	Attack,
+	Air
 }
 
 public class enemyMovement : MonoBehaviour {
 
 	Rigidbody2D rgb;
 	enemyState myState;
+	Animator enemyAnim;
+	bool enemyFacingRight;
+	private Transform enemyJumpCheck;
+	private CapsuleCollider2D enemyCollider;
+	public LayerMask groundMask;
+	private bool enemyGrounded;
+	public float enemyGroundRadius = 0.1f;
 
 	PlayerScript playerScript;
 	GameObject player;
@@ -22,6 +32,8 @@ public class enemyMovement : MonoBehaviour {
 	public Slider healthSlider;
 
 	public float speed = 10f;
+	public float attackXDistance = 1f;
+	public float attackYDistance = 1f;
 
 	float maxHealth = 5;
 	float curHealth;
@@ -32,9 +44,13 @@ public class enemyMovement : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerScript = GameObject.FindWithTag ("Player").GetComponent<PlayerScript> ();
 		rgb = GetComponent<Rigidbody2D> ();
+		enemyAnim = GetComponent<Animator>();
+		enemyCollider = GetComponent<CapsuleCollider2D> ();
 		healthSlider =  GameObject.Find ("EnemyHealth").GetComponent <Slider> ();
 
 		myState = enemyState.Walk;
+		enemyGrounded = false;
+		enemyJumpCheck = transform.Find("enemyJumpCheck");
 
 	}
 	
@@ -42,25 +58,75 @@ public class enemyMovement : MonoBehaviour {
 	void Update () {
 		healthSlider.value = curHealth / maxHealth;
 
+		if (enemyCollider.IsTouchingLayers (groundMask)) {
+			enemyGrounded = true;
+		} else {
+			enemyGrounded = false;
+		}
+		if (enemyGrounded) {
+			Debug.Log ("Grounded!!!");
+		}
+
 		if (curHealth == 0) {
             SceneManager.LoadScene("WorldMapMainScene");
 			Destroy (gameObject);
 		}
 
+
+		DirectionFacing ();
 		HandleInput ();
+	}
+
+	void DirectionFacing()
+	{
+		float inX = rgb.velocity.x;
+		if (inX > 0)
+		{
+			enemyFacingRight = true;
+		}
+		else if (inX < 0)
+		{
+			enemyFacingRight = false;
+		}
+
+		if(enemyFacingRight) {
+			rgb.transform.localScale = new Vector3 (Mathf.Abs(rgb.transform.localScale.x), rgb.transform.localScale.y, rgb.transform.localScale.z);
+		}
+		else {
+			rgb.transform.localScale = new Vector3 (-Mathf.Abs(rgb.transform.localScale.x), rgb.transform.localScale.y, rgb.transform.localScale.z);
+		}
+	}
+
+	void ChangeState(enemyState newState)
+	{
+		myState = newState;
+
+		switch (myState)
+		{
+		case enemyState.Walk:
+			//rgb.velocity = new Vector2(0f, 0f);
+			enemyAnim.SetInteger("enemyAction", 0);
+			break;
+		case enemyState.Attack:
+			enemyAnim.SetInteger("enemyAction", 1);
+			break;
+		case enemyState.Air:
+			//enemyAnim.SetInteger("enemyAction", 2);
+			break;
+		}
 	}
 
 	void HandleInput()
 	{
 		switch (myState)
 		{
-		case enemyState.Stand:
-			//Stand();
-			break;
 		case enemyState.Walk:
 			Walk();
 			break;
-		case enemyState.Punch:
+		case enemyState.Attack:
+			Attack ();
+			break;
+		case enemyState.Air:
 			//Punch ();
 			break;
 		}
@@ -72,21 +138,34 @@ public class enemyMovement : MonoBehaviour {
 			Debug.Log ("Touched Player");
 
 		
-			//THIS WILL CHECK IF THE PLAYER IS IN PUNCH STATE   
-			//if (playerScript.currentState == 3) {
-				Debug.Log ("Lost Health!");
-				curHealth = curHealth - 1;
-				Debug.Log (curHealth);
-			//}
+
+			Debug.Log ("Lost Health!");
+			curHealth = curHealth - 1;
+			Debug.Log (curHealth);
+
 		}
 	}
 
 	void Walk() {
-		//bool playerIsLeft = false;
-		if (transform.position.x > player.transform.position.x) {
-			rgb.velocity = new Vector2 (-0.1f*speed, 0);
-		} else {
-			rgb.velocity = new Vector2 (0.1f* speed, 0);
+		if (enemyGrounded) {
+			if (transform.position.x > player.transform.position.x) {
+				rgb.velocity = new Vector2 (-0.1f*speed, 0);
+			} else {
+				rgb.velocity = new Vector2 (0.1f* speed, 0);
+			}
+
+			if (((Mathf.Abs(transform.position.x - player.transform.position.x)) <= attackXDistance) & ((Mathf.Abs(transform.position.y - player.transform.position.y)) <= attackYDistance)) {
+				ChangeState(enemyState.Attack);
+			}
+		}
+
+	}
+
+	void Attack() {
+		//Attack
+		Debug.Log ("Attack");
+		if (((Mathf.Abs(transform.position.x - player.transform.position.x)) >= attackXDistance) || ((Mathf.Abs(transform.position.y - player.transform.position.y)) >= attackYDistance)) {
+			ChangeState(enemyState.Walk);
 		}
 	}
 }

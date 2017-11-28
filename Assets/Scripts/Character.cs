@@ -52,7 +52,6 @@ public class Character
         }
         set
         {
-            if (value < _maxHealth)
             {
                 _health = value;
             }
@@ -71,7 +70,6 @@ public class Character
         }
         set
         {
-            if(value < _maxStamina)
             {
                 _stamina = value;
             }
@@ -90,7 +88,6 @@ public class Character
         }
         set
         {
-            if(value < _maxStrength)
             {
                 _strength = value;
             }
@@ -100,8 +97,24 @@ public class Character
             }
         }
     }
+<<<<<<< HEAD
 
     public Character(string name, bool isHostile, int maxHealth, int maxStamina, int maxStrength)
+=======
+    public int getMaxHealth()
+    {
+        return _maxHealth;
+    }
+    public int getMaxStamina()
+    {
+        return _maxStamina;
+    }
+    public int getMaxStrength()
+    {
+        return _maxStrength;
+    }
+    public Character(string name, int maxHealth, int maxStamina, int maxStrength)
+>>>>>>> master
     {
         _name = name;
         _isHostile = isHostile;
