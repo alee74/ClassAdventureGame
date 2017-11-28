@@ -52,6 +52,7 @@ public class Character
         }
         set
         {
+            if (value <= _maxHealth)
             {
                 _health = value;
             }
@@ -70,6 +71,7 @@ public class Character
         }
         set
         {
+            if(value <= _maxStamina)
             {
                 _stamina = value;
             }
@@ -88,6 +90,7 @@ public class Character
         }
         set
         {
+            if(value <= _maxStrength)
             {
                 _strength = value;
             }
