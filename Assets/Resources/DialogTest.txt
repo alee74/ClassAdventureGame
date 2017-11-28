@@ -1,5 +1,24 @@
-Dialog One	Testing One	1	1	1
-Dialog Two	Testing Two	1	1	1
-Dialog Three	Testing Three	1	1	1
-Bandit One	I'm gonna steal your stuff, noob.	-1	-1	-1
-Story Popup	You encounter a ADJECTIVE NOUN.	0	0	1
+Hostile	Time to die.
+Hostile	For the lord of the ADJECTIVE castle!
+Nonhostile	He sleeps below the golden oak.
+Nonhostile	We will aid you as best we can.
+Nonhostile	Do you remember?
+Nonhostile	History is but a name.
+Hostile	The end draws near!
+Hostile	I taste sunset!
+Hostile	What do you hope to accomplish?
+Nonhostile	What do you hope to accomplish?
+Story Popup	You encounter a ADJECTIVE NOUN.
+Story Popup	"...but as the Zookeeper prepared to make the final strike, the youth took the opportunity, lashing out with the great blade..."
+Story Popup	In the end, desperate measures were needed to save the pandas. And the cost may have been too great.
+Story Popup	"...with a wet, meaty sound, the Zookeeper collapsed in a crimson puddle, prompting a chorus of yelling and hooting from all the cages, save for the large cage in the center, from which came only a slow, methodical *chewing*."
+Story Popup	"But Romeo, our parents will never consent!" "Fear not, fair Juliet, for I have the Stone of Aristotile and the Shield of Simpson at my side, and together we shall..."
+Story Popup	The ADJECTIVE texts of the lost times speak of a great NOUN that once ruled the sky.
+Story Popup	At the end of history, the historians were burned.
+Story Popup	You've been playing quite a while! Why not take a break? 
+AddFood A pack of large, mutant rabbits flees something terrible and seeks refuge in the camp. Your camp is blessed with meat!
+SubFood A bolt of lightning starts a fire, destroying food rations.
+AddWater A camper develops a device that can help filter toxic rainwater. Your camp's water stores are improved!
+SubWater A leak springs in the water tank, unnoticed for hours. The water seeps deep into the ground, now unusable.
+AddWood The new saplings some campers planted are growing tall! The forests can now be sustainably harvested for fallen and overcrowded trees.
+SubWood A thief in the night! Wood and some carving tools have been stolen.
