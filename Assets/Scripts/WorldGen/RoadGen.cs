@@ -63,10 +63,8 @@ public class RoadGen : MonoBehaviour {
             if (c == 'F') {
                 Vector2 delta = new Vector2(Mathf.Cos(ang * Mathf.Deg2Rad), Mathf.Sin(ang * Mathf.Deg2Rad));
                 for (int i = 0; i < fwdDist; ++i) {
-                    //arr[(int)Mathf.Round(pos.x), (int)Mathf.Round(pos.y)];
-                    PlaceTile(pos);
+                    arr[(int) Mathf.Round(pos.x) + w/2, (int) Mathf.Round(pos.y) + h/2] = 1;
                     if (i == (int)fwdDist / 2) {
-						//print ((int)Mathf.Abs (ang) % 360);
 						switch ((int)Mathf.Abs(ang)%360) {
 							case 90:
 								PlaceBuilding (pos + new Vector2 (distFromRoad, 0));
@@ -88,6 +86,16 @@ public class RoadGen : MonoBehaviour {
                 ang += 90;
             } else if (c == '-') {
                 ang -= 90;
+            }
+        }
+        for(int i = 0; i < w; i++)
+        {
+            for (int j = 0; j < h; j++)
+            {
+                if(arr[i, j] == 1)
+                {
+                    PlaceTile(new Vector2(i - w / 2, j - h / 2));
+                }
             }
         }
     }
