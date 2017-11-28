@@ -17,8 +17,6 @@ public static class TextReader{
     static string[] adjectives = new string[] { "old", "green", "squaemous","sinister","ancient","ominous","mysterious","eldritch","strange","red","blue", "yellow","flavorful","frightful","pleasant","grand","small","giant","vengeful","ruined","haunted","playful"};
     static string[] nouns = new string[] { "dog", "cat", "bird", "error", "urn", "temple", "ruin", "chapel", "structure", "man", "creature", "chest", "batman", "device", "shelter","game developer"};
 
-
-
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Initialize () {
         binData = Resources.Load("DialogTest") as TextAsset;

@@ -114,7 +114,7 @@ public class Character
         return _maxStrength;
     }
 	
-    public Character(string name, int maxHealth, int maxStamina, int maxStrength)
+    public Character(string name, bool isHostile, int maxHealth, int maxStamina, int maxStrength)
     {
         _name = name;
         _isHostile = isHostile;
