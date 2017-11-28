@@ -100,10 +100,7 @@ public class Character
             }
         }
     }
-<<<<<<< HEAD
-
-    public Character(string name, bool isHostile, int maxHealth, int maxStamina, int maxStrength)
-=======
+	
     public int getMaxHealth()
     {
         return _maxHealth;
@@ -116,8 +113,8 @@ public class Character
     {
         return _maxStrength;
     }
+	
     public Character(string name, int maxHealth, int maxStamina, int maxStrength)
->>>>>>> master
     {
         _name = name;
         _isHostile = isHostile;
