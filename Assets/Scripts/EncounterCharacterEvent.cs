@@ -15,6 +15,7 @@ public class EncounterCharacterEvent : Event
         float random = UnityEngine.Random.value;
         EncounterCharacterEvent result = new EncounterCharacterEvent();
         result.character = Character.GenerateRandom(random);
+        result.encounterDialog = (result.character.isHostile) ? TextReader.GetDialog("Hostile") : TextReader.GetDialog("Nonhostile");
         return result;
     }
 }
