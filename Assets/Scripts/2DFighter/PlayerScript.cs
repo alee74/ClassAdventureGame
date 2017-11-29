@@ -239,16 +239,17 @@ public class PlayerScript : MonoBehaviour {
     {
 
         yield return new WaitForSeconds(.25f);
-        punchBox.transform.SetPositionAndRotation(new Vector3(transform.position.x + 0.75f, transform.position.y, 0), new Quaternion(0,0,0,0));
+        if (isFacingRight)
+        {
+            punchBox.transform.SetPositionAndRotation(new Vector3(transform.position.x + 0.75f, transform.position.y, 0), new Quaternion(0, 0, 0, 0));
+        } else
+        {
+            punchBox.transform.SetPositionAndRotation(new Vector3(transform.position.x - 0.75f, transform.position.y, 0), new Quaternion(0, 0, 0, 0));
+        }
         punchBox.SetActive(true);
         yield return new WaitForSeconds(.15f);
         punchBox.SetActive(false);
         punchBox.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y, 0), new Quaternion(0, 0, 0, 0));
-    }
-
-    void SaveCharInfo()
-    {
-       // character.health = health;
     }
 
 }
