@@ -108,7 +108,7 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &67749491
+--- !u!1001 &61817051
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -117,11 +117,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4177695495455670, guid: 63eee001837cd9b4ab64f15ff76470d7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.1881156
+      value: -6.451945
       objectReference: {fileID: 0}
     - target: {fileID: 4177695495455670, guid: 63eee001837cd9b4ab64f15ff76470d7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.27212912
+      value: -1.423551
       objectReference: {fileID: 0}
     - target: {fileID: 4177695495455670, guid: 63eee001837cd9b4ab64f15ff76470d7, type: 2}
       propertyPath: m_LocalPosition.z
@@ -145,11 +145,38 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4177695495455670, guid: 63eee001837cd9b4ab64f15ff76470d7, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1857971025636802, guid: 63eee001837cd9b4ab64f15ff76470d7, type: 2}
-      propertyPath: m_TagString
-      value: Tree
+    - target: {fileID: 114456427762072718, guid: 63eee001837cd9b4ab64f15ff76470d7,
+        type: 2}
+      propertyPath: currentHp
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 61746549732656598, guid: 63eee001837cd9b4ab64f15ff76470d7,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114456427762072718, guid: 63eee001837cd9b4ab64f15ff76470d7,
+        type: 2}
+      propertyPath: logs
+      value: 
+      objectReference: {fileID: 4563413414691388, guid: a14ac0d24dcbd4b2b809f95c979b3fc4,
+        type: 2}
+    - target: {fileID: 61746549732656598, guid: 63eee001837cd9b4ab64f15ff76470d7,
+        type: 2}
+      propertyPath: m_UsedByComposite
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61746549732656598, guid: 63eee001837cd9b4ab64f15ff76470d7,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 61746549732656598, guid: 63eee001837cd9b4ab64f15ff76470d7,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63eee001837cd9b4ab64f15ff76470d7, type: 2}
@@ -296,57 +323,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4016414339713928, guid: 029e858bcc6837248b121a17b8daaf2d, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 61649196856452316, guid: 029e858bcc6837248b121a17b8daaf2d,
         type: 2}
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114189664597627556, guid: 029e858bcc6837248b121a17b8daaf2d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 029e858bcc6837248b121a17b8daaf2d, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1582839082 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1857971025636802, guid: 63eee001837cd9b4ab64f15ff76470d7,
-    type: 2}
-  m_PrefabInternal: {fileID: 67749491}
---- !u!61 &1582839083
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1582839082}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &1582839086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1582839082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d86f04fb295534e16b250be16620aa2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  treeHealth: 5
-  logs: {fileID: 4563413414691388, guid: a14ac0d24dcbd4b2b809f95c979b3fc4, type: 2}
-  currentHp: 5
