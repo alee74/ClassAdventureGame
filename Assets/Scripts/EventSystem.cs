@@ -7,22 +7,6 @@ public enum Weather { Sunny, Rainy, Cloudy, Stormy };
 
 static public class EventSystem {
 
-    static public int maxCharacters = 20;
-    static public int maxEvents = 20;
-
-    static public List<Character> GetEncounterableCharacters(int day)
-    {
-        UnityEngine.Random.InitState(day);
-        float random = UnityEngine.Random.value;
-        int numCharacters = (int)(random * (maxCharacters));
-        List<Character> result = new List<Character>(numCharacters);
-        for(int i = 0; i < numCharacters; i++)
-        {
-            result[i] = Character.GenerateRandomCharacter(random);
-        }
-        return result;
-    }
-
     static public Weather GetWeather(int day)
     {
         UnityEngine.Random.InitState(day);
@@ -30,13 +14,30 @@ static public class EventSystem {
         return (Weather)weather;
     }
 
-    static public List<CampEvent> GetCampEvents(int day)
+    static public List<CampEvent> GetCampEvents(int day, int maxEvents = 20, int minEvents = 0)
     {
         UnityEngine.Random.InitState(day);
-        int numEvents = (int)(UnityEngine.Random.value * (maxEvents));
+        int numEvents = Math.Max(minEvents, (int)(UnityEngine.Random.value * maxEvents));
         List<CampEvent> events = new List<CampEvent>(numEvents);
-        // TODO: generate random camp events
+        for(int i = 0; i < numEvents; ++i)
+        {
+            events[i] = CampEvent.GenerateRandom();
+        }
         return events;
+    }
+
+    static public List<GameObject> GetEventTiles(int day, int maxEvents = 20, int minEvents = 0)
+    {
+        UnityEngine.Random.InitState(day);
+        int numEvents = Math.Max(minEvents, (int)(maxEvents * UnityEngine.Random.value));
+        GameObject eventTilePrefab = (GameObject)Resources.Load("Prefabs/EventTile");
+        List<GameObject> result = new List<GameObject>(numEvents);
+        for(int i = 0; i < numEvents; ++i)
+        {
+            result[i] = UnityEngine.Object.Instantiate(eventTilePrefab);
+            result[i].GetComponent<EventTile>().tileEvent = EncounterCharacterEvent.GenerateRandom(day);
+        }
+        return result;
     }
 	
 }
