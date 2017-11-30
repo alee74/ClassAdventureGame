@@ -28,7 +28,7 @@ public class ItemInteraction : MonoBehaviour {
         } else
         {
             // Item has been touched!
-            if (ItemsInInventory.GetTotalItems() < max && resource.gameObject.tag != "Tree")
+			if (ItemsInInventory.GetTotalItems() < max && resource.gameObject.tag != "Tree" && resource.gameObject.tag != "Lake")
             {
                 // if you can still carry stuff
                 Destroy(resource.gameObject);
