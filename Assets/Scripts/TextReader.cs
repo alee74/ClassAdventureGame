@@ -18,7 +18,7 @@ public static class TextReader{
     static string[] nouns = new string[] { "dog", "cat", "bird", "error", "urn", "temple", "ruin", "chapel", "structure", "man", "creature", "chest", "batman", "device", "shelter","game developer"};
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void Initialize () {
+    static void Initialize() {
         binData = Resources.Load("DialogTest") as TextAsset;
         //Debug.Log(binData);
         //string initialLines = binData.text;
@@ -26,7 +26,10 @@ public static class TextReader{
         dialogLines = new string[dialogs.Length][];
         for (int j = 0; j < dialogs.Length; j++) {
             dialogLines[j] = dialogs[j].Split('\t');
-            Debug.Log("Dialog Line " + j + ": " + dialogLines[j]);
+            Debug.Log("Dialog Line " + j + ": ");
+            foreach (string s in dialogLines[j]) {
+                Debug.Log(s + ",");
+            }
         }
         //textBox = GameObject.Find("MainText");
         //postedDialog = textBox.GetComponent<Text>();
