@@ -19,7 +19,6 @@ Story Popup	You encounter a ADJECTIVE NOUN.
 Story Popup	"...but as the Zookeeper prepared to make the final strike, the youth took the opportunity, lashing out with the great blade..."
 Story Popup	In the end, desperate measures were needed to save the pandas. And the cost may have been too great.
 Story Popup	"...with a wet, meaty sound, the Zookeeper collapsed in a crimson puddle, prompting a chorus of yelling and hooting from all the cages, save for the large cage in the center, from which came only a slow, methodical *chewing*."
-Story Popup	"But Romeo, our parents will never consent!" "Fear not, fair Juliet, for I have the Stone of Aristotile and the Shield of Simpson at my side, and together we shall..."
 Story Popup	The ADJECTIVE texts of the lost times speak of a great NOUN that once ruled the sky.
 Story Popup	At the end of history, the historians were burned.
 Story Popup	You've been playing quite a while! Why not take a break? 
@@ -28,6 +27,7 @@ AddFood	A mysterious package appears at the gates of your camp, filled with deli
 AddFood	A traveling merchant has sold you several crates of food.
 AddFood	A mysterious masked man arrives at the gates of your camp, bearing meat. He won't say what animal it came from, but beggars can't be choosers...
 AddFood	Emissaries of the cult "Followers of the ADJECTIVE NOUN" come recruiting, and bring food as gifts.
+AddFood	The Lorax appears at your camp and berates your campers for harming the forest. They cook and eat him.
 SubFood	Those tasty-looking sandwiches turn out to be made of spiders.
 SubFood	A bolt of lightning starts a fire, destroying food rations.
 SubFood	A batch of stored food has spoiled!
@@ -44,13 +44,18 @@ SubWater	Turns out that WASN'T actually water in those tanks, but rather battery
 SubWater	The Servants of the Zookeeper break into your camp, stealing several tanks of water. As payment, they provide a dead frog. 
 SubWater	The ambient temperature suddenly spikes, evaporating your water supplies.
 SubWater	Harmonica music drifts in the air from a nearby hill. For some reason this makes you thirsty.
+SubWater	The Many-Angled Ones descend upon your camp, turning your water to stone.
+SubWater	A very thirsty elephant wanders past, drinking most of your water. On closer inspection, it may not be an elephant at all.
 SubWater	A leak springs in the water tank, unnoticed for hours. The water seeps deep into the ground, now unusable.
 AddWood	The new saplings some campers planted are growing tall! The forests can now be sustainably harvested for fallen and overcrowded trees.
 AddWood	A giant tree sprouts underneath your bed as you sleep. Once you make your way down, the tree is chopped down in revenge.
 AddWood	All those human sacrifices are paying off. The forest offers a rich bounty. Of wood. Totally worth it. 
 AddWood	A group of travelers come to your village, seeking shelter. They offer a bundle of sticks as payment. 
+AddWood	A genie offers you one wish! As long as that wish is for wood.
 SubWood	Everything is on fire. Even the fire is on fire.
 SubWood	A thief in the night! Wood and some carving tools have been stolen.
 SubWood	A horde of wood-eating camels descends upon the forest.
 SubWood	Error 0x833083409. Wood deleted.
 SubWood	That log you just threw on the fire may not have been a log at all. In fact, it appears to be an angry bear.
+SubWood	A strange aura envelops your camp. Several bundles of wood disappear as the light fades.
+SubWood	The Lorax berates your campers for destroying the forest. They return several logs to the forest in guilt.
