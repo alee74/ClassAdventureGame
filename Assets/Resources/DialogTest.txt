@@ -4,6 +4,13 @@ Nonhostile	He sleeps below the golden oak.
 Nonhostile	We will aid you as best we can.
 Nonhostile	Do you remember?
 Nonhostile	History is but a name.
+Hostile	GUBAH!
+Hostile	SO MANY BEES.
+Hostile	Die!
+Hostile	Prepare yourself!
+Hotile	Your blood sings to me!
+Hostile	Frykt kyllinger herre!
+Hostile	I'll eat well tonight!
 Hostile	The end draws near!
 Hostile	I taste sunset!
 Hostile	What do you hope to accomplish?
@@ -26,6 +33,7 @@ SubFood	A bolt of lightning starts a fire, destroying food rations.
 SubFood	A batch of stored food has spoiled!
 SubFood	Raider attack! Rations are destroye in the pillaging.
 SubFood	The Old Ones demand an offering, or at least that's what the crazy guy in your camp says. A number of rations are sacrificed before he is subdued.
+SubFood	A horde of bears descends on your camp, devouring your rations.
 AddWater	A camper develops a device that can help filter toxic rainwater. Your camp's water stores are improved!
 AddWater	An attempt at digging a new latrine uncovers an underwater lake 
 AddWater	It seems that rain dance actually works. And it's not even that corrosive!
@@ -38,4 +46,8 @@ SubWater	The ambient temperature suddenly spikes, evaporating your water supplie
 SubWater	Harmonica music drifts in the air from a nearby hill. For some reason this makes you thirsty.
 SubWater	A leak springs in the water tank, unnoticed for hours. The water seeps deep into the ground, now unusable.
 AddWood	The new saplings some campers planted are growing tall! The forests can now be sustainably harvested for fallen and overcrowded trees.
+AddWood	A giant tree sprouts underneath your bed as you sleep. Once you make your way down, the tree is chopped down in revenge.
+AddWood	A group of travelers come to your village, seeking shelter. They offer a bundle of sticks as payment. 
+SubWood	Everything is on fire. Even the fire is on fire.
 SubWood	A thief in the night! Wood and some carving tools have been stolen.
+SubWood	That log you just threw on the fire may not have been a log at all. In fact, it appears to be an angry bear.
