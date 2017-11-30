@@ -12,5 +12,4 @@ public class WorldMapTransition : MonoBehaviour
         PlayerPrefs.SetFloat("Z", -1);
         SceneManager.LoadScene("WorldMapMainScene");
     }
-
 }

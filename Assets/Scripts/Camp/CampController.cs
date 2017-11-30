@@ -5,16 +5,18 @@ using UnityEngine.UI;
 
 public class CampController : MonoBehaviour {
     // Use this for initialization
+    public static int day = -1;
+
     public Text foodNum;
     public Text waterNum;
     public Text woodNum;
     public Text dayNum;
 	void Start () {
-        if(CampEventSystem.day == -1)
+        if(day == -1)
         {
             firstDay();
         }
-        CampEventSystem.day += 1;
+        day += 1;
         consumeResources();
 
     }
@@ -35,7 +37,7 @@ public class CampController : MonoBehaviour {
     }
     void updateUI()
     {
-        dayNum.text = CampEventSystem.day.ToString();
+        dayNum.text = day.ToString();
         foodNum.text = ResourceInfo.getFoodStock().ToString();
         waterNum.text = ResourceInfo.getWaterStock().ToString();
         woodNum.text = ResourceInfo.getWoodStock().ToString();
