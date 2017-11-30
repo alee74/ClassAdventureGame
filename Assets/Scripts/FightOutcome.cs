@@ -9,11 +9,16 @@ public class FightOutcome : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if(wasInFight && !wonFight){
+            ResourceInfo.setFoodStock(0);
+            ResourceInfo.setWaterStock(0);
+            ResourceInfo.setWoodStock(0);
+            wasInFight = false;
+        }
 	}
 }
