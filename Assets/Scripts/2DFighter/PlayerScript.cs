@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 enum State
 {
@@ -65,6 +66,12 @@ public class PlayerScript : MonoBehaviour {
 		CheckGrounded ();
         DirectionFacing();
         HandleInput();
+
+		//WIN-LOSS HANDLING
+		if (health <= 0)
+		{
+			SceneManager.LoadScene("GameOver");
+		}
 
 	}
 

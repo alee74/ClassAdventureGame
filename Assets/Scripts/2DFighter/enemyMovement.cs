@@ -75,8 +75,11 @@ public class enemyMovement : MonoBehaviour
             //Debug.Log("Grounded!!!");
         }
 
-        if (curHealth == 0)
+		//WIN-LOSS HANDLING
+        if (curHealth <= 0)
         {
+			Text winText = GameObject.Find("EndGameText").GetComponent<Text>();
+			winText.text = "YOU HAVE WON!";
             SceneManager.LoadScene("WorldMapMainScene");
             Destroy(gameObject);
         }
