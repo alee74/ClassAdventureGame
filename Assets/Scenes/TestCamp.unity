@@ -17567,21 +17567,6 @@ MonoBehaviour:
   waterNum: {fileID: 913959648}
   woodNum: {fileID: 202573630}
   dayNum: {fileID: 4110136}
---- !u!114 &1857274651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1857274644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d79e92e3ca476047b0a00508efddb14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 0
-  groundRadius: 0.1
 --- !u!1 &1862244059
 GameObject:
   m_ObjectHideFlags: 0
