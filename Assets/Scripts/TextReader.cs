@@ -24,7 +24,10 @@ public static class TextReader{
         //string initialLines = binData.text;
         dialogs = binData.text.Split('\n');
         dialogLines = new string[dialogs.Length][];
-        for (int j = 0; j < dialogs.Length; j++) {dialogLines[j] = dialogs[j].Split('\t'); }
+        for (int j = 0; j < dialogs.Length; j++) {
+            dialogLines[j] = dialogs[j].Split('\t');
+            Debug.Log("Dialog Line " + j + ": " + dialogLines[j]);
+        }
         //textBox = GameObject.Find("MainText");
         //postedDialog = textBox.GetComponent<Text>();
     }
