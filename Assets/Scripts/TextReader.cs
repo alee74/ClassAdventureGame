@@ -7,7 +7,7 @@ using System.IO;
 using UnityEditor;
 
 
-public static class TextReader{
+public static class TextReader {
 
     //GameObject textBox;
     //Text postedDialog;
@@ -26,10 +26,11 @@ public static class TextReader{
         dialogLines = new string[dialogs.Length][];
         for (int j = 0; j < dialogs.Length; j++) {
             dialogLines[j] = dialogs[j].Split('\t');
-            Debug.Log("Dialog Line " + j + ": ");
+            /*Debug.Log("Dialog Line " + j + ": ");
             foreach (string s in dialogLines[j]) {
                 Debug.Log(s + ",");
             }
+            */
         }
         //textBox = GameObject.Find("MainText");
         //postedDialog = textBox.GetComponent<Text>();
@@ -46,8 +47,10 @@ public static class TextReader{
             {
                 found = true;
                 possibilities.Add(dialogLines[i][1].Replace("ADJECTIVE", adjectives[UnityEngine.Random.Range(0, adjectives.Length)]).Replace("NOUN", nouns[UnityEngine.Random.Range(0, nouns.Length)]));
-                return possibilities[UnityEngine.Random.Range(0, possibilities.Count)];
             }
+        }
+        if (found == true) {
+            return possibilities[UnityEngine.Random.Range(0, possibilities.Count)];
         }
         if (found == false)
         {
