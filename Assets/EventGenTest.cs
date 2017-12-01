@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class test : MonoBehaviour {
+public class EventGenTest : MonoBehaviour {
 
     List<CampEvent> campEvents;
     List<GameObject> eventTiles;
