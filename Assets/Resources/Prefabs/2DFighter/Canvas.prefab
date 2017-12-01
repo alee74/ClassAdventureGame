@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 222920392031012560}
   - component: {fileID: 114266056505842454}
   m_Layer: 5
-  m_Name: Text
+  m_Name: PlayerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 222986513578783450}
   - component: {fileID: 114379226128400206}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: EnemyName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

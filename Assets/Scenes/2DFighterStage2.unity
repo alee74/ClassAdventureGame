@@ -682,13 +682,15 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1424296182158524, guid: 6c43373837799634bb25fff92bb44971, type: 2}
-      propertyPath: m_Name
-      value: PlayerName
+    - target: {fileID: 114266056505842454, guid: 6c43373837799634bb25fff92bb44971,
+        type: 2}
+      propertyPath: m_Text
+      value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1716517071027594, guid: 6c43373837799634bb25fff92bb44971, type: 2}
-      propertyPath: m_Name
-      value: EnemyName
+    - target: {fileID: 114379226128400206, guid: 6c43373837799634bb25fff92bb44971,
+        type: 2}
+      propertyPath: m_Text
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c43373837799634bb25fff92bb44971, type: 2}
