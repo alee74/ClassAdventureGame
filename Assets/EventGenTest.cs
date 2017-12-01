@@ -18,20 +18,20 @@ public class EventGenTest : MonoBehaviour {
 
         foreach(CampEvent ce in campEvents)
         {
-            Debug.Log("Camp Event message: " + ce.message 
-                + "\nfood effect: " + ce.food 
-                + "\nwater effect: " + ce.water 
-                + "\nwood effect: " + ce.wood);
+            Debug.Log("Camp Event Message: \"" + ce.message 
+                + "\"\nFood Effect: " + ce.food 
+                + "\nWater Effect: " + ce.water 
+                + "\nWood Effect: " + ce.wood);
         }
         foreach (GameObject go in eventTiles)
         {
             EventTile et = go.GetComponent<EventTile>();
             EncounterCharacterEvent ece = (EncounterCharacterEvent)et.tileEvent;
-            Debug.Log("Event name: " 
-                + ece.name + "\ndescription: " 
-                + ece.description + "\ndialog: " 
-                + ece.encounterDialog + "\ncharacter name: " 
-                + ece.character.name + "\nhostile?: " 
+            Debug.Log("Event Name: \"" 
+                + ece.name + "\"\nDescription: " 
+                + ece.description + "\nDialog: " 
+                + ece.encounterDialog + "\nCharacter Name: " 
+                + ece.character.name + "\nHostile?: " 
                 + ece.character.isHostile + "\nmaxHealth: " 
                 + ece.character.getMaxHealth() + "\nmaxStamina: " 
                 + ece.character.getMaxStamina() + "\nmaxStrength: " 
