@@ -45,6 +45,7 @@ SubWater	The Servants of the Zookeeper break into your camp, stealing several ta
 SubWater	The ambient temperature suddenly spikes, evaporating your water supplies.
 SubWater	Harmonica music drifts in the air from a nearby hill. For some reason this makes you thirsty.
 SubWater	The Many-Angled Ones descend upon your camp, turning your water to stone.
+SubWater	Your water supplies have caught fire.
 SubWater	A very thirsty elephant wanders past, drinking most of your water. On closer inspection, it may not be an elephant at all.
 SubWater	A leak springs in the water tank, unnoticed for hours. The water seeps deep into the ground, now unusable.
 AddWood	The new saplings some campers planted are growing tall! The forests can now be sustainably harvested for fallen and overcrowded trees.
