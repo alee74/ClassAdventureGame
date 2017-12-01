@@ -9,6 +9,7 @@ public class PlayerInfoForWorldMap : MonoBehaviour {
     private Text nameText;
     private Text strengthText;
     private Text staminaText;
+    private Text healthText;
     
 	// Use this for initialization
 	void Start () {
@@ -16,6 +17,7 @@ public class PlayerInfoForWorldMap : MonoBehaviour {
         nameText = GameObject.Find("Name").GetComponent<Text>();
         strengthText = GameObject.Find("Strength").GetComponent<Text>();
         staminaText = GameObject.Find("Stamina").GetComponent<Text>();
+        healthText = GameObject.Find("HealthText").GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
@@ -23,5 +25,6 @@ public class PlayerInfoForWorldMap : MonoBehaviour {
         nameText.text = currChara.name;
         strengthText.text = "Strength: " + currChara.strength.ToString();
         staminaText.text = "Stamina: " + currChara.stamina.ToString();
+        healthText.text = currChara.health.ToString();
 	}
 }

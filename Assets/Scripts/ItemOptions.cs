@@ -13,11 +13,13 @@ public class ItemOptions : MonoBehaviour {
     public GameObject wood;
 
     private GameObject player;
+    private Character currChara;
 
     // Use this for initialization
     void Start () {
         currItemTag = "null";
         player = GameObject.Find("Player");
+        currChara = CharInfo.getCurrentCharacter();
 	}
 
     public void OnClick()
@@ -66,5 +68,26 @@ public class ItemOptions : MonoBehaviour {
     public void OnUse()
     {
         Debug.Log(currItemTag + " will be used..");
+        switch (currItemTag)
+        {
+            case "Food":
+                if (ItemsInInventory.num_food > 0 )
+                {
+                    /*
+                    CharInfo.getCurrentCharacter().health += 10;
+                    if (CharInfo.getCurrentCharacter().health <)
+                    */
+                    if (currChara.health < currChara.getMaxHealth())
+                    {
+                        currChara.health += 10;
+                    }
+                }
+                break;
+            case "Water":
+                break;
+            case "Wood":
+                break;
+        }
     }
+    
 }

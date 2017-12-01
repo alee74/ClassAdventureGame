@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemsInInventory : MonoBehaviour {
+    
 
     private Text waterTxt;
     public static int num_water = 0;
@@ -31,5 +32,15 @@ public class ItemsInInventory : MonoBehaviour {
     public static int GetTotalItems()
     {
         return num_water + num_food + num_wood;
+    }
+
+    public static void AddInventoryItemsToCampResource()
+    {
+        ResourceInfo.addFoodStock(num_food);
+        ResourceInfo.addWaterStock(num_water);
+        ResourceInfo.addWoodStock(num_wood);
+        
+        num_food = 0; num_water = 0; num_wood = 0;
+
     }
 }

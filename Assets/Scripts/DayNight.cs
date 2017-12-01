@@ -25,6 +25,7 @@ public class DayNight : MonoBehaviour {
 		lerpControl += Time.deltaTime/duration;
 		dayNight.color = Color.Lerp (day, night, lerpControl);
 		if (dayNight.color == night) {
+            ItemsInInventory.AddInventoryItemsToCampResource();
 			SceneManager.LoadScene ("TestCamp");
 		}
 	}
