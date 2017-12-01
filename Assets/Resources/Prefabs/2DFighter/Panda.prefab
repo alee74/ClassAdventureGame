@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 70305036802485456}
   - component: {fileID: 95303283576516474}
   m_Layer: 10
-  m_Name: enemy
+  m_Name: Panda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1493443839592146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9125974, y: -0.37289923, z: 0}
+  m_LocalPosition: {x: 2.96, y: -2.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4887212343417264}
@@ -106,7 +106,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.36, y: 0.75}
+  m_Size: {x: 1, y: 1.6}
   m_Direction: 0
 --- !u!95 &95303283576516474
 Animator:
