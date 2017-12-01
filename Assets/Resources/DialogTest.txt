@@ -35,7 +35,7 @@ SubFood	Raider attack! Rations are destroye in the pillaging.
 SubFood	The Old Ones demand an offering, or at least that's what the crazy guy in your camp says. A number of rations are sacrificed before he is subdued.
 SubFood	A horde of bears descends on your camp, devouring your rations.
 AddWater	A camper develops a device that can help filter toxic rainwater. Your camp's water stores are improved!
-AddWater	An attempt at digging a new latrine uncovers an underwater lake 
+AddWater	An attempt at digging a new latrine uncovers an underwater lake.
 AddWater	It seems that rain dance actually works. And it's not even that corrosive!
 AddWater	The self-proclaimed "Queen of the Waters" visits your camp, bearing bottles of water. Well, it's probably water, at least.
 AddWater	One of your residents apparently turned into a werewolf last night. As it turns out, a werewolf's nose is good for finding fresh water.
