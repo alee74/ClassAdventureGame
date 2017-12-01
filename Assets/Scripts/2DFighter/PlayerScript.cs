@@ -19,11 +19,11 @@ public class PlayerScript : MonoBehaviour {
     Animator anim;
     State state;
     float speed = 5f;        //will probably move to Dependent Variables
-    float jumpPower = 300f;  //will probably move to Dependent Variables
+    float jumpPower = 200f;  //will probably move to Dependent Variables
     bool isFacingRight;
 
     //Child Objects 
-    private Transform jumpCheck;
+   // private Transform jumpCheck;
     private GameObject punchBox;
 	private CapsuleCollider2D playerCollider;
 
@@ -51,9 +51,9 @@ public class PlayerScript : MonoBehaviour {
         anim = GetComponent<Animator>();
 		playerCollider = GetComponent<CapsuleCollider2D>();
         state = State.Stand;
-        jumpCheck = transform.Find("JumpCheck");
+     //   jumpCheck = transform.Find("JumpCheck");
         punchBox = transform.Find("PunchBox").gameObject;
-        grounded = false;
+        grounded = true;
 		//groundMask = 9;
 
 		healthSlider =  GameObject.Find ("PlayerHealth").GetComponent <Slider> ();
@@ -63,7 +63,6 @@ public class PlayerScript : MonoBehaviour {
 	void Update () {
 		healthSlider.value = health / maxHealth;
 
-		CheckGrounded ();
         DirectionFacing();
         HandleInput();
 
@@ -75,8 +74,8 @@ public class PlayerScript : MonoBehaviour {
 
 	}
 
-	void CheckGrounded () {
-		if (playerCollider.IsTouchingLayers(groundMask))
+	bool IsOnGround () {
+        /*if (playerCollider.IsTouchingLayers(groundMask))
 		{
 			grounded = true;
 			//Debug.Log("Grounded!!!");
@@ -85,7 +84,20 @@ public class PlayerScript : MonoBehaviour {
 		{
 			grounded = false;
 			//Debug.Log(" Not Grounded!!!");
-		}
+		}*/
+        Debug.DrawRay(transform.position, new Vector2(0, -0.9f), Color.green);
+        RaycastHit2D hit =  Physics2D.Raycast(transform.position, Vector2.down, distance: 0.85f, layerMask: groundMask);
+        Debug.Log(hit.collider);
+        if (hit.collider != null)
+        {
+            Debug.Log("grounded");
+            return true;
+        } else
+        {
+            return false;
+        }
+
+        //return false;
 	}
 
     void HandleInput()
@@ -115,6 +127,7 @@ public class PlayerScript : MonoBehaviour {
                {
                    case State.Stand:
                         rgb.velocity = new Vector2(0f, 0f);
+                        Debug.Log("Stand");
                         anim.SetInteger("action", 0);
                        break;
                    case State.Walk:
@@ -154,21 +167,23 @@ public class PlayerScript : MonoBehaviour {
     {
 		//Debug.Log ("standing");
 		//rgb.velocity = new Vector2 (0, 0);
-        float inX = Input.GetAxis("Horizontal");
         bool inY = Input.GetKeyDown("space");
+        float inX = Input.GetAxis("Horizontal");
 		bool inF = Input.GetKey(KeyCode.F);
-        
-		if (inX != 0)
-        {
-            ChangeState(State.Walk);
-        } 
 
-		if (inY && grounded)
+
+        if (inY && IsOnGround())
         {
             ChangeState(State.Jump);
             rgb.velocity = new Vector2(rgb.velocity.x, 0f);
             rgb.AddForce(new Vector2(0, jumpPower));
+            return;
         }
+
+		if (inX != 0)
+        {
+            ChangeState(State.Walk);
+        } 
 
 		if (inF) {
 			Debug.Log ("Should punch1");
@@ -190,7 +205,7 @@ public class PlayerScript : MonoBehaviour {
 		} 
 
 
-        if (inY && grounded)
+        if (inY && IsOnGround())
         {
             ChangeState(State.Jump);
             rgb.velocity = new Vector2(rgb.velocity.x, 0f);
@@ -212,10 +227,10 @@ public class PlayerScript : MonoBehaviour {
 		rgb.velocity = new Vector2(inX * speed, rgb.velocity.y);
 
 
-		grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
+		//grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
 
 
-        if (grounded)
+        if (IsOnGround())
         {
 			Debug.Log ("Grounded!");
             ChangeState(State.Stand);
@@ -232,7 +247,6 @@ public class PlayerScript : MonoBehaviour {
         StartCoroutine(PunchFunc());
         //Need to change state?
         float inX = Input.GetAxis("Horizontal");
-		bool inY = Input.GetKeyDown("space");
 
 		if (inX == 0) {
 			ChangeState (State.Stand);
