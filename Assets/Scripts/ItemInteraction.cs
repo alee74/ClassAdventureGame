@@ -22,7 +22,6 @@ public class ItemInteraction : MonoBehaviour {
             //PlayerPrefs.SetFloat("Y", 0);
             ///PlayerPrefs.SetFloat("Z", -1);
 			SceneManager.LoadScene ("TestCamp");
-
 		} else if (resource.gameObject.tag == "Event"){
             EventInteraction();
         } else

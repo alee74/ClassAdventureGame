@@ -13,21 +13,31 @@ enum State
 
 public class PlayerScript : MonoBehaviour {
 
+    //Local variables
     Rigidbody2D rgb;
     Animator anim;
     State state;
-    float speed = 5f;
-    float jumpPower = 300f;
+    float speed = 5f;        //will probably move to Dependent Variables
+    float jumpPower = 300f;  //will probably move to Dependent Variables
     bool isFacingRight;
+
+    //Child Objects 
     private Transform jumpCheck;
+    private GameObject punchBox;
+	private CapsuleCollider2D playerCollider;
+
+    //Layers and Ground
     public LayerMask groundMask;
     private bool grounded;
     public float groundRadius = 0.1f;
+
+    //Dependent Variables
     private float health;
 	private float maxHealth;
     private Character character;
 
-	public Slider healthSlider;
+    //UI variables
+    private Slider healthSlider;
 
 
 
@@ -38,9 +48,12 @@ public class PlayerScript : MonoBehaviour {
 		maxHealth = 100;
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+		playerCollider = GetComponent<CapsuleCollider2D>();
         state = State.Stand;
         jumpCheck = transform.Find("JumpCheck");
+        punchBox = transform.Find("PunchBox").gameObject;
         grounded = false;
+		//groundMask = 9;
 
 		healthSlider =  GameObject.Find ("PlayerHealth").GetComponent <Slider> ();
 	}
@@ -48,12 +61,24 @@ public class PlayerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		healthSlider.value = health / maxHealth;
-        grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
-        //Debug.Log("State: " + state);
-        //Debug.Log(grounded);
+
+		CheckGrounded ();
         DirectionFacing();
         HandleInput();
 
+	}
+
+	void CheckGrounded () {
+		if (playerCollider.IsTouchingLayers(groundMask))
+		{
+			grounded = true;
+			//Debug.Log("Grounded!!!");
+		}
+		else
+		{
+			grounded = false;
+			//Debug.Log(" Not Grounded!!!");
+		}
 	}
 
     void HandleInput()
@@ -102,12 +127,10 @@ public class PlayerScript : MonoBehaviour {
         float inX = Input.GetAxis("Horizontal");
         if (inX > 0)
         {
-			//anim.SetBool("isFacingRight", true);
             isFacingRight = true;
         }
         else if (inX < 0)
         {
-			//anim.SetBool("isFacingRight", false);
             isFacingRight = false;
         }
 
@@ -127,10 +150,13 @@ public class PlayerScript : MonoBehaviour {
         float inX = Input.GetAxis("Horizontal");
         bool inY = Input.GetKeyDown("space");
 		bool inF = Input.GetKey(KeyCode.F);
-        if (inX != 0)
+        
+		if (inX != 0)
         {
             ChangeState(State.Walk);
-        } if (inY && grounded)
+        } 
+
+		if (inY && grounded)
         {
             ChangeState(State.Jump);
             rgb.velocity = new Vector2(rgb.velocity.x, 0f);
@@ -177,7 +203,10 @@ public class PlayerScript : MonoBehaviour {
 		Debug.Log ("jumping");
         float inX = Input.GetAxis("Horizontal");
 		rgb.velocity = new Vector2(inX * speed, rgb.velocity.y);
+
+
 		grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
+
 
         if (grounded)
         {
@@ -193,8 +222,9 @@ public class PlayerScript : MonoBehaviour {
 		//Punch!
 		Debug.Log("Punch");
 
-		//Need to change state?
-		float inX = Input.GetAxis("Horizontal");
+        StartCoroutine(PunchFunc());
+        //Need to change state?
+        float inX = Input.GetAxis("Horizontal");
 		bool inY = Input.GetKeyDown("space");
 
 		if (inX == 0) {
@@ -205,9 +235,21 @@ public class PlayerScript : MonoBehaviour {
 		}
     }
 
-    void SaveCharInfo()
+    IEnumerator PunchFunc()
     {
-       // character.health = health;
+
+        yield return new WaitForSeconds(.25f);
+        if (isFacingRight)
+        {
+            punchBox.transform.SetPositionAndRotation(new Vector3(transform.position.x + 0.75f, transform.position.y, 0), new Quaternion(0, 0, 0, 0));
+        } else
+        {
+            punchBox.transform.SetPositionAndRotation(new Vector3(transform.position.x - 0.75f, transform.position.y, 0), new Quaternion(0, 0, 0, 0));
+        }
+        punchBox.SetActive(true);
+        yield return new WaitForSeconds(.15f);
+        punchBox.SetActive(false);
+        punchBox.transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y, 0), new Quaternion(0, 0, 0, 0));
     }
 
 }
