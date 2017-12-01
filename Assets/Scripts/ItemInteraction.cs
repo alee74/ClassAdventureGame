@@ -23,7 +23,8 @@ public class ItemInteraction : MonoBehaviour {
             //PlayerPrefs.SetFloat("X", 0);
             //PlayerPrefs.SetFloat("Y", 0);
             ///PlayerPrefs.SetFloat("Z", -1);
-			SceneManager.LoadScene ("TestCamp");
+            ItemsInInventory.AddInventoryItemsToCampResource();
+			SceneManager.LoadScene ("T-MinusDays");
 		} else if (resource.gameObject.tag == "Event"){
             //placeholder?
             EventInteraction();
@@ -39,17 +40,14 @@ public class ItemInteraction : MonoBehaviour {
                     case "Food":
                         ItemsInInventory.num_food++;
                         currChara.health -= 5;
-                        Debug.Log(currChara.health + " / " + currChara.getMaxHealth());
                         break;
                     case "Water":
                         ItemsInInventory.num_water++;
-                        currChara.health -= 5;
-                        Debug.Log(currChara.health + " / " + currChara.getMaxHealth());
+                        currChara.stamina -= 5;
                         break;
                     case "Wood":
                         ItemsInInventory.num_wood++;
-                        currChara.health -= 5;
-                        Debug.Log(currChara.health + " / " + currChara.getMaxHealth());
+                        currChara.strength -= 5;
                         break;
                 }
             } else

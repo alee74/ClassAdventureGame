@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemsInInventory : MonoBehaviour {
-    
+    private Text dayText;
 
     private Text waterTxt;
     public static int num_water = 0;
@@ -17,6 +17,7 @@ public class ItemsInInventory : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        dayText = GameObject.Find("DayText").GetComponent<Text>();
         waterTxt = GameObject.Find("WaterTxt").GetComponent<Text>();
         foodTxt = GameObject.Find("FoodTxt").GetComponent<Text>();
         woodTxt = GameObject.Find("WoodTxt").GetComponent<Text>();
@@ -24,9 +25,10 @@ public class ItemsInInventory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        waterTxt.text = "x" + num_water;
-        foodTxt.text = "x" + num_food;
-        woodTxt.text = "x" + num_wood;
+        dayText.text = "Day " + CampController.day;
+        waterTxt.text = num_water.ToString();
+        foodTxt.text = num_food.ToString();
+        woodTxt.text = num_wood.ToString();
 	}
 
     public static int GetTotalItems()
