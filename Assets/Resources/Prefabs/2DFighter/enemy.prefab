@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114370518607864896}
   - component: {fileID: 70305036802485456}
   - component: {fileID: 95303283576516474}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4887212343417264}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: enemyJumpCheck
   m_TagString: Untagged
   m_Icon: {fileID: -6488666005112524639, guid: 0000000000000000d000000000000000, type: 0}
@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1493443839592146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.4, y: -1.95, z: 0}
+  m_LocalPosition: {x: -3.1489592, y: -1.7056863, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4887212343417264}
@@ -106,7 +106,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.36, y: 0.7}
+  m_Size: {x: 0.36, y: 0.75}
   m_Direction: 0
 --- !u!95 &95303283576516474
 Animator:
@@ -173,11 +173,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1499763431
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4a0cdad609d323343bfce404f6e50fd5, type: 3}
-  m_Color: {r: 0.038927317, g: 0.42647058, b: 0.025086503, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
