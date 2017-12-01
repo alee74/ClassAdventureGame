@@ -8,7 +8,7 @@ Hostile	GUBAH!
 Hostile	SO MANY BEES.
 Hostile	Die!
 Hostile	Prepare yourself!
-Hotile	Your blood sings to me!
+Hostile	Your blood sings to me!
 Hostile	Frykt kyllinger herre!
 Hostile	I'll eat well tonight!
 Hostile	The end draws near!
