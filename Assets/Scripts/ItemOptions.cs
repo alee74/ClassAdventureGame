@@ -26,7 +26,7 @@ public class ItemOptions : MonoBehaviour {
     {
         gameObject.SetActive(true);
         //transform.position = Input.mousePosition;
-        transform.position = new Vector3(Input.mousePosition.x - 25, Input.mousePosition.y, Input.mousePosition.z);
+        transform.position = new Vector3(Input.mousePosition.x + 25, Input.mousePosition.y, Input.mousePosition.z);
     }
 
     public void OnClose()
@@ -73,19 +73,54 @@ public class ItemOptions : MonoBehaviour {
             case "Food":
                 if (ItemsInInventory.num_food > 0 )
                 {
-                    /*
-                    CharInfo.getCurrentCharacter().health += 10;
-                    if (CharInfo.getCurrentCharacter().health <)
-                    */
-                    if (currChara.health < currChara.getMaxHealth())
+                    if ((currChara.health + 10) > currChara.getMaxHealth())
+                    {
+                        currChara.health = currChara.getMaxHealth();
+                    }
+                    else
                     {
                         currChara.health += 10;
                     }
+                    ItemsInInventory.num_food--;
+                } else
+                {
+                    Debug.Log("Not carrying enough food..");
                 }
                 break;
             case "Water":
+                if (ItemsInInventory.num_water > 0 )
+                {
+                    if ((currChara.stamina + 10) > currChara.getMaxStamina())
+                    {
+                        currChara.stamina = currChara.getMaxStamina();
+                    }
+                    else
+                    {
+                        currChara.stamina += 10;
+                    }
+                    ItemsInInventory.num_water--;
+                } else
+                {
+                    Debug.Log("Not carrying enough water..");
+                }
                 break;
             case "Wood":
+                if (ItemsInInventory.num_wood > 0)
+                {
+                    if ((currChara.strength + 10) > currChara.getMaxStrength())
+                    {
+                        currChara.strength = currChara.getMaxStrength();
+                    }
+                    else
+                    {
+                        currChara.strength += 10;
+                    }
+                    ItemsInInventory.num_wood--;
+                }
+                else
+                {
+                    Debug.Log("Not carrying enough wood..");
+                }
                 break;
         }
     }
