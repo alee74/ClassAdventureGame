@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 61310650094143438}
   m_Layer: 10
   m_Name: PunchBox
-  m_TagString: Untagged
+  m_TagString: PlayerFist
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,7 +194,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 512
-  groundRadius: 0.1
 --- !u!212 &212982880867142908
 SpriteRenderer:
   m_ObjectHideFlags: 1

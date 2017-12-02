@@ -10,6 +10,10 @@ TagManager:
   - NPC
   - Event
   - CampLife
+  - Ground
+  - Enemy
+  - PlayerFist
+  - EnemyFist
   layers:
   - Default
   - TransparentFX

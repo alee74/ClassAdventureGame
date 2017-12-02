@@ -40,7 +40,6 @@ public class PlayerScript : MonoBehaviour {
     private Slider healthSlider;
 
 
-
     // Use this for initialization
     void Start () {
         character = CharInfo.getCurrentCharacter();
@@ -71,7 +70,8 @@ public class PlayerScript : MonoBehaviour {
 
 	}
 
-	bool IsOnGround () {
+	bool IsOnGround ()
+    { 
         Debug.DrawRay(transform.position, new Vector2(0, -0.9f), Color.green);
         RaycastHit2D hit =  Physics2D.Raycast(transform.position, Vector2.down, distance: 0.85f, layerMask: groundMask);
         Debug.Log(hit.collider);
@@ -112,18 +112,18 @@ public class PlayerScript : MonoBehaviour {
                {
                    case State.Stand:
                         rgb.velocity = new Vector2(0f, 0f);
-                        anim.SetInteger("action", 0);
+                        anim.SetInteger("state", 0);
                        break;
                    case State.Walk:
-                       anim.SetInteger("action", 1);
+                       anim.SetInteger("state", 1);
                        break;
                    case State.Jump:
                        firstCheck = true;
                        rgb.AddForce(new Vector2(0, jumpPower));
-                       anim.SetInteger("action", 3);
+                       anim.SetInteger("state", 3);
                        break;
                    case State.Punch:
-                       anim.SetInteger("action", 2);
+                       anim.SetInteger("state", 2);
                        break;
                }
     }
@@ -194,6 +194,7 @@ public class PlayerScript : MonoBehaviour {
 
     void Jump()
     {
+
         Debug.Log("Enter Jump");
 		Debug.Log ("jumping");
         float inX = Input.GetAxis("Horizontal");
@@ -221,6 +222,7 @@ public class PlayerScript : MonoBehaviour {
 		}
     }
 
+    
     IEnumerator JumpToGround()
     {
         Debug.Log("J2G");
@@ -243,6 +245,7 @@ public class PlayerScript : MonoBehaviour {
             }
         }
     }
+    
     IEnumerator PunchFunc()
     {
 

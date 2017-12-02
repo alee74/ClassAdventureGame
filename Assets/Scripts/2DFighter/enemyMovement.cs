@@ -119,16 +119,16 @@ public class enemyMovement : MonoBehaviour
         {
             case enemyState.Walk:
                 //rgb.velocity = new Vector2(0f, 0f);
-                enemyAnim.SetInteger("enemyAction", 0);
+                enemyAnim.SetInteger("state", 1);
                 break;
             case enemyState.Attack:
-                enemyAnim.SetInteger("enemyAction", 1);
+                enemyAnim.SetInteger("state", 2);
                 break;
             case enemyState.Air:
-                //enemyAnim.SetInteger("enemyAction", 3);
+                //enemyAnim.SetInteger("state", 3);
                 break;
             case enemyState.Stand:
-                enemyAnim.SetInteger("enemyAction", 2);
+                enemyAnim.SetInteger("state", 0);
                 break;
         }
     }
