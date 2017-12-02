@@ -19,8 +19,9 @@ public class PlayerScript : MonoBehaviour {
     Animator anim;
     State state;
     float speed = 5f;        //will probably move to Dependent Variables
-    float jumpPower = 200f;  //will probably move to Dependent Variables
+    float jumpPower = 250f;  //will probably move to Dependent Variables
     bool isFacingRight;
+    bool firstCheck; //for jumping
 
     //Child Objects 
    // private Transform jumpCheck;
@@ -90,7 +91,6 @@ public class PlayerScript : MonoBehaviour {
         Debug.Log(hit.collider);
         if (hit.collider != null)
         {
-            Debug.Log("grounded");
             return true;
         } else
         {
@@ -111,6 +111,7 @@ public class PlayerScript : MonoBehaviour {
                 Walk();
                 break;
             case State.Jump:
+                Debug.Log("Calling Jump");
                 Jump();
                 break;
 			case State.Punch:
@@ -131,9 +132,12 @@ public class PlayerScript : MonoBehaviour {
                         anim.SetInteger("action", 0);
                        break;
                    case State.Walk:
+                       Debug.Log("Walk");
 					   anim.SetInteger("action", 1);
                        break;
                    case State.Jump:
+                       firstCheck = true;
+                       Debug.Log("Jump");
                        anim.SetInteger("action", 3);
                        break;
                    case State.Punch:
@@ -175,17 +179,11 @@ public class PlayerScript : MonoBehaviour {
         if (inY && IsOnGround())
         {
             ChangeState(State.Jump);
-            rgb.velocity = new Vector2(rgb.velocity.x, 0f);
             rgb.AddForce(new Vector2(0, jumpPower));
-            return;
-        }
-
-		if (inX != 0)
+        } else if (inX != 0)
         {
             ChangeState(State.Walk);
-        } 
-
-		if (inF) {
+        } else if (inF) {
 			Debug.Log ("Should punch1");
 			ChangeState(State.Punch);
 			return;
@@ -198,43 +196,33 @@ public class PlayerScript : MonoBehaviour {
         float inX = Input.GetAxis("Horizontal");
         bool inY = Input.GetKeyDown("space");
 		bool inF = Input.GetKey(KeyCode.F);
-		if (inX == 0) {
-			ChangeState (State.Stand);
-		} else {
-			rgb.velocity = new Vector2 (inX*speed, 0);
-		} 
 
-
-        if (inY && IsOnGround())
-        {
+        if (inY && IsOnGround()) {
             ChangeState(State.Jump);
-            rgb.velocity = new Vector2(rgb.velocity.x, 0f);
             rgb.AddForce(new Vector2(0, jumpPower));
+        } else if (inF) {
+            ChangeState(State.Punch);
+		} else if (inX == 0)
+        {
+            ChangeState(State.Stand);
+        } else {
+            rgb.velocity = new Vector2(inX * speed, 0f);
         }
 
-		if (inF) {
-			ChangeState (State.Punch);
-			Debug.Log("punch while walk");
-			return;
-		}
 
     }
 
     void Jump()
     {
+        Debug.Log("Enter Jump");
 		Debug.Log ("jumping");
         float inX = Input.GetAxis("Horizontal");
 		rgb.velocity = new Vector2(inX * speed, rgb.velocity.y);
 
 
-		//grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
+        //grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
 
-
-        if (IsOnGround())
-        {
-			Debug.Log ("Grounded!");
-            ChangeState(State.Stand);
-        }
+        StartCoroutine(JumpToGround());
 
     }
 
@@ -256,6 +244,28 @@ public class PlayerScript : MonoBehaviour {
 		}
     }
 
+    IEnumerator JumpToGround()
+    {
+        Debug.Log("J2G");
+        if (firstCheck)
+        {
+            yield return new WaitForSeconds(1f);
+            if (IsOnGround())
+            {
+                Debug.Log("First Grounded!");
+                ChangeState(State.Stand);
+            }
+            firstCheck = false;
+        }
+        else
+        {
+            if (IsOnGround())
+            {
+                Debug.Log("Grounded!");
+                ChangeState(State.Stand);
+            }
+        }
+    }
     IEnumerator PunchFunc()
     {
 
