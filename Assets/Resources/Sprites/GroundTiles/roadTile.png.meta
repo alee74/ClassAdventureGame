@@ -1,18 +1,18 @@
 fileFormatVersion: 2
-guid: f9ff93028083a49d7bb267290df5a2a2
-timeCreated: 1511906904
+guid: 7ca00029c83374fe4b174c8997efb88f
+timeCreated: 1512180130
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: roadart_v3_0
-    21300002: roadart_v3_1
-    21300004: roadart_v3_2
-    21300006: roadart_v3_3
-    21300008: roadart_v3_4
-    21300010: roadart_v3_5
-    21300012: roadart_v3_6
-    21300014: roadart_v3_7
-    21300016: roadart_v3_8
+    21300000: roadTile_0
+    21300002: roadTile_1
+    21300004: roadTile_2
+    21300006: roadTile_3
+    21300008: roadTile_4
+    21300010: roadTile_5
+    21300012: roadTile_6
+    21300014: roadTile_7
+    21300016: roadTile_8
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -84,127 +84,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: roadart_v3_0
+      name: roadTile_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
-        width: 16
-        height: 16
+        y: 192
+        width: 96
+        height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadart_v3_1
+      name: roadTile_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 16
+        x: 96
+        y: 192
+        width: 96
+        height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadart_v3_2
+      name: roadTile_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
-        width: 16
-        height: 16
+        x: 192
+        y: 192
+        width: 96
+        height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadart_v3_3
+      name: roadTile_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
-        width: 16
-        height: 16
+        y: 96
+        width: 96
+        height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadart_v3_4
+      name: roadTile_4
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
+        x: 96
+        y: 96
+        width: 96
+        height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadart_v3_5
+      name: roadTile_5
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
-        width: 16
-        height: 16
+        x: 192
+        y: 96
+        width: 96
+        height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadart_v3_6
+      name: roadTile_6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 96
+        height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadart_v3_7
+      name: roadTile_7
       rect:
         serializedVersion: 2
-        x: 16
+        x: 96
         y: 0
-        width: 16
-        height: 16
+        width: 96
+        height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadart_v3_8
+      name: roadTile_8
       rect:
         serializedVersion: 2
-        x: 32
+        x: 192
         y: 0
-        width: 16
-        height: 16
+        width: 96
+        height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
