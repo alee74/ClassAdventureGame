@@ -133,11 +133,12 @@ public class PlayerScript : MonoBehaviour {
                        break;
                    case State.Walk:
                        Debug.Log("Walk");
-					   anim.SetInteger("action", 1);
+                       anim.SetInteger("action", 1);
                        break;
                    case State.Jump:
                        firstCheck = true;
                        Debug.Log("Jump");
+                       rgb.AddForce(new Vector2(0, jumpPower));
                        anim.SetInteger("action", 3);
                        break;
                    case State.Punch:
@@ -179,7 +180,7 @@ public class PlayerScript : MonoBehaviour {
         if (inY && IsOnGround())
         {
             ChangeState(State.Jump);
-            rgb.AddForce(new Vector2(0, jumpPower));
+            return;
         } else if (inX != 0)
         {
             ChangeState(State.Walk);
@@ -199,7 +200,7 @@ public class PlayerScript : MonoBehaviour {
 
         if (inY && IsOnGround()) {
             ChangeState(State.Jump);
-            rgb.AddForce(new Vector2(0, jumpPower));
+            return;
         } else if (inF) {
             ChangeState(State.Punch);
 		} else if (inX == 0)
@@ -249,7 +250,7 @@ public class PlayerScript : MonoBehaviour {
         Debug.Log("J2G");
         if (firstCheck)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.05f);
             if (IsOnGround())
             {
                 Debug.Log("First Grounded!");
