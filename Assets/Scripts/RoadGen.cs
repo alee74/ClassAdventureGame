@@ -28,23 +28,17 @@ public class RoadGen : MonoBehaviour {
 
 	public float distFromRoad = 1.16f;
 
-	//Variety of Road Tiles Necessary
-	public GameObject h1;		// horizontal 1
-	public GameObject h2;		// horizontal 2
-	public GameObject v1;		// vertical 1
-	public GameObject v2;		// vertical 2			***********************************************
-	public GameObject c1;		// corner 1 (	_|	)	* lines represent sides that connect to roads *
-	public GameObject c2;		// corner 2	(	|_	)	*   where _ is the lower edge and - is the    *
-	public GameObject c3;		// corner 3	(	-|	)	* 					upper edge			      *
-	public GameObject c4;		// corner 4	(	|-	)	***********************************************
-	public GameObject i1;		// intersection 1
-	public GameObject i2;		// intersection 2
-
+	private Dictionary<Vector2,GameObject> map = new Dictionary<Vector2,GameObject>();
+	private int tileNum = 0;
+	public GameObject lastTile;
 	public GameObject roadTile;
 	public GameObject buildingTile;
 
     void Start() {
         GenerateRoads();
+		foreach (KeyValuePair<Vector2,GameObject> tile in map) {
+			tile.Value.GetComponent<TileAlignScript>().Align();
+		}
     }
 
     /// <summary>
@@ -52,18 +46,16 @@ public class RoadGen : MonoBehaviour {
     /// </summary>
     private void GenerateRoads() {
         Vector2 pos = new Vector2(0, 0);
-        float ang = 0;
+        int ang = 0;
 
-        string lsys = IterateN(initString, iterations);
-		//Debug.Log(lsys);
+       string lsys = IterateN(initString, iterations);
         foreach (char c in lsys) {
             if (c == 'F') {
                 Vector2 delta = new Vector2(Mathf.Cos(ang * Mathf.Deg2Rad), Mathf.Sin(ang * Mathf.Deg2Rad));
                 for (int i = 0; i < fwdDist; ++i) {
-                    PlaceTile(pos);
+					PlaceTile(pos);
 					if (i == (int)fwdDist / 2) {
-						//print ((int)Mathf.Abs (ang) % 360);
-						switch ((int)Mathf.Abs(ang)%360) {
+						switch(ang) {
 							case 90:
 								PlaceBuilding (pos + new Vector2 (distFromRoad, 0));
 								break;
@@ -78,14 +70,15 @@ public class RoadGen : MonoBehaviour {
 								break;
 								
 						}
-						//PlaceBuilding (pos);
 					}
                     pos += delta;
                 }
             } else if (c == '+') {
-                ang += 90;
+				if (ang==360) ang = 90;
+                else ang += 90;
             } else if (c == '-') {
-                ang -= 90;
+				if (ang==0) ang = 270;
+                else ang -= 90;
             }
         }
     }
@@ -93,16 +86,19 @@ public class RoadGen : MonoBehaviour {
     /// <summary>
     /// Places a road tile at the given position.
     /// </summary>
-    private void PlaceTile(Vector2 pos) {
-        Instantiate(roadTile, pos, Quaternion.identity);
+
+	private void PlaceTile(Vector2 pos) {
+		if (!map.ContainsKey(pos)) {
+			map.Add(pos,Instantiate(roadTile,pos,Quaternion.identity));
+			map[pos].name = "RoadTile #"+tileNum++;
+		}
+		return;
     }
 
 	private void PlaceBuilding(Vector2 pos){
 		bool buildingCollide = Physics2D.OverlapBox(pos, buildingBox.size, buildingMask);
 		if (Random.Range (0f, 1f) > 0.85f && !buildingCollide) {
-			
 			Instantiate (buildingTile, pos, Quaternion.identity);
-
 		}
 	}
 
