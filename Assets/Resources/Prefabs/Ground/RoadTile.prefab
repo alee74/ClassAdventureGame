@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4873411955623248}
   - component: {fileID: 212755623701381098}
   - component: {fileID: 114968574008779178}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RoadTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,10 +36,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4414974360457790}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckUp
   m_TagString: Untagged
-  m_Icon: {fileID: -982381405332843317, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -6488666005112524639, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -51,10 +51,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4190519942969720}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckLeft
   m_TagString: Untagged
-  m_Icon: {fileID: -3701561207968579530, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -4087464717476244675, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -66,10 +66,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4888270881890900}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckDown
   m_TagString: Untagged
-  m_Icon: {fileID: 1654036009018553494, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 571167235653111936, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -81,10 +81,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4600629158812756}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CheckRight
   m_TagString: Untagged
-  m_Icon: {fileID: 8220585740371884164, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -1577725955494882426, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -171,7 +171,8 @@ MonoBehaviour:
   roadMask:
     serializedVersion: 2
     m_Bits: 512
-  radius: 0.1
+  radius: 1
+  delay: 3
   spriteScale: {x: 0.05, y: 0.05, z: 0}
   h1: {fileID: 21300002, guid: 9e4de217629544fab96661a8bac0b29e, type: 3}
   h2: {fileID: 21300016, guid: 9e4de217629544fab96661a8bac0b29e, type: 3}

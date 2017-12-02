@@ -6,6 +6,7 @@ public class TileAlignScript : MonoBehaviour {
 	
 	public LayerMask roadMask;
 	public float radius = 0.1f;
+	public float delay = 3;
 	public Vector3 spriteScale = new Vector3 ( 0.05f, 0.05f, 0 );
 	private SpriteRenderer sr;
 
@@ -38,7 +39,7 @@ public class TileAlignScript : MonoBehaviour {
 		d = transform.Find("CheckDown");
 		l = transform.Find("CheckLeft");
 		r = transform.Find("CheckRight");
-
+		Invoke("Align",delay);
 	}
 
 	public void Align() {
@@ -48,8 +49,6 @@ public class TileAlignScript : MonoBehaviour {
 		left = false;
 		right = false;
 		count = 0;
-
-		Debug.Log("test");
 
 		up = Physics2D.OverlapCircle(u.position,radius,roadMask);
 		down = Physics2D.OverlapCircle(d.position,radius,roadMask);
@@ -61,9 +60,11 @@ public class TileAlignScript : MonoBehaviour {
 		if (left) count++;	
 		if (right) count++;
 
+		Debug.Log(count);
+
 		switch(count) {
 			case 0:
-				sr.sprite = h1;
+				sr.sprite = v1;
 				break;
 			case 1:
 				if (up || down) sr.sprite = v1;
