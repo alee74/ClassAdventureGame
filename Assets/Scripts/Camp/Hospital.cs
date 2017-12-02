@@ -30,9 +30,9 @@ public class Hospital : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             Debug.Log("Player Entered Hospital");
-            if (character.health < 100)
+            if (character.health < character.getMaxHealth())
             {
-                character.health += 100;
+                character.health += character.getMaxHealth() - character.health;
                 Debug.Log("Player healed");
             }
             else

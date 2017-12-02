@@ -20,9 +20,9 @@ public class Barracks : MonoBehaviour {
             Debug.Log("Player Entered Barracks");
         }
         
-        if (character.stamina < 100)
+        if (character.stamina  < character.getMaxStamina())
         {
-            character.stamina += 100;
+            character.stamina += character.getMaxStamina() - character.stamina;
             Debug.Log("Stamina restored");
         }
         else
