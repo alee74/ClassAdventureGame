@@ -1,18 +1,19 @@
 fileFormatVersion: 2
-guid: 7ca00029c83374fe4b174c8997efb88f
-timeCreated: 1512180130
+guid: 9e4de217629544fab96661a8bac0b29e
+timeCreated: 1512181093
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: roadTile_0
-    21300002: roadTile_1
-    21300004: roadTile_2
-    21300006: roadTile_3
-    21300008: roadTile_4
-    21300010: roadTile_5
-    21300012: roadTile_6
-    21300014: roadTile_7
-    21300016: roadTile_8
+    21300000: roadTiles_0
+    21300002: roadTiles_1
+    21300004: roadTiles_2
+    21300006: roadTiles_3
+    21300008: roadTiles_4
+    21300010: roadTiles_5
+    21300012: roadTiles_6
+    21300014: roadTiles_7
+    21300016: roadTiles_8
+    21300018: roadTiles_9
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -84,7 +85,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: roadTile_0
+      name: roadTiles_0
       rect:
         serializedVersion: 2
         x: 0
@@ -92,13 +93,13 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadTile_1
+      name: roadTiles_1
       rect:
         serializedVersion: 2
         x: 96
@@ -106,13 +107,13 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadTile_2
+      name: roadTiles_2
       rect:
         serializedVersion: 2
         x: 192
@@ -120,13 +121,27 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadTile_3
+      name: roadTiles_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 192
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: roadTiles_4
       rect:
         serializedVersion: 2
         x: 0
@@ -134,13 +149,13 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadTile_4
+      name: roadTiles_5
       rect:
         serializedVersion: 2
         x: 96
@@ -148,13 +163,13 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadTile_5
+      name: roadTiles_6
       rect:
         serializedVersion: 2
         x: 192
@@ -162,13 +177,13 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadTile_6
+      name: roadTiles_7
       rect:
         serializedVersion: 2
         x: 0
@@ -176,13 +191,13 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadTile_7
+      name: roadTiles_8
       rect:
         serializedVersion: 2
         x: 96
@@ -190,13 +205,13 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: roadTile_8
+      name: roadTiles_9
       rect:
         serializedVersion: 2
         x: 192
@@ -204,7 +219,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
