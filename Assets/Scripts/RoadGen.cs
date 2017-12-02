@@ -28,8 +28,21 @@ public class RoadGen : MonoBehaviour {
 
 	public float distFromRoad = 1.16f;
 
-    public GameObject roadTile;
+	//Variety of Road Tiles Necessary
+	public GameObject h1;		// horizontal 1
+	public GameObject h2;		// horizontal 2
+	public GameObject v1;		// vertical 1
+	public GameObject v2;		// vertical 2			***********************************************
+	public GameObject c1;		// corner 1 (	_|	)	* lines represent sides that connect to roads *
+	public GameObject c2;		// corner 2	(	|_	)	*   where _ is the lower edge and - is the    *
+	public GameObject c3;		// corner 3	(	-|	)	* 					upper edge			      *
+	public GameObject c4;		// corner 4	(	|-	)	***********************************************
+	public GameObject i1;		// intersection 1
+	public GameObject i2;		// intersection 2
+
+	public GameObject roadTile;
 	public GameObject buildingTile;
+
     void Start() {
         GenerateRoads();
     }
@@ -42,6 +55,7 @@ public class RoadGen : MonoBehaviour {
         float ang = 0;
 
         string lsys = IterateN(initString, iterations);
+		//Debug.Log(lsys);
         foreach (char c in lsys) {
             if (c == 'F') {
                 Vector2 delta = new Vector2(Mathf.Cos(ang * Mathf.Deg2Rad), Mathf.Sin(ang * Mathf.Deg2Rad));
