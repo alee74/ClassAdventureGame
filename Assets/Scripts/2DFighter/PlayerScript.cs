@@ -30,8 +30,6 @@ public class PlayerScript : MonoBehaviour {
 
     //Layers and Ground
     public LayerMask groundMask;
-    private bool grounded;
-    public float groundRadius = 0.1f;
 
     //Dependent Variables
     private float health;
@@ -54,8 +52,6 @@ public class PlayerScript : MonoBehaviour {
         state = State.Stand;
      //   jumpCheck = transform.Find("JumpCheck");
         punchBox = transform.Find("PunchBox").gameObject;
-        grounded = true;
-		//groundMask = 9;
 
 		healthSlider =  GameObject.Find ("PlayerHealth").GetComponent <Slider> ();
 	}
@@ -76,16 +72,6 @@ public class PlayerScript : MonoBehaviour {
 	}
 
 	bool IsOnGround () {
-        /*if (playerCollider.IsTouchingLayers(groundMask))
-		{
-			grounded = true;
-			//Debug.Log("Grounded!!!");
-		}
-		else
-		{
-			grounded = false;
-			//Debug.Log(" Not Grounded!!!");
-		}*/
         Debug.DrawRay(transform.position, new Vector2(0, -0.9f), Color.green);
         RaycastHit2D hit =  Physics2D.Raycast(transform.position, Vector2.down, distance: 0.85f, layerMask: groundMask);
         Debug.Log(hit.collider);
@@ -96,8 +82,6 @@ public class PlayerScript : MonoBehaviour {
         {
             return false;
         }
-
-        //return false;
 	}
 
     void HandleInput()
@@ -128,16 +112,13 @@ public class PlayerScript : MonoBehaviour {
                {
                    case State.Stand:
                         rgb.velocity = new Vector2(0f, 0f);
-                        Debug.Log("Stand");
                         anim.SetInteger("action", 0);
                        break;
                    case State.Walk:
-                       Debug.Log("Walk");
                        anim.SetInteger("action", 1);
                        break;
                    case State.Jump:
                        firstCheck = true;
-                       Debug.Log("Jump");
                        rgb.AddForce(new Vector2(0, jumpPower));
                        anim.SetInteger("action", 3);
                        break;
@@ -170,8 +151,6 @@ public class PlayerScript : MonoBehaviour {
 
     void Stand()
     {
-		//Debug.Log ("standing");
-		//rgb.velocity = new Vector2 (0, 0);
         bool inY = Input.GetKeyDown("space");
         float inX = Input.GetAxis("Horizontal");
 		bool inF = Input.GetKey(KeyCode.F);
@@ -219,9 +198,6 @@ public class PlayerScript : MonoBehaviour {
 		Debug.Log ("jumping");
         float inX = Input.GetAxis("Horizontal");
 		rgb.velocity = new Vector2(inX * speed, rgb.velocity.y);
-
-
-        //grounded = Physics2D.OverlapCircle (jumpCheck.position, groundRadius, groundMask);
 
         StartCoroutine(JumpToGround());
 
