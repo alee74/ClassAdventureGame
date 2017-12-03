@@ -36,11 +36,6 @@ public class RoadGen : MonoBehaviour {
 
     void Start() {
         GenerateRoads();
-		/*
-		foreach (KeyValuePair<Vector2,GameObject> tile in map) {
-			tile.Value.GetComponent<TileAlignScript>().Align();
-		}
-		*/
     }
 
     /// <summary>

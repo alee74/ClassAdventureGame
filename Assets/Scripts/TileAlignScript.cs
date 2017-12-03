@@ -5,7 +5,6 @@ using UnityEngine;
 public class TileAlignScript : MonoBehaviour {
 	
 	public LayerMask roadMask;
-	public float radius = 0.1f;
 	public float delay = 3;
 	public Vector3 spriteScale = new Vector3 ( 0.05f, 0.05f, 0 );
 	private SpriteRenderer sr;
@@ -27,40 +26,42 @@ public class TileAlignScript : MonoBehaviour {
 	private bool right;
 	private int count;
 
-	private Transform u;
-	private Transform d;
-	private Transform l;
-	private Transform r;
+	private TileCollider u;
+	private TileCollider d;
+	private TileCollider l;
+	private TileCollider r;
+
+	private Vector3 vinv = new Vector3(0,0,180);
+	private Vector3 vr = new Vector3(0,0,270);
+	private Vector3 vl = new Vector3(0,0,90);
 
 	void Start() {
 
 		sr = GetComponent<SpriteRenderer>();
-		u = transform.Find("CheckUp");
-		d = transform.Find("CheckDown");
-		l = transform.Find("CheckLeft");
-		r = transform.Find("CheckRight");
+		u = transform.Find("CheckUp").GetComponent<TileCollider>();
+		d = transform.Find("CheckDown").GetComponent<TileCollider>();
+		l = transform.Find("CheckLeft").GetComponent<TileCollider>();
+		r = transform.Find("CheckRight").GetComponent<TileCollider>();
 		Invoke("Align",delay);
 	}
 
 	public void Align() {
 
-		up = false;
-		down = false;
-		left = false;
-		right = false;
+		print("Align()");
+
 		count = 0;
 
-		up = Physics2D.OverlapCircle(u.position,radius,roadMask);
-		down = Physics2D.OverlapCircle(d.position,radius,roadMask);
-		left = Physics2D.OverlapCircle(l.position,radius,roadMask);
-		right = Physics2D.OverlapCircle(r.position,radius,roadMask);
+		up = u.touching();
+		down = d.touching();
+		left = l.touching();
+		right = r.touching();
 
 		if (up) count++;
 		if (down) count++;
 		if (left) count++;	
 		if (right) count++;
 
-		Debug.Log(count);
+		//Debug.Log(count);
 
 		switch(count) {
 			case 0:
@@ -80,7 +81,9 @@ public class TileAlignScript : MonoBehaviour {
 				break;
 			case 3:
 				sr.sprite = i3;
-				if (!up) {};//rotate transforms!!!
+				if (!up) this.gameObject.transform.Rotate(vinv);
+				if (!left) this.gameObject.transform.Rotate(vr);
+				if (!right) this.gameObject.transform.Rotate(vl);
 				break;
 			case 4:
 				sr.sprite = i4;
