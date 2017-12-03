@@ -160,14 +160,19 @@ public class PlayerScript : MonoBehaviour {
         {
             ChangeState(State.Jump);
             return;
-        } else if (inX != 0)
+        }
+        else if (inF)
+        {
+            Debug.Log("Should punch1");
+
+            ChangeState(State.Punch);
+            return;
+        }
+        else if (inX != 0)
         {
             ChangeState(State.Walk);
-        } else if (inF) {
-			Debug.Log ("Should punch1");
-			ChangeState(State.Punch);
-			return;
-		}
+        }
+        
     }
 
     void Walk()

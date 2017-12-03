@@ -50,7 +50,7 @@ public class enemyMovement : MonoBehaviour
         enemyCollider = GetComponent<CapsuleCollider2D>();
         healthSlider = GameObject.Find("EnemyHealth").GetComponent<Slider>();
 
-        myState = enemyState.Walk;
+        myState = enemyState.Stand;
         enemyGrounded = false;
         enemyJumpCheck = transform.Find("enemyJumpCheck");
 
@@ -114,7 +114,7 @@ public class enemyMovement : MonoBehaviour
     void ChangeState(enemyState newState)
     {
         myState = newState;
-
+        Debug.Log(newState);
         switch (myState)
         {
             case enemyState.Walk:
@@ -144,7 +144,6 @@ public class enemyMovement : MonoBehaviour
                 Attack();
                 break;
             case enemyState.Air:
-                //Punch ();
                 break;
             case enemyState.Stand:
                 Stand();
