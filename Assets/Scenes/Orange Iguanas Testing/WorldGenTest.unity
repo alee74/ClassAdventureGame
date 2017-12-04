@@ -157,7 +157,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.45882356, g: 0.5019608, b: 0.7137255, a: 0}
+  m_BackGroundColor: {r: 0.20392159, g: 0.3137255, b: 0.14901961, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -236,94 +236,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114790116344542602, guid: 55386ee2110b044ceb93d588ad206537,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114330898339266778, guid: 55386ee2110b044ceb93d588ad206537,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114965338056884636, guid: 55386ee2110b044ceb93d588ad206537,
-        type: 2}
-      propertyPath: roadTile
-      value: 
-      objectReference: {fileID: 1526639436595440, guid: 37a34f0f655a3404ba9e2c5bfec0a8df,
-        type: 2}
-    - target: {fileID: 114965338056884636, guid: 55386ee2110b044ceb93d588ad206537,
-        type: 2}
-      propertyPath: iterations
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114965338056884636, guid: 55386ee2110b044ceb93d588ad206537,
-        type: 2}
-      propertyPath: roadMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55386ee2110b044ceb93d588ad206537, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &1054516493
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4873411955623248, guid: 37a34f0f655a3404ba9e2c5bfec0a8df, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873411955623248, guid: 37a34f0f655a3404ba9e2c5bfec0a8df, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873411955623248, guid: 37a34f0f655a3404ba9e2c5bfec0a8df, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873411955623248, guid: 37a34f0f655a3404ba9e2c5bfec0a8df, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873411955623248, guid: 37a34f0f655a3404ba9e2c5bfec0a8df, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873411955623248, guid: 37a34f0f655a3404ba9e2c5bfec0a8df, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873411955623248, guid: 37a34f0f655a3404ba9e2c5bfec0a8df, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873411955623248, guid: 37a34f0f655a3404ba9e2c5bfec0a8df, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 61907730666501486, guid: 37a34f0f655a3404ba9e2c5bfec0a8df,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: -0.00000011920929
-      objectReference: {fileID: 0}
-    - target: {fileID: 61907730666501486, guid: 37a34f0f655a3404ba9e2c5bfec0a8df,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 0.94169116
-      objectReference: {fileID: 0}
-    - target: {fileID: 61907730666501486, guid: 37a34f0f655a3404ba9e2c5bfec0a8df,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: 0.000000014901161
-      objectReference: {fileID: 0}
-    - target: {fileID: 61907730666501486, guid: 37a34f0f655a3404ba9e2c5bfec0a8df,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 0.91836786
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 37a34f0f655a3404ba9e2c5bfec0a8df, type: 2}
   m_IsPrefabParent: 0

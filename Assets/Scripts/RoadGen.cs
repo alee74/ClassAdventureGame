@@ -36,6 +36,7 @@ public class RoadGen : MonoBehaviour {
 
     void Start() {
         GenerateRoads();
+		GetComponent<GrassGen>().GenerateGrass(map);
     }
 
     /// <summary>

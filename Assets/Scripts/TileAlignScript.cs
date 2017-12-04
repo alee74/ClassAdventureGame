@@ -5,7 +5,7 @@ using UnityEngine;
 public class TileAlignScript : MonoBehaviour {
 	
 	public LayerMask roadMask;
-	public float delay = 3;
+	public float delay = 0.01f;
 	public Vector3 spriteScale = new Vector3 ( 0.05f, 0.05f, 0 );
 	private SpriteRenderer sr;
 
@@ -47,8 +47,6 @@ public class TileAlignScript : MonoBehaviour {
 
 	public void Align() {
 
-		print("Align()");
-
 		count = 0;
 
 		up = u.touching();
@@ -60,8 +58,6 @@ public class TileAlignScript : MonoBehaviour {
 		if (down) count++;
 		if (left) count++;	
 		if (right) count++;
-
-		//Debug.Log(count);
 
 		switch(count) {
 			case 0:
@@ -91,6 +87,10 @@ public class TileAlignScript : MonoBehaviour {
 		}
 
 		transform.localScale += spriteScale;
+
+	}
+
+	void list() {
 
 	}
 
