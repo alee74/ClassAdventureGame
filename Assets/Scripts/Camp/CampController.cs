@@ -17,6 +17,10 @@ public class CampController : MonoBehaviour {
 
 	void Start () {
         day += 1;
+        if (day == 100)
+        {
+            //Win Game
+        }
         if (day == 0)
         {
             firstDay();

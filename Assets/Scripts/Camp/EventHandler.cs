@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class EventHandler : MonoBehaviour {
 
     public Text foodVal;
@@ -49,6 +49,10 @@ public class EventHandler : MonoBehaviour {
         }
         else
         {
+            if(ResourceInfo.getFoodStock() < 0 || ResourceInfo.getWaterStock() < 0 || CharInfo.characters.Count == 0)
+            {
+                SceneManager.LoadScene("GameOver");
+            }
             gameObject.SetActive(false);
         }
     }

@@ -11,7 +11,6 @@ public class Barracks : MonoBehaviour {
         //character = GetComponent<CharInfo>();
         if (col.gameObject.tag == "Player")
         {
-            Debug.Log("Player Entered Barracks");
             ui.SetActive(true);
         }
         
