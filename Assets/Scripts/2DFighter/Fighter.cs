@@ -104,7 +104,6 @@ public abstract class Fighter : MonoBehaviour {
     /// </summary>
     protected virtual void Start() {
 
-        health = maxHealth;
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         punchBox = transform.Find("PunchBox").gameObject;

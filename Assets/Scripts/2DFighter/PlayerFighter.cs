@@ -16,13 +16,20 @@ public class PlayerFighter : Fighter {
     /// override of Start().
     /// performs player specific initialization.
     /// then calls Fighter.Start().
+    /// try/catch to prevent breaking when enemy not in scene, for testing purposes.
     /// </summary>
     protected override void Start() {
 
         character = CharInfo.getCurrentCharacter();
         maxHealth = 100;        // should get from character
+        health = character.health;
         healthSlider = GameObject.Find("PlayerHealth").GetComponent<Slider>();
-        opponent = GameObject.FindGameObjectWithTag("Enemy").transform;
+
+        try {
+            opponent = GameObject.FindGameObjectWithTag("Enemy").transform;
+        } catch (NullReferenceException ne) {
+            Debug.Log(ne.ToString());
+        }
 
         base.Start();
 
@@ -58,7 +65,7 @@ public class PlayerFighter : Fighter {
 
         if (moving > 0)
             isFacingRight = true;
-        else
+        else if (moving < 0)
             isFacingRight = false;
 
         gameObject.GetComponent<SpriteRenderer>().flipX = !isFacingRight;

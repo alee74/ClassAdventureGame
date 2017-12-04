@@ -20,6 +20,7 @@ public class EnemyFighter : Fighter {
     protected override void Start() {
 
         maxHealth = 15f;
+        health = maxHealth;
         healthSlider = GameObject.Find("EnemyHealth").GetComponent<Slider>();
         opponent = GameObject.FindGameObjectWithTag("Player").transform;
 
