@@ -130,10 +130,10 @@ public class PlayerFighter : Fighter {
 
         if (jumping && Grounded())
             ChangeState(State.Jump);
-        else if (punching)
-            ChangeState(State.Punch);
         else if (move == 0)
             ChangeState(State.Stand);
+        else if (punching)
+            ChangeState(State.Punch);
         else
             rgb.velocity = new Vector2(move * speed, 0f);
 
