@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4891890135705402}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: JumpCheck
   m_TagString: Untagged
   m_Icon: {fileID: 6926474624037801865, guid: 0000000000000000d000000000000000, type: 0}
@@ -35,7 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4774919555214946}
   - component: {fileID: 61310650094143438}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: PunchBox
   m_TagString: PlayerFist
   m_Icon: {fileID: 0}
@@ -51,11 +51,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4496222290423554}
   - component: {fileID: 212982880867142908}
+  - component: {fileID: 114315051470274924}
   - component: {fileID: 50045781332647250}
   - component: {fileID: 114405213603579288}
   - component: {fileID: 95912110151090958}
   - component: {fileID: 70956160759361278}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -180,13 +181,34 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114405213603579288
+--- !u!114 &114315051470274924
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1894080625829014}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598816408bf7dea448a3a9b527deefcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 0
+  speed: 5
+  jumpPower: 275
+  rollPower: 2
+  damage: 1
+  knockbackDist: 0.5
+  recoverRate: 2
+  punchCost: 3
+  jumpCost: 5
+  rollCost: 6
+--- !u!114 &114405213603579288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1894080625829014}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d79e92e3ca476047b0a00508efddb14, type: 3}
   m_Name: 

@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 114370518607864896}
   - component: {fileID: 70305036802485456}
   - component: {fileID: 95303283576516474}
-  m_Layer: 10
+  - component: {fileID: 114525026779677626}
+  m_Layer: 12
   m_Name: Panda
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -39,7 +40,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4887212343417264}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: enemyJumpCheck
   m_TagString: Untagged
   m_Icon: {fileID: -6488666005112524639, guid: 0000000000000000d000000000000000, type: 0}
@@ -55,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4021642497149198}
   - component: {fileID: 61406986409085290}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: PunchBox
   m_TagString: EnemyFist
   m_Icon: {fileID: 0}
@@ -186,7 +187,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1493443839592146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bc627ac7338c406baf1976d777a3d32, type: 3}
   m_Name: 
@@ -199,6 +200,27 @@ MonoBehaviour:
   speed: 10
   attackXDistance: 1
   attackYDistance: 2
+--- !u!114 &114525026779677626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1493443839592146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b600209a686ea4b9c3012be9a1e23b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 0
+  speed: 3
+  jumpPower: 250
+  rollPower: 0
+  damage: 5
+  knockbackDist: 0.5
+  recoverRate: 0
+  punchCost: 3
+  jumpCost: 5
+  rollCost: 0
 --- !u!212 &212330514082631614
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
 
 public class EnemyFighter : Fighter {
+
+    // TODO : currently has no implementation of jumping or rolling
 
     private float xAttackDist = 2f;
     private float yAttackDist = 2f;
@@ -25,7 +26,8 @@ public class EnemyFighter : Fighter {
         stamina = maxStamina;
         healthSlider = GameObject.Find("EnemyHealth").GetComponent<Slider>();
         staminaSlider = GameObject.Find("EnemyStamina").GetComponent<Slider>();
-        opponent = GameObject.FindGameObjectWithTag("Player").transform;
+        opponent = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerFighter>();
+        opponentTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         base.Start();
 
@@ -41,7 +43,7 @@ public class EnemyFighter : Fighter {
     protected override void OnTriggerEnter2D(Collider2D other) {
 
         if (other.gameObject.tag == "PlayerFist") {
-            health--;
+            health -= opponent.damage;
             Knockback();
         }
 
@@ -58,7 +60,7 @@ public class EnemyFighter : Fighter {
     /// </summary>
     protected override void SetDirectionFacing() {
 
-        if (transform.position.x < opponent.position.x)
+        if (transform.position.x < opponentTransform.position.x)
             isFacingRight = true;
         else
             isFacingRight = false;
@@ -68,20 +70,16 @@ public class EnemyFighter : Fighter {
     }
     #endregion
 
-    // FIXME - interact with rest of game.
     #region protected override void Death();
     /// <summary>
     /// handles death of enemy.
     /// sets endGameText.
     /// loads world map scene.
     /// destroys this enemy.
-    /// 
-    /// FIXME:
-    /// ***Need to set variable in world indicating we won before loading scene.
-    /// ***should probably also set players health in world.
     /// </summary>
     protected override void Death() {
 
+        opponent.InformWorld(true);
         GameObject.Find("EndGameText").GetComponent<Text>().text = "YOU WON!";
         SceneManager.LoadScene("WorldMapMainScene");
         Destroy(gameObject);
@@ -99,9 +97,9 @@ public class EnemyFighter : Fighter {
     /// </summary>
     protected override void Stand() {
 
-        if (Mathf.Abs(transform.position.x - opponent.position.x) > xAttackDist)
+        if (Mathf.Abs(transform.position.x - opponentTransform.position.x) > xAttackDist)
             ChangeState(State.Walk);
-        else if (Mathf.Abs(transform.position.y - opponent.position.y) <= yAttackDist)
+        else if (Mathf.Abs(transform.position.y - opponentTransform.position.y) <= yAttackDist)
             ChangeState(State.Punch);
 
     }
@@ -120,13 +118,13 @@ public class EnemyFighter : Fighter {
         if (Grounded())
         {
 
-            if (transform.position.x > opponent.position.x)
+            if (transform.position.x > opponentTransform.position.x)
                 rgb.velocity = new Vector2(-speed, 0);  // Vector2.left * speed;
             else
                 rgb.velocity = new Vector2(speed, 0);   // Vector2.right * speed;
 
             // don't check y, because it will always be true when they are both standing on the ground
-            if (Mathf.Abs(transform.position.x - opponent.position.x) <= xAttackDist)
+            if (Mathf.Abs(transform.position.x - opponentTransform.position.x) <= xAttackDist)
                 ChangeState(State.Punch);
 
         }
@@ -149,22 +147,6 @@ public class EnemyFighter : Fighter {
             ChangeState(State.Walk);
         else*/
             ChangeState(State.Stand);
-
-    }
-    #endregion
-
-    // FIXME - definitely should do more than just start coroutine.
-    #region protected override void Jump();
-    /// <summary>
-    /// defines Enemy behavior while in the Jump state.
-    /// 
-    /// FIXME:
-    /// ***currently only starts coroutine. need to fix.
-    /// </summary>
-    protected override void Jump()
-    {
-
-        StartCoroutine(DelayGroundedCheck());
 
     }
     #endregion

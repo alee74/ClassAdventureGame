@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Class for enemies, serves as base class for player
+// Superclass for PlayerFighter and EnemyFighter
 public abstract class Fighter : MonoBehaviour {
-
-    // TODO : decrement health by damage of opponent
 
     #region Member declarations
 
     // states for both player and enemy
-    protected enum State { Stand, Walk, Punch, Jump }
+    protected enum State { Stand, Walk, Punch, Jump, Roll }
 
     // members common to enemy and player
     protected Rigidbody2D rgb;
@@ -21,7 +19,9 @@ public abstract class Fighter : MonoBehaviour {
     protected Slider healthSlider;
     protected Slider staminaSlider;
     protected GameObject punchBox;
-    protected Transform opponent;
+    protected Fighter opponent;
+    protected Transform opponentTransform;
+    protected bool alreadyRolling;
 
     //Game Values Fetched From Character Class
     protected float health;
@@ -33,12 +33,13 @@ public abstract class Fighter : MonoBehaviour {
     // members we can set from editor.
     public float speed;
     public float jumpPower;
+    public float rollPower;
     public float damage;
     public float knockbackDist;
-    public float recoverRate; //rate to recover stamina at
-    public float punchCost; //stamina cost of a punch
-    public float jumpCost; //stamina cost of a jump
-    //public float rollCost; //stamina cost of a jump
+    public float recoverRate;   //rate to recover stamina at
+    public float punchCost;     //stamina cost of a punch
+    public float jumpCost;      //stamina cost of a jump
+    public float rollCost;      //stamina cost of a roll
 
     // members that will not be overriden
     private bool initialGroundedCheck;
@@ -47,6 +48,7 @@ public abstract class Fighter : MonoBehaviour {
     private static float groundedDist = 0.85f;
     private static float punchBeginDelay = 0.25f;   // needs to be public if different for different enemies (will be overriden in this case)
     private static float punchEndDelay = 0.15f;     // needs to be public if different for different enemies (will be overriden in this case)
+    private static float rollTime = 0.25f;
     private Camera cam;
     #endregion
 
@@ -89,18 +91,21 @@ public abstract class Fighter : MonoBehaviour {
     protected abstract void Punch();
     #endregion
 
-    #region protected abstract void Jump();
-    /// <summary>
-    /// defines behavior while in the Jump state.
-    /// </summary>
-    protected abstract void Jump();
-    #endregion
-
     #region protected abstract void SetDirectionFacing();
     /// <summary>
     /// sets the direction the Fighter is facing.
     /// </summary>
     protected abstract void SetDirectionFacing();
+    #endregion
+
+    // This method technically virtual, but has no implementation and intended to be overriden by PlayerFighter only
+    #region public virtual void InformWorld(bool win);
+    /// <summary>
+    /// to be overriden by PlayerFighter.
+    /// communicates relevant information to rest of game.
+    /// </summary>
+    /// <param name="win">indicates whether the Player won or lost</param>
+    public virtual void InformWorld(bool win) { }
     #endregion
     #endregion
 
@@ -173,7 +178,7 @@ public abstract class Fighter : MonoBehaviour {
         // distance from player's position.x to x-coordinate of edge of collider
         float halfWidth = gameObject.GetComponent<CapsuleCollider2D>().bounds.size.x / 2;
 
-        if (transform.position.x < opponent.position.x) {   // Fighter is to left of opponent
+        if (transform.position.x < opponentTransform.position.x) {   // Fighter is to left of opponent
 
             float leftEdge = cam.ViewportToWorldPoint(Vector2.zero).x;
 
@@ -220,9 +225,13 @@ public abstract class Fighter : MonoBehaviour {
     #region protected void ChangeState(State newState);
     /// <summary>
     /// changes the state of the character to that of the parameter.
+    /// ensure we have enough stamina to perform desired action,
+    ///  do not allow state transition if not.
     /// if the character is standing, zero out its velocity.
-    /// if the character is jumping, set initialGroundedCheck to true (flag for coroutine) 
-    ///  and add an upward force.
+    /// if character is punching, decrement stamina by punchCost.
+    /// if the character is jumping, set initialGroundedCheck to true (flag for coroutine), 
+    ///  decrement stamina by rollCost, and add an upward force.
+    /// if character is rolling, set alreadyRolling to false and decrement stamina by rollCost.
     /// values used for transitions between states in the animator correspond to int values
     ///  of the State enum, so we simply set the animator's state parameter to the int value
     ///  of the character's updated state.
@@ -230,9 +239,10 @@ public abstract class Fighter : MonoBehaviour {
     /// <param name="newState">the character's state following execution of this function</param>
     protected void ChangeState(State newState) {
 
-        if (!(newState == State.Jump && stamina < jumpCost) && !(newState == State.Punch && stamina < punchCost))
-            //Fix somehow
-        {
+        if (!(newState == State.Jump && stamina < jumpCost) &&
+            !(newState == State.Punch && stamina < punchCost) &&
+            !(newState == State.Roll && stamina < rollCost)) {
+
             state = newState;
 
             switch (state)
@@ -250,6 +260,11 @@ public abstract class Fighter : MonoBehaviour {
                     stamina -= jumpCost;
                     initialGroundedCheck = true;
                     rgb.AddForce(Vector2.up * jumpPower);
+                    break;
+
+                case State.Roll:
+                    alreadyRolling = false;
+                    stamina -= rollCost;
                     break;
                 
             }
@@ -280,7 +295,51 @@ public abstract class Fighter : MonoBehaviour {
             case State.Jump:
                 Jump();
                 break;
+            case State.Roll:
+                Roll();
+                break;
         }
+
+    }
+    #endregion
+
+    #region protected void Jump();
+    /// <summary>
+    /// defines Fighter behavior while in the Jump state.
+    /// sets the velocity to account for horizontal movement while airborne.
+    /// starts coroutine to delay the first check for grounded and then check
+    ///  repeatedly until grounded and then change state to stand.
+    /// </summary>
+    protected void Jump() {
+
+        rgb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rgb.velocity.y);
+        StartCoroutine(DelayGroundedCheck());
+
+    }
+    #endregion
+
+    #region protected void Roll();
+    /// <summary>
+    /// defines Fighter behavior while in the Roll state.
+    /// if not already rolling, add a force to Player's RigidBody2D.
+    /// tell Unity to ignore collisions between Player and Enemy.
+    /// starts coroutine that delays exit of roll state.
+    /// </summary>
+    protected void Roll() {
+
+        if (!alreadyRolling) {
+
+            float rollMultiplier = rollPower;
+            if (!isFacingRight)
+                rollMultiplier *= -1;
+
+            rgb.AddForce(Vector2.right * rollMultiplier, ForceMode2D.Impulse);
+
+        }
+
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+
+        StartCoroutine(DelayTransitionFromRoll());
 
     }
     #endregion
@@ -333,6 +392,29 @@ public abstract class Fighter : MonoBehaviour {
 
         yield return new WaitForSeconds(punchEndDelay);
         punchBox.SetActive(false);
+
+    }
+    #endregion
+
+    #region protected IEnumerator DelayTransitionFromRoll();
+    /// <summary>
+    /// coroutine to control timing of state change following a roll.
+    /// if not already rolling, say we are and wait for rollTime.
+    /// tell Unity to stop ignoring collisions between Player and Enemy.
+    /// change state to Stand.
+    /// </summary>
+    /// <returns>time to wait prior to exiting Roll state</returns>
+    protected IEnumerator DelayTransitionFromRoll() {
+
+        if (!alreadyRolling) {
+
+            alreadyRolling = true;
+            yield return new WaitForSeconds(rollTime);
+
+        }
+
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+        ChangeState(State.Stand);
 
     }
     #endregion

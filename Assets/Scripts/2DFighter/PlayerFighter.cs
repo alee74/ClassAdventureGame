@@ -10,7 +10,6 @@ public class PlayerFighter : Fighter {
     private Character character;
 
 
-    // FIXME - get maxHealth from CharInfo
     #region protected override void Start();
     /// <summary>
     /// override of Start().
@@ -25,14 +24,19 @@ public class PlayerFighter : Fighter {
         health = character.health;
         // maxStamina = character.getMaxStamina();
         maxStamina = 10f;
-        stamina = maxStamina;
+        stamina = (character.stamina / character.getMaxStamina()) * maxStamina;
         healthSlider = GameObject.Find("PlayerHealth").GetComponent<Slider>();
         staminaSlider = GameObject.Find("PlayerStamina").GetComponent<Slider>();
 
         try {
-            opponent = GameObject.FindGameObjectWithTag("Enemy").transform;
+
+            opponent = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyFighter>();
+            opponentTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
+
         } catch (NullReferenceException ne) {
+
             Debug.Log(ne.ToString());
+
         }
 
         base.Start();
@@ -49,7 +53,7 @@ public class PlayerFighter : Fighter {
     protected override void OnTriggerEnter2D(Collider2D other) {
         
         if (other.gameObject.tag == "EnemyFist") {
-            health--;
+            health -= opponent.damage;
             Knockback();
         }
 
@@ -77,18 +81,37 @@ public class PlayerFighter : Fighter {
     }
     #endregion
 
-    // FIXME - interact with world
+    // FIXME
     #region protected override void Death();
     /// <summary>
     /// handles death of character.
+    /// sets appropriate variables in world.
+    /// loads next scene.
     /// 
     /// FIXME:
-    /// ***currently just loads GameOver scene.
-    /// ***need to update to set variable in world indicating we lost and return to it
+    /// load proper scene.
     /// </summary>
     protected override void Death() {
 
+        InformWorld(false);
         SceneManager.LoadScene("GameOver");
+
+    }
+    #endregion
+
+    // FIXME
+    #region public override void InformWorld(bool win);
+    /// <summary>
+    /// called from on death in this and EnemyFighter classes.
+    /// sets global (game level) health and stamina.
+    /// 
+    /// FIXME:
+    /// need to set variable indicating a win/loss.
+    /// </summary>
+    public override void InformWorld(bool win) {
+
+        character.health = (int)health;
+        character.stamina = (int)(stamina / maxStamina) * character.getMaxStamina();
 
     }
     #endregion
@@ -101,12 +124,14 @@ public class PlayerFighter : Fighter {
     /// if we are trying to jump and are grounded, we jump.
     /// else if we are trying to move, we walk.
     /// else if we are trying to punch, we punch.
+    /// else if we are trying to roll, we roll.
     /// </summary>
     protected override void Stand() {
 
         float move = Input.GetAxis("Horizontal");
-        bool jumping = Input.GetKeyDown("space");
+        bool jumping = Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
         bool punching = Input.GetKeyDown(KeyCode.F);
+        bool rolling = Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
 
         if (jumping && Grounded())
             ChangeState(State.Jump);
@@ -114,6 +139,8 @@ public class PlayerFighter : Fighter {
             ChangeState(State.Walk);
         else if (punching)
             ChangeState(State.Punch);
+        else if (rolling)
+            ChangeState(State.Roll);
 
     }
     #endregion
@@ -123,21 +150,25 @@ public class PlayerFighter : Fighter {
     /// defines Player behavior while in the Walk state.
     /// if we are trying to jump and are grounded, we jump.
     /// else if we are trying to punch, we punch.
+    /// else if we are trying to roll, we roll.
     /// else if we are not moving, we stand.
     /// otherwise, we more accordingly.
     /// </summary>
     protected override void Walk() {
 
         float move = Input.GetAxis("Horizontal");
-        bool jumping = Input.GetKeyDown("space");
+        bool jumping = Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
         bool punching = Input.GetKeyDown(KeyCode.F);
+        bool rolling = Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
 
         if (jumping && Grounded())
             ChangeState(State.Jump);
-        else if (move == 0)
-            ChangeState(State.Stand);
         else if (punching)
             ChangeState(State.Punch);
+        else if (rolling)
+            ChangeState(State.Roll);
+        else if (move == 0)
+            ChangeState(State.Stand);
         else
             rgb.velocity = new Vector2(move * speed, 0f);
 
@@ -163,21 +194,6 @@ public class PlayerFighter : Fighter {
             rgb.velocity = new Vector2(move * speed, 0f);
             ChangeState(State.Walk);
         }
-
-    }
-    #endregion
-
-    #region protected override void Jump();
-    /// <summary>
-    /// defines Player behavior while in the Jump state.
-    /// sets the velocity to account for horizontal movement while airborne.
-    /// starts coroutine to delay the first check for grounded and then check
-    ///  repeatedly until grounded and then change state to stand.
-    /// </summary>
-    protected override void Jump() {
-
-        rgb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rgb.velocity.y);
-        StartCoroutine(DelayGroundedCheck());
 
     }
     #endregion
