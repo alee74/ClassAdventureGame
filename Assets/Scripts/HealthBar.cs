@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour {
 
 
+	public Character charHealth;
 	public float fillAmnt;
 
 	public Image fillcontent; // Image Used to Fill bar
@@ -16,8 +17,8 @@ public class HealthBar : MonoBehaviour {
 
 	public float Value { 
 		set {
-			fillAmnt = CalculatedStats (value, 0, Maxvalue, 0, 1); 
-			Debug.Log ("Value");
+			fillAmnt = CalculatedStats (value, 0, Maxvalue, 1, 0); 
+			Debug.Log ("Value" + value);
 		} 
 	}
 
@@ -29,18 +30,21 @@ public class HealthBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
 		FillBar ();  //Updates the bar to fill the image	
-		
 
 
 	}
-
+	// Fill content and fill amount
 	public void FillBar() {
 
 		if (fillAmnt != fillcontent.fillAmount) {
-			fillcontent.fillAmount = fillAmnt;
+			fillcontent.fillAmount = fillAmnt; 
+			Debug.Log ("Bar Filling" + fillcontent.fillAmount);
 		}
 	}
+
+
 
 
 
@@ -48,13 +52,13 @@ public class HealthBar : MonoBehaviour {
 	// max - Is the max health
 	// min = 0
 	// retMin = o 
-	// retMax = 1 
+	// retMax = 1  
 
 
 	private float CalculatedStats(float value, float min, float max, float retMax, float retMin) {  
 
 
-
+									
 		return (value - min) * (retMax - retMin) / (max - min) + retMin;
 
 	}
