@@ -37,6 +37,7 @@ public abstract class Fighter : MonoBehaviour {
     private static float groundedDist = 0.85f;
     private static float punchBeginDelay = 0.25f;   // needs to be public if different for different enemies (will be overriden in this case)
     private static float punchEndDelay = 0.15f;     // needs to be public if different for different enemies (will be overriden in this case)
+    private Camera cam;
     #endregion
 
 
@@ -107,6 +108,7 @@ public abstract class Fighter : MonoBehaviour {
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         punchBox = transform.Find("PunchBox").gameObject;
+        cam = GameObject.FindObjectOfType<Camera>();
         state = State.Stand;
 
 	}
@@ -143,13 +145,36 @@ public abstract class Fighter : MonoBehaviour {
     /// <summary>
     /// called from OnTriggerEnter2D when taking damage from opponent.
     /// moves character by knockbackDist in direction opposite the one they are facing.
+    /// if moving by knockbackDist puts Fighter beyond bounds of camera, adjusts distance
+    ///  Fighter will be moved to keep them in frame.
     /// </summary>
     protected void Knockback() {
 
-        if (transform.position.x < opponent.position.x)
-            gameObject.transform.Translate(Vector3.left * knockbackDist);
-        else
-            gameObject.transform.Translate(Vector3.right * knockbackDist);
+        float translateDist = knockbackDist;
+        // distance from player's position.x to x-coordinate of edge of collider
+        float halfWidth = gameObject.GetComponent<CapsuleCollider2D>().bounds.size.x / 2;
+
+        if (transform.position.x < opponent.position.x) {   // Fighter is to left of opponent
+
+            float leftEdge = cam.ViewportToWorldPoint(Vector2.zero).x;
+
+            // if translating by knockbackDist puts Fighter beyond camera's left edge, adjust translateDist
+            if (transform.position.x - halfWidth - knockbackDist < leftEdge)
+                translateDist = leftEdge - (transform.position.x - halfWidth);
+            else
+                translateDist *= -1;
+
+        } else {    // Fighter is to right of opponent
+
+            float rightEdge = cam.ViewportToWorldPoint(Vector2.right).x;
+
+            // if translating by knockbackDist puts Fighter beyond camera's right edge, adjust translateDist
+            if (transform.position.x + halfWidth + knockbackDist > rightEdge)
+                translateDist = rightEdge - (transform.position.x + halfWidth);
+
+        }
+
+        gameObject.transform.Translate(Vector2.right * translateDist);
 
     }
     #endregion
