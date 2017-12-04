@@ -17,10 +17,10 @@ public class Character
 
     private string _name;
     private bool _isHostile;
-    private Int _health;
+    private int _health;
     private int _stamina;
     private int _strength;
-	private Int _maxHealth;
+	private int _maxHealth;
     private int _maxStamina;
     private int _maxStrength;
 
@@ -44,7 +44,7 @@ public class Character
         }
     }
 
-    public Int health 
+    public int health 
     {
         get
         {
