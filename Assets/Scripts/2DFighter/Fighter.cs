@@ -18,17 +18,27 @@ public abstract class Fighter : MonoBehaviour {
     protected Animator anim;
     protected State state;
     protected bool isFacingRight;
-    protected float health;
-    protected float maxHealth;
     protected Slider healthSlider;
+    protected Slider staminaSlider;
     protected GameObject punchBox;
     protected Transform opponent;
 
+    //Game Values Fetched From Character Class
+    protected float health;
+    protected float maxHealth;
+    protected float stamina;
+    protected float maxStamina;
+    public float strength; //will translate to damage
+    
     // members we can set from editor.
     public float speed;
     public float jumpPower;
     public float damage;
     public float knockbackDist;
+    public float recoverRate; //rate to recover stamina at
+    public float punchCost; //stamina cost of a punch
+    public float jumpCost; //stamina cost of a jump
+    //public float rollCost; //stamina cost of a jump
 
     // members that will not be overriden
     private bool initialGroundedCheck;
@@ -126,6 +136,15 @@ public abstract class Fighter : MonoBehaviour {
     protected virtual void Update() {
 
         healthSlider.value = health / maxHealth;
+        staminaSlider.value = stamina / maxStamina;
+
+        if (stamina < maxStamina) {
+
+            stamina += recoverRate * Time.deltaTime;
+            if (stamina > maxStamina)
+                stamina = maxStamina;
+
+        }
 
         if (health <= 0) {
             Death();
@@ -211,22 +230,32 @@ public abstract class Fighter : MonoBehaviour {
     /// <param name="newState">the character's state following execution of this function</param>
     protected void ChangeState(State newState) {
 
-        state = newState;
+        if (!(newState == State.Jump && stamina < jumpCost) && !(newState == State.Punch && stamina < punchCost))
+            //Fix somehow
+        {
+            state = newState;
 
-        switch (state) {
+            switch (state)
+            {
 
-            case State.Stand:
-                rgb.velocity = Vector2.zero;
-                break;
+                case State.Stand:
+                    rgb.velocity = Vector2.zero;
+                    break;
 
-            case State.Jump:
-                initialGroundedCheck = true;
-                rgb.AddForce(Vector2.up * jumpPower);
-                break;
+                case State.Punch:
+                    stamina -= punchCost;
+                    break;
+
+                case State.Jump:
+                    stamina -= jumpCost;
+                    initialGroundedCheck = true;
+                    rgb.AddForce(Vector2.up * jumpPower);
+                    break;
+                
+            }
+
+            anim.SetInteger("state", (int)state);
         }
-
-        anim.SetInteger("state", (int)state);
-
     }
     #endregion
 
@@ -265,14 +294,14 @@ public abstract class Fighter : MonoBehaviour {
     /// the purpose is to prevent an early check that causes the jump to malfunction.
     /// if this is the first time we are checking for grounded, wait for specified time.
     /// after we've waited, check if character is grounded and change state to Stand if so.
+    /// Subtracts punch cost form stamina.
     /// </summary>
     /// <returns>an amount of time to wait over multiple frames</returns>
     protected IEnumerator DelayGroundedCheck() {
 
         if (initialGroundedCheck) {
-
-            yield return new WaitForSeconds(groundCheckDelay);
             initialGroundedCheck = false;
+            yield return new WaitForSeconds(groundCheckDelay);
 
         }
 
@@ -289,7 +318,8 @@ public abstract class Fighter : MonoBehaviour {
     /// waits for specified time before activated collider on fist.
     /// then sets position of collider and activates it.
     /// waits for specified time before deactivating collider on fist.
-    /// then deactivates fist's collider.
+    /// then deactivates fist's collider. 
+    /// Subtracts punch cost from stamina.
     /// </summary>
     /// <returns>times to wait before beginning and ending the punch</returns>
     protected IEnumerator ControlPunchTiming() {

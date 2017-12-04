@@ -7,7 +7,7 @@ using System;
 
 public class EnemyFighter : Fighter {
 
-    private float xAttackDist = 1f;
+    private float xAttackDist = 2f;
     private float yAttackDist = 2f;
 
 
@@ -21,7 +21,10 @@ public class EnemyFighter : Fighter {
 
         maxHealth = 15f;
         health = maxHealth;
+        maxStamina = 10f;
+        stamina = maxStamina;
         healthSlider = GameObject.Find("EnemyHealth").GetComponent<Slider>();
+        staminaSlider = GameObject.Find("EnemyStamina").GetComponent<Slider>();
         opponent = GameObject.FindGameObjectWithTag("Player").transform;
 
         base.Start();
@@ -142,9 +145,9 @@ public class EnemyFighter : Fighter {
 
         StartCoroutine(ControlPunchTiming());
 
-        if (Mathf.Abs(transform.position.x - opponent.position.x) >= xAttackDist)
+       /* if (Mathf.Abs(transform.position.x - opponent.position.x) >= xAttackDist)
             ChangeState(State.Walk);
-        else
+        else*/
             ChangeState(State.Stand);
 
     }

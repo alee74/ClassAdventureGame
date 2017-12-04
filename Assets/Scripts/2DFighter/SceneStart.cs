@@ -16,15 +16,13 @@ public class SceneStart : MonoBehaviour {
 	void Start () {
 
 		Character character = CharInfo.getCurrentCharacter();
-		Text player = GameObject.Find("PlayerName").GetComponent<Text>();
-		player.text = character.name;
+		GameObject.Find("PlayerName").GetComponent<Text>().text = character.name;
 
         string enemyName = enemyType[rando.Next(enemyType.Length)];
         enemy = Resources.Load<GameObject>("Prefabs/2DFighter/" + enemyName);
         Instantiate(enemy, new Vector3(xStart, yStart, 0f), Quaternion.identity);
 
-        Text enemyNameText = GameObject.Find("EnemyName").GetComponent<Text>();
-        enemyNameText.text = enemyName;
+        GameObject.Find("EnemyName").GetComponent<Text>().text = enemyName;
 		
 	}
 	

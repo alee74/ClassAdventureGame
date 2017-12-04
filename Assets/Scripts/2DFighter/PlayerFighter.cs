@@ -21,9 +21,13 @@ public class PlayerFighter : Fighter {
     protected override void Start() {
 
         character = CharInfo.getCurrentCharacter();
-        maxHealth = 100;        // should get from character
+        maxHealth = character.getMaxHealth();       
         health = character.health;
+        // maxStamina = character.getMaxStamina();
+        maxStamina = 10f;
+        stamina = maxStamina;
         healthSlider = GameObject.Find("PlayerHealth").GetComponent<Slider>();
+        staminaSlider = GameObject.Find("PlayerStamina").GetComponent<Slider>();
 
         try {
             opponent = GameObject.FindGameObjectWithTag("Enemy").transform;
