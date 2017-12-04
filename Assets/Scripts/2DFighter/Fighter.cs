@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 // Class for enemies, serves as base class for player
-public class Fighter : MonoBehaviour {
+public abstract class Fighter : MonoBehaviour {
 
     // TODO : decrement health by damage of opponent
 
@@ -38,25 +37,65 @@ public class Fighter : MonoBehaviour {
     private static float groundedDist = 0.85f;
     private static float punchBeginDelay = 0.25f;   // needs to be public if different for different enemies (will be overriden in this case)
     private static float punchEndDelay = 0.15f;     // needs to be public if different for different enemies (will be overriden in this case)
-
-    // members specific to enemy
-    private float xAttackDist = 1f;         // needs to be public if different for different enemies
-    private float yAttackDist = 2f;         // needs to be public if different for different enemies
     #endregion
 
 
+    #region Abstrat methods -- must be overriden by subclasses!
+
+    #region protected abstract void OnTriggerEnter2D(Collider2D other);
+    /// <summary>
+    /// called when Fighter collides with a collider set to trigger.
+    /// </summary>
+    /// <param name="other">the collider that triggered the collision</param>
+    protected abstract void OnTriggerEnter2D(Collider2D other);
+    #endregion
+
+    #region protected abstract void Death();
+    /// <summary>
+    /// handles death of character.
+    /// </summary>
+    protected abstract void Death();
+    #endregion
+
+    #region protected abstract void Stand();
+    /// <summary>
+    /// defines behavior while in the Stand state.
+    /// </summary>
+    protected abstract void Stand();
+    #endregion
+
+    #region protected abstract void Walk();
+    /// <summary>
+    /// defines behavior while in the Walk state.
+    /// </summary>
+    protected abstract void Walk();
+    #endregion
+
+    #region protected abstract void Punch();
+    /// <summary>
+    /// defines behavior while in the Punch state.
+    /// </summary>
+    protected abstract void Punch();
+    #endregion
+
+    #region protected abstract void Jump();
+    /// <summary>
+    /// defines behavior while in the Jump state.
+    /// </summary>
+    protected abstract void Jump();
+    #endregion
+    #endregion
+
     #region Unity methods
 
-    #region protected void Start();
+    #region protected virtual void Start();
     /// <summary>
     /// called when character is enabled.
-    /// calls OnStart() to initialize enemy/player specific members.
     /// initializes remaining members.
     /// sets starting state to Stand.
+    /// ***override for enemy/player specific initialization.
     /// </summary>
-    protected void Start() {
-
-        OnStart();
+    protected virtual void Start() {
 
         health = maxHealth;
         rgb = GetComponent<Rigidbody2D>();
@@ -67,15 +106,16 @@ public class Fighter : MonoBehaviour {
 	}
     #endregion
 
-    #region protected void Update();
+    #region protected virtual void Update();
     /// <summary>
     /// called once per frame.
     /// adjust health slider.
     /// check for and handle death.
     /// set direction facing.
     /// execute code for current state.
+    /// **override for enemy/player specific updating.
     /// </summary>
-    protected void Update() {
+    protected virtual void Update() {
 
         healthSlider.value = health / maxHealth;
 
@@ -89,39 +129,9 @@ public class Fighter : MonoBehaviour {
 
 	}
     #endregion
-
-    #region protected virtual void OnTriggerEnter2D(Collider2D other);
-    /// <summary>
-    /// called when character collides with a collider set to trigger.
-    /// if it's the player's fist, take damage and get knocked back.
-    /// </summary>
-    /// <param name="other">the collider that triggered the collision</param>
-    protected virtual void OnTriggerEnter2D(Collider2D other) {
-
-        if (other.gameObject.tag == "PlayerFist") {
-            health--;
-            Knockback();
-        }
-
-    }
-    #endregion
     #endregion
 
     #region User defined methods
-
-    #region protected virtual void OnStart();
-    /// <summary>
-    /// called from Start().
-    /// performs enemy specific initialization.
-    /// </summary>
-    protected virtual void OnStart() {
-
-        maxHealth = 5f;
-        healthSlider = GameObject.Find("EnemyHealth").GetComponent<Slider>();
-        opponent = GameObject.FindGameObjectWithTag("Player").transform;
-
-    }
-    #endregion
 
     #region protected void Knockback();
     /// <summary>
@@ -175,25 +185,6 @@ public class Fighter : MonoBehaviour {
             return true;
         else
             return false;
-
-    }
-    #endregion
-
-    // FIXME
-    #region protected virtual void Death();
-    /// <summary>
-    /// handles death of character.
-    /// sets endGameText.
-    /// loads world map scene.
-    /// destroys this character.
-    /// ***Need to set variable in world indicating we won before loading scene
-    /// ***should probably also set players health in world
-    /// </summary>
-    protected virtual void Death() {
-
-        GameObject.Find("EndGameText").GetComponent<Text>().text = "YOU WON!";
-        SceneManager.LoadScene("WorldMapMainScene");
-        Destroy(gameObject);
 
     }
     #endregion
@@ -254,78 +245,6 @@ public class Fighter : MonoBehaviour {
                 Jump();
                 break;
         }
-
-    }
-    #endregion
-
-    #region protected virtual void Stand();
-    /// <summary>
-    /// defines the character's behavior while in the Stand state.
-    /// if the player is outside of our horizontal attack range, we walk.
-    /// otherwise, ensure player is within vertical attack range and attack (punch).
-    /// </summary>
-    protected virtual void Stand() {
-
-        if (Mathf.Abs(transform.position.x - opponent.position.x) > xAttackDist)
-            ChangeState(State.Walk);
-        else if (Mathf.Abs(transform.position.y - opponent.position.y) <= yAttackDist)
-            ChangeState(State.Punch);
-
-    }
-    #endregion
-
-    #region protected virtual void Walk();
-    /// <summary>
-    /// defines character's behavior while in the Walk state.
-    /// if character is grounded, sets velocity to be in the direction
-    ///  towards the player and 
-    /// changes state to punch if player is within horizontal attack distance.
-    /// </summary>
-    protected virtual void Walk() {
-
-        if (Grounded()) {
-
-            if (transform.position.x > opponent.position.x)
-                rgb.velocity = new Vector2(-speed, 0);  // Vector2.left * speed;
-            else
-                rgb.velocity = new Vector2(speed, 0);   // Vector2.right * speed;
-
-            // don't check y, because it will always be true when they are both standing on the ground
-            if (Mathf.Abs(transform.position.x - opponent.position.x) <= xAttackDist)
-                ChangeState(State.Punch);
-
-        }
-
-    }
-    #endregion
-
-    #region protected virtual void Punch();
-    /// <summary>
-    /// defines character's behavior while in the Punch state.
-    /// if the player is beyond the horizontal attack range, we walk.
-    /// otherwise, we stand.
-    /// </summary>
-    protected virtual void Punch() {
-
-        StartCoroutine(ControlPunchTiming());
-
-        if (Mathf.Abs(transform.position.x - opponent.position.x) >= xAttackDist)
-            ChangeState(State.Walk);
-        else
-            ChangeState(State.Stand);
-
-    }
-    #endregion
-
-    // FIXME
-    #region protected virtual void Jump();
-    /// <summary>
-    /// defines character's behavior while in the Jump state.
-    /// ***currently only starts coroutine. need to fix.
-    /// </summary>
-    protected virtual void Jump() {
-
-        StartCoroutine(DelayGroundedCheck());
 
     }
     #endregion

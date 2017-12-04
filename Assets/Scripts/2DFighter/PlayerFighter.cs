@@ -8,6 +8,26 @@ public class PlayerFighter : Fighter {
 
     private Character character;
 
+
+    // FIXME - get maxHealth from CharInfo
+    #region protected override void Start();
+    /// <summary>
+    /// override of Start().
+    /// performs player specific initialization.
+    /// then calls Fighter.Start().
+    /// </summary>
+    protected override void Start() {
+
+        character = CharInfo.getCurrentCharacter();
+        maxHealth = 100;        // should get from character
+        healthSlider = GameObject.Find("PlayerHealth").GetComponent<Slider>();
+        opponent = GameObject.FindGameObjectWithTag("Enemy").transform;
+
+        base.Start();
+
+    }
+    #endregion
+
     #region protected override void OnTriggerEnter2D(Collider2D other);
     /// <summary>
     /// called when player collides with a collider set to trigger.
@@ -24,23 +44,6 @@ public class PlayerFighter : Fighter {
     }
     #endregion
 
-    #region protected override void OnStart();
-    /// <summary>
-    /// called from Start().
-    /// performs player specific initialization.
-    /// </summary>
-    protected override void OnStart() {
-
-        character = CharInfo.getCurrentCharacter();
-        maxHealth = 100;        // should get from character
-        healthSlider = GameObject.Find("PlayerHealth").GetComponent<Slider>();
-        opponent = GameObject.FindGameObjectWithTag("Enemy").transform;
-
-    }
-    #endregion
-
-    #region State control methods
-
     // FIXME
     #region protected override void Death();
     /// <summary>
@@ -55,9 +58,11 @@ public class PlayerFighter : Fighter {
     }
     #endregion
 
+    #region State control methods
+
     #region protected override void Stand();
     /// <summary>
-    /// defines player's behavior while in the Stand state.
+    /// defines Player behavior while in the Stand state.
     /// if we are trying to jump and are grounded, we jump.
     /// else if we are trying to move, we walk.
     /// else if we are trying to punch, we punch.
@@ -80,7 +85,7 @@ public class PlayerFighter : Fighter {
 
     #region protected override void Walk();
     /// <summary>
-    /// defines player's behavior while in the Walk state.
+    /// defines Player behavior while in the Walk state.
     /// if we are trying to jump and are grounded, we jump.
     /// else if we are trying to punch, we punch.
     /// else if we are not moving, we stand.
@@ -106,7 +111,7 @@ public class PlayerFighter : Fighter {
 
     #region protected override void Punch();
     /// <summary>
-    /// defines player's behavior while in the Punch state.
+    /// defines Player behavior while in the Punch state.
     /// starts coroutine to control the timing and speed of the punch.
     /// if we are not moving, we stand.
     /// otherwise, we walk.
@@ -129,7 +134,7 @@ public class PlayerFighter : Fighter {
 
     #region protected override void Jump();
     /// <summary>
-    /// defines player's behavior while in the Jump state.
+    /// defines Player behavior while in the Jump state.
     /// sets the velocity to account for horizontal movement while airborne.
     /// starts coroutine to delay the first check for grounded and then check
     ///  repeatedly until grounded and then change state to stand.
