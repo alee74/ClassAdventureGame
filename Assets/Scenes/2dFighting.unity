@@ -768,7 +768,22 @@ Prefab:
     - target: {fileID: 114315051470274924, guid: 7b410e4dafce25d4da850d5938209d7c,
         type: 2}
       propertyPath: rollPower
-      value: 100
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315051470274924, guid: 7b410e4dafce25d4da850d5938209d7c,
+        type: 2}
+      propertyPath: recoverRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315051470274924, guid: 7b410e4dafce25d4da850d5938209d7c,
+        type: 2}
+      propertyPath: jumpCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315051470274924, guid: 7b410e4dafce25d4da850d5938209d7c,
+        type: 2}
+      propertyPath: rollCost
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7b410e4dafce25d4da850d5938209d7c, type: 2}

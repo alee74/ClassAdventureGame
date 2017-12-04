@@ -333,6 +333,7 @@ public abstract class Fighter : MonoBehaviour {
             if (!isFacingRight)
                 rollMultiplier *= -1;
 
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
             rgb.AddForce(Vector2.right * rollMultiplier, ForceMode2D.Impulse);
 
         }
