@@ -26,7 +26,8 @@ public class PlayerFighter : Fighter {
         maxStamina = 10f;
         stamina = (character.stamina / character.getMaxStamina()) * maxStamina;
         healthSlider = GameObject.Find("PlayerHealth").GetComponent<Slider>();
-        staminaSlider = GameObject.Find("PlayerStamina").GetComponent<Slider>();
+		staminaSlider = GameObject.Find("PlayerStamina").GetComponent<Slider>();
+		healthText = GameObject.Find ("PlayerHealthText").GetComponent<Text> ();
 
         try {
 

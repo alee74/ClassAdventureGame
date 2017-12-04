@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public abstract class Fighter : MonoBehaviour {
     protected bool isFacingRight;
     protected Slider healthSlider;
     protected Slider staminaSlider;
+	protected Text healthText;
     protected GameObject punchBox;
     protected Fighter opponent;
     protected Transform opponentTransform;
@@ -141,6 +143,16 @@ public abstract class Fighter : MonoBehaviour {
     protected virtual void Update() {
 
         healthSlider.value = health / maxHealth;
+		if (((float)health / (float)maxHealth) < 0.2f) {
+			var fill = (healthSlider as UnityEngine.UI.Slider).GetComponentsInChildren<UnityEngine.UI.Image>()
+				.FirstOrDefault(t => t.name == "Fill");
+			if (fill != null)
+			{
+				fill.color = Color.red;
+			}
+		}
+
+		healthText.text = "" + health + "/" + maxHealth;
         staminaSlider.value = stamina / maxStamina;
 
         if (stamina < maxStamina) {

@@ -26,6 +26,7 @@ public class EnemyFighter : Fighter {
         stamina = maxStamina;
         healthSlider = GameObject.Find("EnemyHealth").GetComponent<Slider>();
         staminaSlider = GameObject.Find("EnemyStamina").GetComponent<Slider>();
+		healthText = GameObject.Find ("EnemyHealthText").GetComponent<Text> ();
         opponent = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerFighter>();
         opponentTransform = GameObject.FindGameObjectWithTag("Player").transform;
 

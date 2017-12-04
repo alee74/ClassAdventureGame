@@ -9,7 +9,7 @@ public class SceneStart : MonoBehaviour {
     public float yStart;
 
     private GameObject enemy;
-    private string[] enemyType = new string[] { "Panda" };
+    private string[] enemyType = new string[] { "Panda", "Bandit", "Mutant", "Rogue" };
     static private System.Random rando = new System.Random();
 
 	// Use this for initialization
@@ -20,7 +20,7 @@ public class SceneStart : MonoBehaviour {
 
         string enemyName = enemyType[rando.Next(enemyType.Length)];
         enemy = Resources.Load<GameObject>("Prefabs/2DFighter/" + enemyName);
-       // Instantiate(enemy, new Vector3(xStart, yStart, 0f), Quaternion.identity);
+        Instantiate(enemy, new Vector3(xStart, yStart, 0f), Quaternion.identity);
 
         GameObject.Find("EnemyName").GetComponent<Text>().text = enemyName;
 		
