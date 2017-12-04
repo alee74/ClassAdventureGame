@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerFighter : Fighter {
 
@@ -44,10 +45,33 @@ public class PlayerFighter : Fighter {
     }
     #endregion
 
-    // FIXME
+    #region protected override void SetDirectionFacing();
+    /// <summary>
+    /// sets the direction Player is facing.
+    /// only changes direction if user is moving player.
+    /// sets SpriteRenderer.flipX, which indicates if sprite should be flipped.
+    ///  - because of this option, we don't need to do anything else!
+    /// </summary>
+    protected override void SetDirectionFacing() {
+
+        float moving = Input.GetAxis("Horizontal");
+
+        if (moving > 0)
+            isFacingRight = true;
+        else
+            isFacingRight = false;
+
+        gameObject.GetComponent<SpriteRenderer>().flipX = !isFacingRight;
+
+    }
+    #endregion
+
+    // FIXME - interact with world
     #region protected override void Death();
     /// <summary>
     /// handles death of character.
+    /// 
+    /// FIXME:
     /// ***currently just loads GameOver scene.
     /// ***need to update to set variable in world indicating we lost and return to it
     /// </summary>

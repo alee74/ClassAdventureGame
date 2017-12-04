@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class EnemyFighter : Fighter {
 
@@ -18,7 +19,7 @@ public class EnemyFighter : Fighter {
     /// </summary>
     protected override void Start() {
 
-        maxHealth = 5f;
+        maxHealth = 15f;
         healthSlider = GameObject.Find("EnemyHealth").GetComponent<Slider>();
         opponent = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -42,7 +43,27 @@ public class EnemyFighter : Fighter {
 
     }
     #endregion
-    
+
+    #region protected override void SetDirectionFacing();
+    /// <summary>
+    /// sets the direction Enemy is facing.
+    /// always sets enemy to face in the direction of the opponent (Player)
+    ///  by comparing their position's x values.
+    /// sets SpriteRenderer.flipX, which indicates if sprite should be flipped.
+    ///  - because of this option, we don't need to do anything else!
+    /// </summary>
+    protected override void SetDirectionFacing() {
+
+        if (transform.position.x < opponent.position.x)
+            isFacingRight = true;
+        else
+            isFacingRight = false;
+
+        gameObject.GetComponent<SpriteRenderer>().flipX = !isFacingRight;
+
+    }
+    #endregion
+
     // FIXME - interact with rest of game.
     #region protected override void Death();
     /// <summary>

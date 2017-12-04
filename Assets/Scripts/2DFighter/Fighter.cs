@@ -84,6 +84,13 @@ public abstract class Fighter : MonoBehaviour {
     /// </summary>
     protected abstract void Jump();
     #endregion
+
+    #region protected abstract void SetDirectionFacing();
+    /// <summary>
+    /// sets the direction the Fighter is facing.
+    /// </summary>
+    protected abstract void SetDirectionFacing();
+    #endregion
     #endregion
 
     #region Unity methods
@@ -144,30 +151,6 @@ public abstract class Fighter : MonoBehaviour {
             gameObject.transform.Translate(Vector3.left * knockbackDist);
         else
             gameObject.transform.Translate(Vector3.right * knockbackDist);
-
-    }
-    #endregion
-
-    #region protected void SetDirectionFacing();
-    /// <summary>
-    /// sets the direction the character is facing.
-    /// - only changes direction if moving;
-    /// - sets SpriteRenderer.flipX, which indicates if we want the sprite to be flipped;
-    ///   -- because of this option, we don't need to do anything else!
-    ///   
-    /// functionality is same for player and enemy, so not marked virtual, which
-    ///  means this function cannot be overriden.
-    /// </summary>
-    protected void SetDirectionFacing() {
-
-        float xVelocity = rgb.velocity.x;
-
-        if (xVelocity > 0)
-            isFacingRight = true;
-        else if (xVelocity < 0)
-            isFacingRight = false;
-
-        gameObject.GetComponent<SpriteRenderer>().flipX = !isFacingRight;
 
     }
     #endregion
@@ -233,10 +216,10 @@ public abstract class Fighter : MonoBehaviour {
         switch (state) {
 
             case State.Stand:
-                Walk();
+                Stand();
                 break;
             case State.Walk:
-                Stand();
+                Walk();
                 break;
             case State.Punch:
                 Punch();

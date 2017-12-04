@@ -106,8 +106,9 @@ public class PlayerScript : MonoBehaviour {
 
     void ChangeState(State newState)
     {
+        Debug.Log("Change State");
         state = newState;
-
+        Debug.Log("Before: " + anim.GetInteger("state"));
                switch (state)
                {
                    case State.Stand:
@@ -123,9 +124,11 @@ public class PlayerScript : MonoBehaviour {
                        anim.SetInteger("state", 3);
                        break;
                    case State.Punch:
+                       Debug.Log("PUNCH");
                        anim.SetInteger("state", 2);
                        break;
                }
+        Debug.Log("After: " + anim.GetInteger("state"));
     }
 
     void DirectionFacing()
@@ -153,19 +156,16 @@ public class PlayerScript : MonoBehaviour {
     {
         bool inY = Input.GetKeyDown("space");
         float inX = Input.GetAxis("Horizontal");
-		bool inF = Input.GetKey(KeyCode.F);
+		bool inF = Input.GetKeyDown(KeyCode.F);
 
-
-        if (inY && IsOnGround())
+        if (inF)
         {
-            ChangeState(State.Jump);
+            ChangeState(State.Punch);
             return;
         }
-        else if (inF)
+        else if (inY && IsOnGround())
         {
-            Debug.Log("Should punch1");
-
-            ChangeState(State.Punch);
+            ChangeState(State.Jump);
             return;
         }
         else if (inX != 0)
@@ -180,7 +180,7 @@ public class PlayerScript : MonoBehaviour {
 		//Debug.Log ("walking");
         float inX = Input.GetAxis("Horizontal");
         bool inY = Input.GetKeyDown("space");
-		bool inF = Input.GetKey(KeyCode.F);
+		bool inF = Input.GetKeyDown(KeyCode.F);
 
         if (inY && IsOnGround()) {
             ChangeState(State.Jump);
@@ -218,6 +218,7 @@ public class PlayerScript : MonoBehaviour {
         StartCoroutine(PunchFunc());
         //Need to change state?
         float inX = Input.GetAxis("Horizontal");
+
 
 		if (inX == 0) {
 			ChangeState (State.Stand);

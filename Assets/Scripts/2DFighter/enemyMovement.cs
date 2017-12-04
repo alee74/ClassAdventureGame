@@ -32,7 +32,7 @@ public class enemyMovement : MonoBehaviour
 
     public Slider healthSlider;
 
-    public float speed = 10f;
+    public float speed = 5f;
     public float attackXDistance = 1f;
     public float attackYDistance = 1f;
 
@@ -176,11 +176,11 @@ public class enemyMovement : MonoBehaviour
         {
             if (transform.position.x > player.transform.position.x)
             {
-                rgb.velocity = new Vector2(-0.1f * speed, 0);
+                rgb.velocity = new Vector2(-0.5f * speed, 0);
             }
             else
             {
-                rgb.velocity = new Vector2(0.1f * speed, 0);
+                rgb.velocity = new Vector2(0.5f * speed, 0);
             }
 
             if (((Mathf.Abs(transform.position.x - player.transform.position.x)) <= attackXDistance) & ((Mathf.Abs(transform.position.y - player.transform.position.y)) <= attackYDistance))
