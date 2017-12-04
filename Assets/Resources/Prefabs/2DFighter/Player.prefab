@@ -53,7 +53,6 @@ GameObject:
   - component: {fileID: 212982880867142908}
   - component: {fileID: 114315051470274924}
   - component: {fileID: 50045781332647250}
-  - component: {fileID: 114405213603579288}
   - component: {fileID: 95912110151090958}
   - component: {fileID: 70956160759361278}
   m_Layer: 11
@@ -202,20 +201,6 @@ MonoBehaviour:
   punchCost: 3
   jumpCost: 5
   rollCost: 6
---- !u!114 &114405213603579288
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1894080625829014}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d79e92e3ca476047b0a00508efddb14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!212 &212982880867142908
 SpriteRenderer:
   m_ObjectHideFlags: 1
