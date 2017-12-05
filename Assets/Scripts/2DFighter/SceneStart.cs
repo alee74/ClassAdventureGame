@@ -21,7 +21,7 @@ public class SceneStart : MonoBehaviour {
     /// instantiates enemy of random type at (xStart, yStart).
     /// sets enemy and player names in UI.
     /// </summary>
-	void Start () {
+	void OnEnable () {
 
 		Character character = CharInfo.getCurrentCharacter();
 		GameObject.Find("PlayerName").GetComponent<Text>().text = character.name;
