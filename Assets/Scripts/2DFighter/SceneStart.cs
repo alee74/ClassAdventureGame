@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// attatch to canvas.
+/// attach to canvas.
 /// instantiates enemy and sets names in UI.
 /// </summary>
 public class SceneStart : MonoBehaviour {
@@ -16,12 +16,13 @@ public class SceneStart : MonoBehaviour {
     private string[] enemyType = new string[] { "Panda", "Bandit", "Mutant", "Rogue" };
     static private System.Random rando = new System.Random();
 
+    #region void OnEnable();
     /// <summary>
     /// called when scene is being loaded.
     /// instantiates enemy of random type at (xStart, yStart).
     /// sets enemy and player names in UI.
     /// </summary>
-	void OnEnable () {
+    void OnEnable () {
 
 		Character character = CharInfo.getCurrentCharacter();
 		GameObject.Find("PlayerName").GetComponent<Text>().text = character.name;
@@ -33,5 +34,6 @@ public class SceneStart : MonoBehaviour {
         GameObject.Find("EnemyName").GetComponent<Text>().text = enemyName;
 		
 	}
+    #endregion
 
 }
