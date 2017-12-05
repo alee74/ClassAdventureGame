@@ -53,6 +53,8 @@ public class PlayerFighter : Fighter {
     /// <param name="other">the collider that triggered the collision</param>
     protected override void OnTriggerEnter2D(Collider2D other) {
         
+		if (other.gameObject.tag == "KillerGround")
+			Death ();
         if (other.gameObject.tag == "EnemyFist") {
             health -= opponent.damage;
             Knockback();
