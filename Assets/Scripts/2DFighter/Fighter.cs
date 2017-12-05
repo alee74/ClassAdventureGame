@@ -94,6 +94,13 @@ public abstract class Fighter : MonoBehaviour {
     protected abstract void Punch();
     #endregion
 
+    #region protected abstract void Jump();
+    /// <summary>
+    /// defines Fighter behavior while in the Jump state.
+    /// </summary>
+    protected abstract void Jump();
+    #endregion
+
     #region protected abstract void SetDirectionFacing();
     /// <summary>
     /// sets the direction the Fighter is facing.
@@ -266,7 +273,7 @@ public abstract class Fighter : MonoBehaviour {
             !(newState == State.Punch && waitForCooldown)) {
 
             state = newState;
-            Debug.Log("stamina = " + stamina);
+
             switch (state)
             {
 
@@ -326,20 +333,6 @@ public abstract class Fighter : MonoBehaviour {
     }
     #endregion
 
-    #region protected void Jump();
-    /// <summary>
-    /// defines Fighter behavior while in the Jump state.
-    /// sets the velocity to account for horizontal movement while airborne.
-    /// starts coroutine to delay the first check for grounded and then check
-    ///  repeatedly until grounded and then change state to stand.
-    /// </summary>
-    protected void Jump() {
-
-        rgb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rgb.velocity.y);
-        StartCoroutine(DelayGroundedCheck());
-
-    }
-    #endregion
 
     #region protected void Roll();
     /// <summary>

@@ -200,6 +200,21 @@ public class PlayerFighter : Fighter {
 
     }
     #endregion
+
+    #region protected override void Jump();
+    /// <summary>
+    /// defines Player behavior while in the Jump state.
+    /// sets the velocity to account for horizontal movement while airborne.
+    /// starts coroutine to delay the first check for grounded and then check
+    ///  repeatedly until grounded and then change state to stand.
+    /// </summary>
+    protected override void Jump() {
+
+        rgb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rgb.velocity.y);
+        StartCoroutine(DelayGroundedCheck());
+
+    }
+    #endregion
     #endregion
 
 }

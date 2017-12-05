@@ -10,6 +10,8 @@ public class EnemyFighter : Fighter {
 
     private float xAttackDist = 2f;
     private float yAttackDist = 2f;
+    private float jumpHeightDiff = 0.5f;
+    public float distanceForJump = 1.5f;
 
 
     #region protected override void Start();
@@ -118,9 +120,14 @@ public class EnemyFighter : Fighter {
     /// </summary>
     protected override void Walk() {
 
-        if (Grounded())
-        {
+        if ((Mathf.Abs(opponentTransform.position.y - transform.position.y) >= jumpHeightDiff) && 
+            (Mathf.Abs(opponentTransform.position.x - transform.position.x) >= distanceForJump)) {
 
+            Debug.Log("Enemy Jump");
+            ChangeState(State.Jump);
+        }
+        else
+        {
             if (transform.position.x > opponentTransform.position.x)
                 rgb.velocity = new Vector2(-speed, 0);  // Vector2.left * speed;
             else
@@ -129,7 +136,6 @@ public class EnemyFighter : Fighter {
             // don't check y, because it will always be true when they are both standing on the ground
             if (Mathf.Abs(transform.position.x - opponentTransform.position.x) <= xAttackDist)
                 ChangeState(State.Punch);
-
         }
 
     }
@@ -143,13 +149,34 @@ public class EnemyFighter : Fighter {
     /// otherwise, we stand.
     /// </summary>
     protected override void Punch() {
-        Debug.Log("Enemy Punch");
+
         StartCoroutine(ControlPunchTiming());
 
        /* if (Mathf.Abs(transform.position.x - opponent.position.x) >= xAttackDist)
             ChangeState(State.Walk);
         else*/
         ChangeState(State.Stand);
+
+    }
+    #endregion
+
+    #region protected override void Jump();
+    /// <summary>
+    /// defines Enemy behavior while in the Jump state.
+    /// sets the velocity to account for horizontal movement while airborne.
+    /// starts coroutine to delay the first check for grounded and then check
+    ///  repeatedly until grounded and then change state to stand.
+    /// </summary>
+    protected override void Jump() {
+
+        if (opponentTransform.position.x < transform.position.x) {
+            rgb.velocity = new Vector2(-speed, rgb.velocity.y);
+        }
+        else {
+            rgb.velocity = new Vector2(speed, rgb.velocity.y);
+        }
+
+        StartCoroutine(DelayGroundedCheck());
 
     }
     #endregion
