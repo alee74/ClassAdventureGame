@@ -18,16 +18,14 @@ public class WorldPersist : MonoBehaviour {
         obj.transform.parent = persistParent.transform;
     }
 
-    private void Awake() {
+    private void Start() {
         if (persistParent == null) {
-            // There is no persistent world, so create an empty one.
+            // There is no persistent world, so create an empty one and then generate the world.
             persistParent = new GameObject(PERSIST_PARENT_NAME);
             persistParent.AddComponent<PersistentWorldObj>();
             DontDestroyOnLoad(persistParent);
-        } else if (!persistParent.activeSelf) {
-            // There is a persisted world, so re-activate it and disable world generation.
-            persistParent.SetActive(true);
-            gameObject.SetActive(false);
+            SendMessage("GenerateWorld");
         }
+        // If there is a persisted world, it will re-activate itself.
     }
 }

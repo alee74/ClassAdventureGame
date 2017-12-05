@@ -9,12 +9,10 @@ public class LakeGen : MonoBehaviour {
     public float lakeChance = 0.99f;
     private WorldPersist persist;
 
-	// Use this for initialization
-	void Start () {
+    void GenerateWorld() {
         persist = GetComponent<WorldPersist>();
         GenLake();
 	}
-	
         
     void GenLake()
     {

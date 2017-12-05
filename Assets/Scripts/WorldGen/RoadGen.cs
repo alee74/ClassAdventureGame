@@ -41,8 +41,7 @@ public class RoadGen : MonoBehaviour {
 
     private WorldPersist persist;
 
-    void Start()
-    {
+    void GenerateWorld() {
         persist = GetComponent<WorldPersist>();
         for(int i = 0; i < w; i++)
         {

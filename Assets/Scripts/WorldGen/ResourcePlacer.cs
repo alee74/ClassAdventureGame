@@ -13,8 +13,7 @@ public class ResourcePlacer : MonoBehaviour {
 
 	private List<GameObject> events; 
 
-	// Use this for initialization
-	void Start () {
+	void GenerateWorld () {
 		//print (EventSystem.GetEventTiles (0, 20, 1));
 		events = new List<GameObject>(EventSystem.GetEventTiles(0,100,1));
 		Vector2 pos = new Vector2(-resourceRadius, -resourceRadius);

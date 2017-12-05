@@ -23,7 +23,7 @@ public class TreeGen : MonoBehaviour {
 
     private WorldPersist persist;
 
-    void Start() {
+    void GenerateWorld() {
         persist = GetComponent<WorldPersist>();
         for (int i = 0; i < numForests; ++i) {
             var pos = new Vector2(Random.Range(-treeZoneSize, treeZoneSize),

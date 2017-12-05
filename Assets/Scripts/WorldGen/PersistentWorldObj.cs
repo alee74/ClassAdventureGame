@@ -13,6 +13,6 @@ public class PersistentWorldObj : MonoBehaviour {
     }
 
     void OnSceneLoaded(Scene s, LoadSceneMode m) {
-        gameObject.SetActive(false);
+        gameObject.SetActive(FindObjectOfType<WorldPersist>() != null);
     }
 }
