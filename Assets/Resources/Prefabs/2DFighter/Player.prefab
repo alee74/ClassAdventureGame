@@ -194,13 +194,13 @@ MonoBehaviour:
   strength: 0
   speed: 5
   jumpPower: 275
-  rollPower: 2
+  rollPower: 85
   damage: 1
   knockbackDist: 0.5
-  recoverRate: 2
-  punchCost: 3
-  jumpCost: 5
-  rollCost: 6
+  recoverRate: 1
+  punchCost: 2
+  jumpCost: 1
+  rollCost: 2
 --- !u!212 &212982880867142908
 SpriteRenderer:
   m_ObjectHideFlags: 1
