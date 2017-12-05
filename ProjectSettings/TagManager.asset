@@ -23,7 +23,7 @@ TagManager:
   - 
   - Background
   - Ground
-  - 
+  - Characters
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
   - name: Background
     uniqueID: 1074945011
     locked: 0
-  - name: Game
+  - name: Ground
     uniqueID: 3880486037
+    locked: 0
+  - name: Characters
+    uniqueID: 2795203865
     locked: 0

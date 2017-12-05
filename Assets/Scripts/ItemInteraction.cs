@@ -7,23 +7,27 @@ public class ItemInteraction : MonoBehaviour {
     
     public int max = 5;
 
+    private Character currChara;
 
     private void Start()
     {
+        currChara = CharInfo.getCurrentCharacter();
         //transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), PlayerPrefs.GetFloat("Z"));
         //ONLY UNCOMMENT IF NEEDED FOR TESTING //transform.position = new Vector3(0, 0, -1);
     }
     void OnTriggerEnter2D(Collider2D resource){
         if (resource.gameObject.tag == "NPC") {
             Destroy(resource.gameObject);
+            FightOutcome.wasInFight = true;
             NPCInteraction();
 		} else if (resource.gameObject.tag == "CampLife") {
             //PlayerPrefs.SetFloat("X", 0);
             //PlayerPrefs.SetFloat("Y", 0);
             ///PlayerPrefs.SetFloat("Z", -1);
-			SceneManager.LoadScene ("TestCamp");
-
+            ItemsInInventory.AddInventoryItemsToCampResource();
+			SceneManager.LoadScene ("T-MinusDays");
 		} else if (resource.gameObject.tag == "Event"){
+            //placeholder?
             EventInteraction();
         } else
         {
@@ -36,12 +40,15 @@ public class ItemInteraction : MonoBehaviour {
                 {
                     case "Food":
                         ItemsInInventory.num_food++;
+                        currChara.health -= 5;
                         break;
                     case "Water":
                         ItemsInInventory.num_water++;
+                        currChara.stamina -= 5;
                         break;
                     case "Wood":
                         ItemsInInventory.num_wood++;
+                        currChara.strength -= 5;
                         break;
                 }
             } else
