@@ -52,6 +52,7 @@ public abstract class Fighter : MonoBehaviour {
     private static float punchEndDelay = 0.15f;     // needs to be public if different for different enemies (will be overriden in this case)
     private static float rollTime = 0.25f;
     private Camera cam;
+    private bool waitForCooldown;
     #endregion
 
 
@@ -127,6 +128,7 @@ public abstract class Fighter : MonoBehaviour {
         punchBox = transform.Find("PunchBox").gameObject;
         cam = GameObject.FindObjectOfType<Camera>();
         state = State.Stand;
+        waitForCooldown = false;
 
 	}
     #endregion
@@ -260,10 +262,11 @@ public abstract class Fighter : MonoBehaviour {
 
         if (!(newState == State.Jump && stamina < jumpCost) &&
             !(newState == State.Punch && stamina < punchCost) &&
-            !(newState == State.Roll && stamina < rollCost)) {
+            !(newState == State.Roll && stamina < rollCost) &&
+            !(newState == State.Punch && waitForCooldown)) {
 
             state = newState;
-
+            Debug.Log("stamina = " + stamina);
             switch (state)
             {
 
@@ -272,6 +275,7 @@ public abstract class Fighter : MonoBehaviour {
                     break;
 
                 case State.Punch:
+                    waitForCooldown = true;
                     stamina -= punchCost;
                     break;
 
@@ -412,6 +416,7 @@ public abstract class Fighter : MonoBehaviour {
 
         yield return new WaitForSeconds(punchEndDelay);
         punchBox.SetActive(false);
+        waitForCooldown = false;
 
     }
     #endregion

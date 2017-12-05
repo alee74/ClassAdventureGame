@@ -197,7 +197,7 @@ MonoBehaviour:
   rollPower: 0
   damage: 5
   knockbackDist: 0.5
-  recoverRate: 0
+  recoverRate: 1
   punchCost: 3
   jumpCost: 5
   rollCost: 0

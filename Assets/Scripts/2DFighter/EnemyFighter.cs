@@ -143,13 +143,13 @@ public class EnemyFighter : Fighter {
     /// otherwise, we stand.
     /// </summary>
     protected override void Punch() {
-
+        Debug.Log("Enemy Punch");
         StartCoroutine(ControlPunchTiming());
 
        /* if (Mathf.Abs(transform.position.x - opponent.position.x) >= xAttackDist)
             ChangeState(State.Walk);
         else*/
-            ChangeState(State.Stand);
+        ChangeState(State.Stand);
 
     }
     #endregion
