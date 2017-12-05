@@ -147,6 +147,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114512694249895116, guid: e4af5a4ada058e94588564c75627f980,
+        type: 2}
+      propertyPath: roadTile
+      value: 
+      objectReference: {fileID: 1526639436595440, guid: 37a34f0f655a3404ba9e2c5bfec0a8df,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4af5a4ada058e94588564c75627f980, type: 2}
   m_IsPrefabParent: 0
