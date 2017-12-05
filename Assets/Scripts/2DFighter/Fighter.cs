@@ -13,7 +13,7 @@ public abstract class Fighter : MonoBehaviour {
     #region Member declarations
 
     // states for both player and enemy
-    protected enum State { Stand, Walk, Punch, Jump, Roll }
+    protected enum State { Stand, Walk, Punch, Jump, Roll, Knockback, Falling }
 
     // members common to enemy and player
     protected Rigidbody2D rgb;
@@ -54,6 +54,7 @@ public abstract class Fighter : MonoBehaviour {
     private static float punchBeginDelay = 0.25f;   // needs to be public if different for different enemies (will be overriden in this case)
     private static float punchEndDelay = 0.15f;     // needs to be public if different for different enemies (will be overriden in this case)
     private static float rollTime = 0.25f;
+    private static float knockbackTime = 0.15f;
     private Camera cam;
     private bool waitForCooldown;
     #endregion
@@ -105,8 +106,6 @@ public abstract class Fighter : MonoBehaviour {
     #endregion
 
     #region protected abstract void SetDirectionFacing();
-
-
     /// <summary>
     /// sets the direction the Fighter is facing.
     /// </summary>
@@ -197,44 +196,6 @@ public abstract class Fighter : MonoBehaviour {
     #endregion
 
     #region User defined methods
-
-    #region protected void Knockback();
-    /// <summary>
-    /// called from OnTriggerEnter2D when taking damage from opponent.
-    /// moves character by knockbackDist in direction opposite the one they are facing.
-    /// if moving by knockbackDist puts Fighter beyond bounds of camera, adjusts distance
-    ///  Fighter will be moved to keep them in frame.
-    /// </summary>
-    protected void Knockback() {
-
-        float translateDist = knockbackDist;
-        // distance from player's position.x to x-coordinate of edge of collider
-        float halfWidth = gameObject.GetComponent<CapsuleCollider2D>().bounds.size.x / 2;
-
-        if (transform.position.x < opponentTransform.position.x) {   // Fighter is to left of opponent
-
-            float leftEdge = cam.ViewportToWorldPoint(Vector2.zero).x;
-
-            // if translating by knockbackDist puts Fighter beyond camera's left edge, adjust translateDist
-            if (transform.position.x - halfWidth - knockbackDist < leftEdge)
-                translateDist = leftEdge - (transform.position.x - halfWidth);
-            else
-                translateDist *= -1;
-
-        } else {    // Fighter is to right of opponent
-
-            float rightEdge = cam.ViewportToWorldPoint(Vector2.right).x;
-
-            // if translating by knockbackDist puts Fighter beyond camera's right edge, adjust translateDist
-            if (transform.position.x + halfWidth + knockbackDist > rightEdge)
-                translateDist = rightEdge - (transform.position.x + halfWidth);
-
-        }
-
-        gameObject.transform.Translate(Vector2.right * translateDist);
-
-    }
-    #endregion
 
     #region protected bool Grounded();
     /// <summary>
@@ -333,6 +294,13 @@ public abstract class Fighter : MonoBehaviour {
             case State.Roll:
                 Roll();
                 break;
+            case State.Knockback:
+                Knockback();
+                break;
+            case State.Falling:
+                Falling();
+                break;
+
         }
 
     }
@@ -367,7 +335,59 @@ public abstract class Fighter : MonoBehaviour {
     }
     #endregion
 
+    #region protected void Knockback();
+    /// <summary>
+    /// defines Fighter behavior while in Knockback state.
+    /// starts coroutine to delay transition back to Stand state.
+    /// moves character by knockbackDist in direction opposite the one they are facing.
+    /// if moving by knockbackDist puts Fighter beyond bounds of camera, adjusts distance
+    ///  Fighter will be moved to keep them in frame.
+    /// </summary>
+    protected void Knockback() {
 
+        StartCoroutine(DelayTransitionFromKnockback());
+
+        float translateDist = knockbackDist;
+        // distance from player's position.x to x-coordinate of edge of collider
+        float halfWidth = gameObject.GetComponent<CapsuleCollider2D>().bounds.size.x / 2;
+
+        if (transform.position.x < opponentTransform.position.x) {   // Fighter is to left of opponent
+
+            float leftEdge = cam.ViewportToWorldPoint(Vector2.zero).x;
+
+            // if translating by knockbackDist puts Fighter beyond camera's left edge, adjust translateDist
+            if (transform.position.x - halfWidth - knockbackDist < leftEdge)
+                translateDist = leftEdge - (transform.position.x - halfWidth);
+            else
+                translateDist *= -1;
+
+        } else {    // Fighter is to right of opponent
+
+            float rightEdge = cam.ViewportToWorldPoint(Vector2.right).x;
+
+            // if translating by knockbackDist puts Fighter beyond camera's right edge, adjust translateDist
+            if (transform.position.x + halfWidth + knockbackDist > rightEdge)
+                translateDist = rightEdge - (transform.position.x + halfWidth);
+
+        }
+
+        gameObject.transform.Translate(Vector2.right * translateDist);
+
+    }
+    #endregion
+
+    #region protected virtual void Falling();
+    /// <summary>
+    /// defines Fighter behavior while in Falling state.
+    /// if on the ground, change state to Stand.
+    /// </summary>
+    protected virtual void Falling() {
+
+        if (Grounded())
+            ChangeState(State.Stand);
+
+    }
+    #endregion
     #endregion
 
     #region Coroutines
@@ -441,6 +461,20 @@ public abstract class Fighter : MonoBehaviour {
 
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
         ChangeState(State.Stand);
+
+    }
+    #endregion
+
+    #region protected IEnumerator DelayTransitionFromKnockback();
+    /// <summary>
+    /// coroutine to control timing of state change following being knocked back.
+    /// simply waits for knockbackTime and changes state to Stand.
+    /// </summary>
+    /// <returns>time to wait prior to exiting Knockback state</returns>
+    protected IEnumerator DelayTransitionFromKnockback() {
+
+        yield return new WaitForSeconds(knockbackTime);
+        ChangeState(State.Knockback);
 
     }
     #endregion

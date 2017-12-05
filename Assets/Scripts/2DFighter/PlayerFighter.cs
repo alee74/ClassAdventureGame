@@ -52,16 +52,16 @@ public class PlayerFighter : Fighter {
     #region protected override void OnTriggerEnter2D(Collider2D other);
     /// <summary>
     /// called when player collides with a collider set to trigger.
-    /// if its the enemy's fist, take damage and get knocked back.
+    /// if its the enemy's fist, take damage and set state to Knockback.
     /// </summary>
     /// <param name="other">the collider that triggered the collision</param>
     protected override void OnTriggerEnter2D(Collider2D other) {
         
-		if (other.gameObject.tag == "KillerGround")
-			Death ();
         if (other.gameObject.tag == "EnemyFist") {
+
             health -= opponent.damage;
-            Knockback();
+            ChangeState(State.Knockback);
+
         }
 
     }
@@ -88,37 +88,31 @@ public class PlayerFighter : Fighter {
     }
     #endregion
 
-    // FIXME
     #region protected override void Death();
     /// <summary>
     /// handles death of character.
     /// sets appropriate variables in world.
     /// loads next scene.
-    /// 
-    /// FIXME:
-    /// load proper scene.
     /// </summary>
     protected override void Death() {
 
         InformWorld(false);
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("WorldMapMainScene");
 
     }
     #endregion
 
-    // FIXME
+    // FIXME : ensure proper variable and uncomment
     #region public override void InformWorld(bool win);
     /// <summary>
     /// called from on death in this and EnemyFighter classes.
     /// sets global (game level) health and stamina.
-    /// 
-    /// FIXME:
-    /// need to set variable indicating a win/loss.
     /// </summary>
     public override void InformWorld(bool win) {
 
         character.health = (int)health;
         character.stamina = (int)(stamina / maxStamina) * character.getMaxStamina();
+        //character.wonFight = win;
 
     }
     #endregion
@@ -128,10 +122,11 @@ public class PlayerFighter : Fighter {
     #region protected override void Stand();
     /// <summary>
     /// defines Player behavior while in the Stand state.
-    /// if we are trying to jump and are grounded, we jump.
-    /// else if we are trying to move, we walk.
-    /// else if we are trying to punch, we punch.
-    /// else if we are trying to roll, we roll.
+    /// if we are not grounded, we are Falling.
+    /// else if we are trying to jump, we Jump.
+    /// else if we are trying to move, we Walk.
+    /// else if we are trying to punch, we Punch.
+    /// else if we are trying to roll, we Roll.
     /// </summary>
     protected override void Stand() {
 
@@ -140,7 +135,9 @@ public class PlayerFighter : Fighter {
         bool punching = Input.GetKeyDown(KeyCode.F);
         bool rolling = Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
 
-        if (jumping && Grounded())
+        if (!Grounded())
+            ChangeState(State.Falling);
+        else if (jumping)
             ChangeState(State.Jump);
         else if (move != 0)
             ChangeState(State.Walk);
@@ -155,11 +152,12 @@ public class PlayerFighter : Fighter {
     #region protected override void Walk();
     /// <summary>
     /// defines Player behavior while in the Walk state.
-    /// if we are trying to jump and are grounded, we jump.
-    /// else if we are trying to punch, we punch.
-    /// else if we are trying to roll, we roll.
-    /// else if we are not moving, we stand.
-    /// otherwise, we more accordingly.
+    /// if we aren't grounded, we are Falling.
+    /// else if we are trying to jump, we Jump.
+    /// else if we are trying to punch, we Punch.
+    /// else if we are trying to roll, we Roll.
+    /// else if we are not moving, we Stand.
+    /// otherwise, we move accordingly.
     /// </summary>
     protected override void Walk() {
 
@@ -168,7 +166,9 @@ public class PlayerFighter : Fighter {
         bool punching = Input.GetKeyDown(KeyCode.F);
         bool rolling = Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
 
-        if (jumping && Grounded())
+        if (!Grounded())
+            ChangeState(State.Falling);
+        else if (jumping)
             ChangeState(State.Jump);
         else if (punching)
             ChangeState(State.Punch);
@@ -220,6 +220,20 @@ public class PlayerFighter : Fighter {
     }
     #endregion
 
+    #region protected override void Falling();
+    /// <summary>
+    /// defines Player behavior while in the Falling state.
+    /// sets the velocity to account for horizontal movement while airborne.
+    /// calls base implementation (checks for grounded, changes to Stand).
+    /// </summary>
+    protected override void Falling() {
+
+        rgb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rgb.velocity.y);
+
+        base.Falling();
+
+    }
+    #endregion
     #endregion
 
 }

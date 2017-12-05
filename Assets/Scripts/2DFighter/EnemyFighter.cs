@@ -47,11 +47,11 @@ public class EnemyFighter : Fighter {
     /// <param name="other">the collider that triggered the collision</param>
     protected override void OnTriggerEnter2D(Collider2D other) {
 
-		if (other.gameObject.tag == "KillerGround")
-			Death ();
         if (other.gameObject.tag == "PlayerFist") {
+
             health -= opponent.damage;
-            Knockback();
+            ChangeState(State.Knockback);
+
         }
 
     }
@@ -63,12 +63,10 @@ public class EnemyFighter : Fighter {
     /// if an edge, enemy rolls.
     /// </summary>
     /// <param name="other">the collider that triggered the collision</param>
-    protected void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Edge") {
-            Debug.Log("Roll");
+    protected void OnCollisionEnter2D(Collision2D other) {
+
+        if (other.gameObject.tag == "Edge")
             ChangeState(State.Roll);
-        }
 
     }
     #endregion
@@ -144,13 +142,23 @@ public class EnemyFighter : Fighter {
         else {
 
             rgb.velocity = Vector2.right * speed;
+            
+            if (stamina < punchCost) {
 
-            if (transform.position.x > opponentTransform.position.x)
-                rgb.velocity *= -1;
+                if (transform.position.x < opponentTransform.position.x)
+                    rgb.velocity *= -1;
+                
+            } else {
 
-            // don't check y, because it will always be true when they are both standing on the ground
-            if (Mathf.Abs(transform.position.x - opponentTransform.position.x) <= xAttackDist)
-                ChangeState(State.Punch);
+
+                if (transform.position.x > opponentTransform.position.x)
+                    rgb.velocity *= -1;
+
+                // don't check y, because it will always be true when they are both standing on the ground
+                if (Mathf.Abs(transform.position.x - opponentTransform.position.x) <= xAttackDist)
+                    ChangeState(State.Punch);
+
+            }
 
         }
 
@@ -197,6 +205,23 @@ public class EnemyFighter : Fighter {
     }
     #endregion
 
+    #region protected override void Falling();
+    /// <summary>
+    /// defines Enemy behavior while in Falling state.
+    /// sets the velocity to account for horizontal movement while airborne.
+    /// calls base implentation (checks if grounded, changes to Stand).
+    /// </summary>
+    protected override void Falling() {
+
+        if (opponentTransform.position.x < transform.position.x)
+            rgb.velocity = new Vector2(-speed, rgb.velocity.y);
+        else
+            rgb.velocity = new Vector2(speed, rgb.velocity.y);
+
+        base.Falling();
+
+    }
+    #endregion
     #endregion
 
 }
