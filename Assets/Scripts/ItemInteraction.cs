@@ -16,6 +16,7 @@ public class ItemInteraction : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D resource){
         if (resource.gameObject.tag == "NPC") {
             Destroy(resource.gameObject);
+            FightOutcome.wasInFight = true;
             NPCInteraction();
 		} else if (resource.gameObject.tag == "CampLife") {
             //PlayerPrefs.SetFloat("X", 0);
