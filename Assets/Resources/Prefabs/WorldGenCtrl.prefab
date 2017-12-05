@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114037628389116564}
   - component: {fileID: 114444985504410850}
   - component: {fileID: 114796807743201496}
+  - component: {fileID: 114874541188710388}
   m_Layer: 0
   m_Name: WorldGenCtrl
   m_TagString: Untagged
@@ -120,3 +121,14 @@ MonoBehaviour:
   seafab: {fileID: 1295896070826534, guid: 452b8e456cb065f4d9530a23c051196a, type: 2}
   lakeZoneSize: 700
   lakeChance: 0.99
+--- !u!114 &114874541188710388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1710420843930068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c33c1dda5c419a4283c27c6a37d5a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
