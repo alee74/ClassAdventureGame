@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// class defining Enemy behavior.
+/// inherits from Figther class.
+/// </summary>
 public class EnemyFighter : Fighter {
-
-    // TODO : currently has no implementation of jumping or rolling
 
     private float xAttackDist = 2f;
     private float yAttackDist = 2f;
@@ -126,7 +128,6 @@ public class EnemyFighter : Fighter {
     }
     #endregion
 
-    // FIXME - check for grounded unnecessary? shouldn't be in walk state if not grounded.
     #region protected override void Walk();
     /// <summary>
     /// defines Enemy behavior while in the Walk state.
@@ -136,22 +137,21 @@ public class EnemyFighter : Fighter {
     /// </summary>
     protected override void Walk() {
 
-        if ((Mathf.Abs(opponentTransform.position.y - transform.position.y) >= jumpHeightDiff) && 
-            (Mathf.Abs(opponentTransform.position.x - transform.position.x) >= distanceForJump)) {
-
-            Debug.Log("Enemy Jump");
+        if ( (Mathf.Abs(opponentTransform.position.y - transform.position.y) >= jumpHeightDiff) && 
+            (Mathf.Abs(opponentTransform.position.x - transform.position.x) >= distanceForJump))
             ChangeState(State.Jump);
-        }
-        else
-        {
+
+        else {
+
+            rgb.velocity = Vector2.right * speed;
+
             if (transform.position.x > opponentTransform.position.x)
-                rgb.velocity = new Vector2(-speed, 0);  // Vector2.left * speed;
-            else
-                rgb.velocity = new Vector2(speed, 0);   // Vector2.right * speed;
+                rgb.velocity *= -1;
 
             // don't check y, because it will always be true when they are both standing on the ground
             if (Mathf.Abs(transform.position.x - opponentTransform.position.x) <= xAttackDist)
                 ChangeState(State.Punch);
+
         }
 
     }
@@ -168,9 +168,11 @@ public class EnemyFighter : Fighter {
 
         StartCoroutine(ControlPunchTiming());
 
-       /* if (Mathf.Abs(transform.position.x - opponent.position.x) >= xAttackDist)
+       /* 
+        if (Mathf.Abs(transform.position.x - opponent.position.x) >= xAttackDist)
             ChangeState(State.Walk);
-        else*/
+        else
+        */
         ChangeState(State.Stand);
 
     }
@@ -185,12 +187,10 @@ public class EnemyFighter : Fighter {
     /// </summary>
     protected override void Jump() {
 
-        if (opponentTransform.position.x < transform.position.x) {
+        if (opponentTransform.position.x < transform.position.x)
             rgb.velocity = new Vector2(-speed, rgb.velocity.y);
-        }
-        else {
+        else
             rgb.velocity = new Vector2(speed, rgb.velocity.y);
-        }
 
         StartCoroutine(DelayGroundedCheck());
 

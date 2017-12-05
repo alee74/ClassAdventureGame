@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// attatch to canvas.
+/// instantiates enemy and sets names in UI.
+/// </summary>
 public class SceneStart : MonoBehaviour {
 
     public float xStart;
@@ -12,7 +16,11 @@ public class SceneStart : MonoBehaviour {
     private string[] enemyType = new string[] { "Panda", "Bandit", "Mutant", "Rogue" };
     static private System.Random rando = new System.Random();
 
-	// Use this for initialization
+    /// <summary>
+    /// called when scene is being loaded.
+    /// instantiates enemy of random type at (xStart, yStart).
+    /// sets enemy and player names in UI.
+    /// </summary>
 	void Start () {
 
 		Character character = CharInfo.getCurrentCharacter();
@@ -25,9 +33,5 @@ public class SceneStart : MonoBehaviour {
         GameObject.Find("EnemyName").GetComponent<Text>().text = enemyName;
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

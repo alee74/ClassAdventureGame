@@ -4,7 +4,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Superclass for PlayerFighter and EnemyFighter
+/// <summary>
+/// class defining common behavior for Player and Enemy.
+/// superclass for PlayerFighter and EnemyFighter.
+/// </summary>
 public abstract class Fighter : MonoBehaviour {
 
     #region Member declarations

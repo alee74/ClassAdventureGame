@@ -5,6 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
+/// <summary>
+/// class defining Player behavior.
+/// inherits from Fighter.
+/// </summary>
 public class PlayerFighter : Fighter {
 
     private Character character;
