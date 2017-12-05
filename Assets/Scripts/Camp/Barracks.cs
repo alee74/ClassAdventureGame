@@ -3,13 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Barracks : MonoBehaviour {
-    private GameObject player;
-
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameObject ui;
 
    void OnTriggerEnter2D(Collider2D col)
    {
@@ -17,12 +11,12 @@ public class Barracks : MonoBehaviour {
         //character = GetComponent<CharInfo>();
         if (col.gameObject.tag == "Player")
         {
-            Debug.Log("Player Entered Barracks");
+            ui.SetActive(true);
         }
         
-        if (character.stamina < 100)
+        if (character.stamina  < character.getMaxStamina())
         {
-            character.stamina += 100;
+            character.stamina += character.getMaxStamina() - character.stamina;
             Debug.Log("Stamina restored");
         }
         else
@@ -30,6 +24,13 @@ public class Barracks : MonoBehaviour {
 
             Debug.Log("Your Stamina Is Full");
 
+        }
+    }
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            ui.SetActive(false);
         }
     }
 }

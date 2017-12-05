@@ -21,7 +21,7 @@ static public class EventSystem {
         List<CampEvent> events = new List<CampEvent>(numEvents);
         for(int i = 0; i < numEvents; ++i)
         {
-            events[i] = CampEvent.GenerateRandom();
+            events.Add(CampEvent.GenerateRandom());
         }
         return events;
     }
@@ -34,8 +34,8 @@ static public class EventSystem {
         List<GameObject> result = new List<GameObject>(numEvents);
         for(int i = 0; i < numEvents; ++i)
         {
-            result[i] = UnityEngine.Object.Instantiate(eventTilePrefab);
-            result[i].GetComponent<EventTile>().tileEvent = EncounterCharacterEvent.GenerateRandom(day);
+            result.Add(UnityEngine.Object.Instantiate(eventTilePrefab));
+            result[i].GetComponent<EventTile>().tileEvent = EncounterCharacterEvent.GenerateRandom();
         }
         return result;
     }

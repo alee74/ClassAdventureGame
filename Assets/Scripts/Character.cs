@@ -16,11 +16,11 @@ public class Character
     private static int limitStrength = 500;
 
     private string _name;
-    private GameObject _prefab;
+    private bool _isHostile;
     private int _health;
     private int _stamina;
     private int _strength;
-    private int _maxHealth;
+	private int _maxHealth;
     private int _maxStamina;
     private int _maxStrength;
 
@@ -32,7 +32,19 @@ public class Character
         }
     }
 
-    public int health
+    public bool isHostile
+    {
+        get
+        {
+            return _isHostile;
+        }
+        set
+        {
+            _isHostile = value;
+        }
+    }
+
+    public int health 
     {
         get
         {
@@ -88,9 +100,10 @@ public class Character
             }
         }
     }
-    public int getMaxHealth()
+	
+	public int getMaxHealth()
     {
-        return _maxHealth;
+		return _maxHealth; 
     }
     public int getMaxStamina()
     {
@@ -100,22 +113,24 @@ public class Character
     {
         return _maxStrength;
     }
-    public Character(string name, int maxHealth, int maxStamina, int maxStrength)
+	
+    public Character(string name, bool isHostile, int maxHealth, int maxStamina, int maxStrength)
     {
         _name = name;
+        _isHostile = isHostile;
         _maxHealth = maxHealth;
         _maxStamina = maxStamina;
         _maxStrength = maxStrength;
         _health = maxHealth;
         _stamina = maxStamina;
         _strength = maxStrength;
-        // TODO: add some way to pick a GameObject for character
     }
 
     public static Character GenerateRandom(float random)
     {
         string[] names = System.IO.File.ReadAllLines(@"Assets/Scripts/CharacterNames.txt");
         string name = names[(int)(random * names.Length)];
+        bool isHostile = (random > 0.5f) ? true : false;
         int health;
         int stamina;
         int strength;
@@ -134,7 +149,7 @@ public class Character
             strength = (int)(UnityEngine.Random.Range((float)(baseStrength + (2*(baseStrength * random))), limitStrength));
         }
         
-        Character character = new Character(name,health,stamina,strength);
+        Character character = new Character(name,isHostile,health,stamina,strength);
         return character;
     }
 

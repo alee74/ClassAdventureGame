@@ -5,18 +5,49 @@ using UnityEngine.UI;
 
 public class CampController : MonoBehaviour {
     // Use this for initialization
+    public static int day = -1;
+
     public Text foodNum;
     public Text waterNum;
     public Text woodNum;
     public Text dayNum;
+
+    public GameObject eventPanel;
+    private List<CampEvent> campEvents;
+
 	void Start () {
-        if(CampEventSystem.day == -1)
+        day += 1;
+        if (day == 100)
+        {
+            //Win Game
+        }
+        if (day == 0)
         {
             firstDay();
         }
-        CampEventSystem.day += 1;
-        consumeResources();
+        else
+        {
+            CampEvent ce = consumeResources();
+            campEvents = EventSystem.GetCampEvents(day, 5, 0);
+            campEvents.Add(ce);
+            foreach (CampEvent camp in campEvents)
+            {
+                Debug.Log(camp.food);
+                ResourceInfo.addFoodStock(camp.food);
+                ResourceInfo.addWaterStock(camp.water);
+                ResourceInfo.addWoodStock(camp.wood);
+            }
+            displayCampEvents();
+            updateUI();
+        }
+        
 
+    }
+
+    void displayCampEvents()
+    {
+        eventPanel.SetActive(true);
+        eventPanel.GetComponent<EventHandler>().displayEvents(campEvents);
     }
 
     void firstDay()
@@ -27,15 +58,17 @@ public class CampController : MonoBehaviour {
         updateUI();
     }
 
-    void consumeResources()
+    CampEvent consumeResources()
     {
-        ResourceInfo.addFoodStock(-100 * CharInfo.characters.Count);
-        ResourceInfo.addWaterStock(-100 * CharInfo.characters.Count);
-        updateUI();
+        CampEvent ce = new CampEvent();
+        ce.food = -100 * CharInfo.characters.Count;
+        ce.water = -100 * CharInfo.characters.Count;
+        ce.description = "Your characters consumed resources.";
+        return ce;
     }
     void updateUI()
     {
-        dayNum.text = CampEventSystem.day.ToString();
+        dayNum.text = day.ToString();
         foodNum.text = ResourceInfo.getFoodStock().ToString();
         waterNum.text = ResourceInfo.getWaterStock().ToString();
         woodNum.text = ResourceInfo.getWoodStock().ToString();
