@@ -12,6 +12,9 @@ using System;
 public class PlayerFighter : Fighter {
 
     private Character character;
+    private float staminaTimer;
+    private int staminaLossPerMinute;
+
 
     #region protected override void Start();
     /// <summary>
@@ -22,15 +25,17 @@ public class PlayerFighter : Fighter {
     /// </summary>
     protected override void Start() {
 
+        maxStamina = 10f;
         character = CharInfo.getCurrentCharacter();
         maxHealth = character.getMaxHealth();       
         health = character.health;
-        // maxStamina = character.getMaxStamina();
-        maxStamina = 10f;
         stamina = (character.stamina / character.getMaxStamina()) * maxStamina;
         healthSlider = GameObject.Find("PlayerHealth").GetComponent<Slider>();
 		staminaSlider = GameObject.Find("PlayerStamina").GetComponent<Slider>();
 		healthText = GameObject.Find ("PlayerHealthText").GetComponent<Text> ();
+        damage = character.strength;
+        staminaTimer = 0f;
+        staminaLossPerMinute = 30;
 
         try {
 
@@ -44,6 +49,20 @@ public class PlayerFighter : Fighter {
         }
 
         base.Start();
+
+    }
+    #endregion
+
+    #region protected override void Update();
+    /// <summary>
+    /// called once per frame.
+    /// increments staminaTimer by the time since last frame.
+    /// calls base implementation of Update().
+    /// </summary>
+    protected override void Update() {
+
+        staminaTimer += Time.deltaTime;
+        base.Update();
 
     }
     #endregion
@@ -101,17 +120,24 @@ public class PlayerFighter : Fighter {
     }
     #endregion
 
-    // FIXME : ensure proper variable and uncomment
     #region public override void InformWorld(bool win);
     /// <summary>
     /// called from on death in this and EnemyFighter classes.
-    /// sets global (game level) health and stamina.
+    /// sets global (game level) health and stamina,
+    ///  scaling stamina appropriately.
+    /// sets global variable indicating whether we won or lost.
     /// </summary>
     public override void InformWorld(bool win) {
 
         character.health = (int)health;
-        character.stamina = (int)(stamina / maxStamina) * character.getMaxStamina();
-        //character.wonFight = win;
+        int staminaLoss = (int)(staminaLossPerMinute * (staminaTimer % 60));
+
+        if (character.stamina - staminaLoss >= 0)
+            character.stamina -= (int)(staminaLossPerMinute * (staminaTimer % 60));
+        else
+            character.stamina = 0;
+
+        //FightOutcome.wonFight = win;
 
     }
     #endregion
@@ -185,13 +211,12 @@ public class PlayerFighter : Fighter {
     /// <summary>
     /// defines Player behavior while in the Punch state.
     /// starts coroutine to control the timing and speed of the punch.
-    /// if we are not moving, we stand.
+    /// then, if we are not moving, we stand.
     /// otherwise, we walk.
     /// </summary>
     protected override void Punch() {
 
         StartCoroutine(ControlPunchTiming());
-
         float move = Input.GetAxis("Horizontal");
 
         if (move == 0)

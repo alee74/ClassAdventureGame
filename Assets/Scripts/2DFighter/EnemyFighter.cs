@@ -16,6 +16,7 @@ public class EnemyFighter : Fighter {
     public float distanceForJump = 1.5f;
 
 
+    // FIXME : get health and strength and stamina from ... ???
     #region protected override void Start();
     /// <summary>
     /// override of Start().

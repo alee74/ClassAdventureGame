@@ -35,7 +35,6 @@ public abstract class Fighter : MonoBehaviour {
     protected float maxHealth;
     protected float stamina;
     protected float maxStamina;
-    //protected float strength; //will translate to damage
     
     // members we can set from editor.
     public float speed;
