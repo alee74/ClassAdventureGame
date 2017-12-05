@@ -5,8 +5,8 @@ using UnityEngine;
 public class GetWater : MonoBehaviour {
 
 	private GameObject player;
-	public Transform waterBottle; 
-	private GameObject lakeTile = null;
+	public GameObject lake; 
+//	private GameObject lakeTile = null;
 
 	// Use this for initialization
 	void Start () {
@@ -14,22 +14,26 @@ public class GetWater : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update() {
-		if (lakeTile != null && Input.GetButtonDown ("GetWater")) {
-			Vector3 newpos = new Vector3 (player.transform.position.x, player.transform.position.y - 1f, player.transform.position.z);
-			Instantiate (waterBottle, newpos, Quaternion.identity);
-		}
-	}
+//	void Update() {
+//		if ((player.transform.position - lake.transform.position).magnitude < 2.5f 
+////			&& (player.transform.position - lake.transform.position).magnitude < 3f
+//			&& Input.GetButtonDown("GetWater")) { /*&&  Input.GetButtonDown ("GetWater")*/ 
+//				Instantiate (waterBottle, player.transform.position, Quaternion.identity);
+//
+//		}
+//	}
+//}
 
 	void OnTriggerEnter2D(Collider2D col) {
 		if (col.tag == "Lake") {
-			lakeTile = col.gameObject;
-			Debug.Log ("touching lake");
+			ItemsInInventory.num_water++;
+			//lakeTile = col.gameObject;
 		}
 	}
-
-	void OnTriggerExit2D(Collider2D col) {
-		lakeTile = null;
-	}
-		
+//
+//	void OnTriggerExit2D(Collider2D col) {
+//		lakeTile = null;
+//	}
 }
+		
+
