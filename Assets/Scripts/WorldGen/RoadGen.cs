@@ -28,10 +28,7 @@ public class RoadGen : MonoBehaviour {
 
 	public float distFromRoad = 1.16f;
 
-	private Dictionary<Vector2,GameObject> map = new Dictionary<Vector2,GameObject>();
-	private int tileNum = 0;
-	public GameObject lastTile;
-	public GameObject roadTile;
+    public GameObject roadTile;
 	public GameObject buildingTile;
 
     public int width = 200;
@@ -53,9 +50,7 @@ public class RoadGen : MonoBehaviour {
                 arr[i, j] = 0;
             }
         }
-        print(arr[0, 0]);
         GenerateRoads();
-		GetComponent<GrassGen>().GenerateGrass(map);
     }
 
     /// <summary>
@@ -85,15 +80,14 @@ public class RoadGen : MonoBehaviour {
 							    PlaceBuilding (pos + new Vector2 (0, -distFromRoad));
                                 break;
 						}
+						//PlaceBuilding (pos);
 					}
                     pos += delta;
                 }
             } else if (c == '+') {
-				if (ang==360) ang = 90;
-                else ang += 90;
+                ang += 90;
             } else if (c == '-') {
-				if (ang==0) ang = 270;
-                else ang -= 90;
+                ang -= 90;
             }
         }
         for(int i = 0; i < w; i++)

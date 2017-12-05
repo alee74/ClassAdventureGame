@@ -10,6 +10,8 @@ TagManager:
   - NPC
   - Event
   - CampLife
+  - Tree
+  - Lake
   layers:
   - Default
   - TransparentFX
