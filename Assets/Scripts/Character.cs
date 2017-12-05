@@ -20,7 +20,7 @@ public class Character
     private int _health;
     private int _stamina;
     private int _strength;
-    private int _maxHealth;
+	private int _maxHealth;
     private int _maxStamina;
     private int _maxStrength;
 
@@ -44,7 +44,7 @@ public class Character
         }
     }
 
-    public int health
+    public int health 
     {
         get
         {
@@ -101,9 +101,9 @@ public class Character
         }
     }
 	
-    public int getMaxHealth()
+	public int getMaxHealth()
     {
-        return _maxHealth;
+		return _maxHealth; 
     }
     public int getMaxStamina()
     {

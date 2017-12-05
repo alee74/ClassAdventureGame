@@ -3,10 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class Hospital : MonoBehaviour {
+
+
+	public BarStats health;
+
+
+
+	private void Awake() {
+		health.Intialize();
 	
+	}
+
 	// Update is called once per frame
 	void Update () {
 
+		health.Intialize();
+
+
+		if (Input.GetKeyDown (KeyCode.H)) {
+
+			health.currentVal -= 10;
+
+		}
 		// Resource menu Buy or upgrade health Items
 
 	
@@ -26,18 +44,23 @@ public class Hospital : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D col) {
 
-        Character character = CharInfo.getCurrentCharacter();
+        //Character character = CharInfo.getCurrentCharacter();
         if (col.gameObject.tag == "Player")
         {
             Debug.Log("Player Entered Hospital");
-            if (character.health < 100)
+		
+			if ( health.currentVal != health.maxVal) //character.health < character.getMaxHealth()
             {
-                character.health += 100;
-                Debug.Log("Player healed");
+				health.currentVal = health.maxVal;
+				//character.health += character.getMaxHealth() - character.health;
+				//FindObjectOfType<HealthBar> ().minBar (); 
+				//health.currentVal += FindObjectOfType<HealthBar> ().fillAmnt;
+				Debug.Log("Player healed" + FindObjectOfType<HealthBar> ().fillAmnt);
+				Debug.Log("Your HP Is Full" + health.currentVal + health.maxVal);
             }
             else
             {
-                Debug.Log("Your HP Is Full");
+				Debug.Log("Your HP Is Full" + health.currentVal + health.maxVal);
             }
         }
     }
