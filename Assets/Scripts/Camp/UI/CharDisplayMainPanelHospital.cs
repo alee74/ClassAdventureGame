@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharDisplayMainPanel : MonoBehaviour {
+public class CharDisplayMainPanelHospital : MonoBehaviour
+{
 
     public Text healthText;
     public Text characterText;
-    public Text staminaText;
-    public Text strengthText;
 
-    public Button setCharacter;
+    public Button healCharacterBtn;
 
     private Character currentCharacter;
 
     private int characterPosition;
 
-    void Start ()
+    void Start()
     {
         updatePanel();
-        setCharacter.onClick.AddListener(changeCharacter);
+        healCharacterBtn.onClick.AddListener(healCharacter);
     }
 
 
@@ -32,36 +31,33 @@ public class CharDisplayMainPanel : MonoBehaviour {
 
     private void updatePanel()
     {
-        if (currentCharacter  != null)
+        if (currentCharacter != null)
         {
             characterText.text = currentCharacter.name;
             healthText.text = "Health: " + currentCharacter.health + "/" + currentCharacter.getMaxHealth();
-            staminaText.text = "Stamina: " + currentCharacter.stamina + "/" + currentCharacter.getMaxStamina();
-            strengthText.text = "Strength: " + currentCharacter.strength + "/" + currentCharacter.getMaxStrength();
 
-            if (CharInfo.currentCharacter == characterPosition)
+            if (currentCharacter.health == currentCharacter.getMaxHealth())
             {
-                setCharacter.interactable = false;
+                healCharacterBtn.interactable = false;
             }
             else
             {
-                setCharacter.interactable = true;
+                healCharacterBtn.interactable = true;
             }
         }
         else
         {
             healthText.text = "";
             characterText.text = "";
-            staminaText.text = "";
-            strengthText.text = "";
         }
 
     }
 
-    private void changeCharacter()
+    private void healCharacter()
     {
-        CharInfo.currentCharacter = characterPosition;
+        currentCharacter.health = currentCharacter.getMaxHealth();
         updatePanel();
     }
 
 }
+
