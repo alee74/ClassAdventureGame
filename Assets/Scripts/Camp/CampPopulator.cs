@@ -6,6 +6,7 @@ public class CampPopulator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        CharInfo.characters = new List<Character>();
         for(int i = 0; i < 5; i++)
         {
             CharInfo.characters.Add(Character.GenerateRandom(Random.value));

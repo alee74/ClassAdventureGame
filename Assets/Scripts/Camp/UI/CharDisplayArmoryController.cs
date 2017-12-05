@@ -14,7 +14,6 @@ public class CharDisplayArmoryController : MonoBehaviour {
 
         for (int i = 0; i < CharInfo.characters.Count; i++)
         {
-            Debug.Log(i);
             Transform newItem = Instantiate(prefab, gameObject.transform, false) as Transform;
             newItem.GetComponent<CharDisplayArmory>().character = CharInfo.characters[i];
         }
