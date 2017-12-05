@@ -10,6 +10,8 @@ public class EnemyFighter : Fighter {
 
     private float xAttackDist = 2f;
     private float yAttackDist = 2f;
+    private float jumpHeightDiff = 0.5f;
+    public float distanceForJump = 1.5f;
 
 
     #region protected override void Start();
@@ -118,8 +120,9 @@ public class EnemyFighter : Fighter {
     /// </summary>
     protected override void Walk() {
 
-        if (opponentTransform.position.y > transform.position.y)
-        {
+        if ((Mathf.Abs(opponentTransform.position.y - transform.position.y) >= jumpHeightDiff) && 
+            (Mathf.Abs(opponentTransform.position.x - transform.position.x) >= distanceForJump)) {
+
             Debug.Log("Enemy Jump");
             ChangeState(State.Jump);
         }
