@@ -143,13 +143,20 @@ public abstract class Fighter : MonoBehaviour {
     protected virtual void Update() {
 
         healthSlider.value = health / maxHealth;
-		if (((float)health / (float)maxHealth) < 0.2f) {
+		float healthPercent = (float)health / (float)maxHealth;
+		if (healthPercent < 0.7f) {
 			var fill = (healthSlider as UnityEngine.UI.Slider).GetComponentsInChildren<UnityEngine.UI.Image>()
 				.FirstOrDefault(t => t.name == "Fill");
 			if (fill != null)
 			{
-				fill.color = Color.red;
+				if (healthPercent < 0.3f)
+					fill.color = Color.red;
+				else if(healthPercent < 0.5f)
+					fill.color = new Color(1F, 0.6F, 0F, 1F);
+				else
+					fill.color = Color.yellow;
 			}
+
 		}
 
 		healthText.text = "" + health + "/" + maxHealth;
