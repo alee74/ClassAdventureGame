@@ -20,7 +20,7 @@ public class ResourcePlacer : MonoBehaviour {
 		placeEvents ();
 		for (int i = -resourceRadius; i < resourceRadius; i++) {
 			for(int j = -resourceRadius; j < resourceRadius; j++){
-					if (Random.Range (0f, 1f) > 0.99f){
+					if (Random.Range (0f, 1f) > resourceRate){
 						placeResource (pos);
 					}
 				pos.y = j;
