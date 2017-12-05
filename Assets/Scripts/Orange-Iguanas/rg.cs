@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadGen : MonoBehaviour {
+public class rg : MonoBehaviour {
     /// <summary>
     /// Initial string for the L-system.
     /// </summary>
