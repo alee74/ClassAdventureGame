@@ -40,7 +40,7 @@ public static class TextReader {
         bool found = false;
         //string storedResult = "NotFound2";
 
-        List<String> possibilities = new List<String>(); ;
+        List<String> possibilities = new List<String>();
 
         for (int i = 0; i < dialogLines.Length; i++) {
             if (dialogLines[i][0].Equals(dialogTitle))
