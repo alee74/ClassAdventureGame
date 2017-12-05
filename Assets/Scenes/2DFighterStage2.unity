@@ -851,22 +851,12 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224868736039001786, guid: 6c43373837799634bb25fff92bb44971,
+    - target: {fileID: 224889388305143120, guid: 6c43373837799634bb25fff92bb44971,
         type: 2}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224868736039001786, guid: 6c43373837799634bb25fff92bb44971,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224716500683824942, guid: 6c43373837799634bb25fff92bb44971,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224716500683824942, guid: 6c43373837799634bb25fff92bb44971,
+    - target: {fileID: 224889388305143120, guid: 6c43373837799634bb25fff92bb44971,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -881,15 +871,30 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224889388305143120, guid: 6c43373837799634bb25fff92bb44971,
+    - target: {fileID: 224716500683824942, guid: 6c43373837799634bb25fff92bb44971,
         type: 2}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224889388305143120, guid: 6c43373837799634bb25fff92bb44971,
+    - target: {fileID: 224716500683824942, guid: 6c43373837799634bb25fff92bb44971,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868736039001786, guid: 6c43373837799634bb25fff92bb44971,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224868736039001786, guid: 6c43373837799634bb25fff92bb44971,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82814235496416486, guid: 6c43373837799634bb25fff92bb44971,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5416667
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c43373837799634bb25fff92bb44971, type: 2}
@@ -949,7 +954,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4072866557655518, guid: 8d8932311a0f73f41a69139d7f3f087b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.08
+      value: -0.62
       objectReference: {fileID: 0}
     - target: {fileID: 4072866557655518, guid: 8d8932311a0f73f41a69139d7f3f087b, type: 2}
       propertyPath: m_LocalPosition.z

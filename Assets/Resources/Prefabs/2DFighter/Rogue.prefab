@@ -162,9 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b600209a686ea4b9c3012be9a1e23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 0
   speed: 3
-  jumpPower: 250
+  jumpPower: 400
   rollPower: 85
   damage: 5
   knockbackDist: 0.5

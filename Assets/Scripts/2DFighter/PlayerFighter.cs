@@ -13,7 +13,6 @@ public class PlayerFighter : Fighter {
 
     private Character character;
 
-
     #region protected override void Start();
     /// <summary>
     /// override of Start().
