@@ -55,6 +55,22 @@ public class EnemyFighter : Fighter {
     }
     #endregion
 
+    #region protected void OnCollisionEnter2D(Collider2D other);
+    /// <summary>
+    /// called when enemy collides with a collider..
+    /// if an edge, enemy rolls.
+    /// </summary>
+    /// <param name="other">the collider that triggered the collision</param>
+    protected void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Edge") {
+            Debug.Log("Roll");
+            ChangeState(State.Roll);
+        }
+
+    }
+    #endregion
+
     #region protected override void SetDirectionFacing();
     /// <summary>
     /// sets the direction Enemy is facing.
@@ -180,6 +196,7 @@ public class EnemyFighter : Fighter {
 
     }
     #endregion
+
     #endregion
 
 }

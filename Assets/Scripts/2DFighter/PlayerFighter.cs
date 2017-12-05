@@ -215,6 +215,7 @@ public class PlayerFighter : Fighter {
 
     }
     #endregion
+
     #endregion
 
 }

@@ -102,6 +102,8 @@ public abstract class Fighter : MonoBehaviour {
     #endregion
 
     #region protected abstract void SetDirectionFacing();
+
+
     /// <summary>
     /// sets the direction the Fighter is facing.
     /// </summary>
@@ -333,7 +335,6 @@ public abstract class Fighter : MonoBehaviour {
     }
     #endregion
 
-
     #region protected void Roll();
     /// <summary>
     /// defines Fighter behavior while in the Roll state.
@@ -341,9 +342,11 @@ public abstract class Fighter : MonoBehaviour {
     /// tell Unity to ignore collisions between Player and Enemy.
     /// starts coroutine that delays exit of roll state.
     /// </summary>
-    protected void Roll() {
+    protected void Roll()
+    {
 
-        if (!alreadyRolling) {
+        if (!alreadyRolling)
+        {
 
             float rollMultiplier = rollPower;
             if (!isFacingRight)
@@ -360,6 +363,8 @@ public abstract class Fighter : MonoBehaviour {
 
     }
     #endregion
+
+
     #endregion
 
     #region Coroutines

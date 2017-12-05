@@ -15,6 +15,7 @@ TagManager:
   - PlayerFist
   - EnemyFist
   - KillerGround
+  - Edge
   layers:
   - Default
   - TransparentFX
