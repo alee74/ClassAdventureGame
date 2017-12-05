@@ -131,9 +131,9 @@ public class PlayerFighter : Fighter {
     protected override void Stand() {
 
         float move = Input.GetAxis("Horizontal");
-        bool jumping = Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
-        bool punching = Input.GetKeyDown(KeyCode.F);
-        bool rolling = Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+        bool jumping = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
+        bool punching = Input.GetKeyDown("space");
+        bool rolling = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
 
         if (!Grounded())
             ChangeState(State.Falling);
@@ -162,9 +162,9 @@ public class PlayerFighter : Fighter {
     protected override void Walk() {
 
         float move = Input.GetAxis("Horizontal");
-        bool jumping = Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
-        bool punching = Input.GetKeyDown(KeyCode.F);
-        bool rolling = Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+        bool jumping = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
+        bool punching = Input.GetKeyDown("space");
+        bool rolling = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
 
         if (!Grounded())
             ChangeState(State.Falling);

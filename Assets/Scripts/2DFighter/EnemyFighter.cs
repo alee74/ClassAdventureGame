@@ -65,8 +65,12 @@ public class EnemyFighter : Fighter {
     /// <param name="other">the collider that triggered the collision</param>
     protected void OnCollisionEnter2D(Collision2D other) {
 
-        if (other.gameObject.tag == "Edge")
-            ChangeState(State.Roll);
+        if (other.gameObject.tag == "Edge") {
+
+            if (Mathf.Abs(transform.position.x - opponentTransform.position.x) <= xAttackDist)
+                ChangeState(State.Roll);
+
+        }
 
     }
     #endregion
@@ -118,10 +122,17 @@ public class EnemyFighter : Fighter {
     /// </summary>
     protected override void Stand() {
 
-        if (Mathf.Abs(transform.position.x - opponentTransform.position.x) > xAttackDist)
-            ChangeState(State.Walk);
-        else if (Mathf.Abs(transform.position.y - opponentTransform.position.y) <= yAttackDist)
-            ChangeState(State.Punch);
+        if (!Grounded())
+            ChangeState(State.Falling);
+
+        else {
+
+            if (Mathf.Abs(transform.position.x - opponentTransform.position.x) > xAttackDist)
+                ChangeState(State.Walk);
+            else if (Mathf.Abs(transform.position.y - opponentTransform.position.y) <= yAttackDist)
+                ChangeState(State.Punch);
+
+        }
 
     }
     #endregion
@@ -135,31 +146,35 @@ public class EnemyFighter : Fighter {
     /// </summary>
     protected override void Walk() {
 
-        if ( (Mathf.Abs(opponentTransform.position.y - transform.position.y) >= jumpHeightDiff) && 
-            (Mathf.Abs(opponentTransform.position.x - transform.position.x) >= distanceForJump))
-            ChangeState(State.Jump);
+        if (!Grounded())
+            ChangeState(State.Falling);
 
         else {
 
-            rgb.velocity = Vector2.right * speed;
-            
-            if (stamina < punchCost) {
+            if ((Mathf.Abs(opponentTransform.position.y - transform.position.y) >= jumpHeightDiff) &&
+                (Mathf.Abs(opponentTransform.position.x - transform.position.x) >= distanceForJump))
+                ChangeState(State.Jump);
 
-                if (transform.position.x < opponentTransform.position.x)
-                    rgb.velocity *= -1;
-                
-            } else {
+            else {
 
+                rgb.velocity = Vector2.right * speed;
 
-                if (transform.position.x > opponentTransform.position.x)
-                    rgb.velocity *= -1;
+                if (stamina < punchCost) {
 
-                // don't check y, because it will always be true when they are both standing on the ground
-                if (Mathf.Abs(transform.position.x - opponentTransform.position.x) <= xAttackDist)
-                    ChangeState(State.Punch);
+                    if (transform.position.x < opponentTransform.position.x)
+                        rgb.velocity *= -1;
 
+                } else {
+
+                    if (transform.position.x > opponentTransform.position.x)
+                        rgb.velocity *= -1;
+
+                    // don't check y, because it will always be true when they are both standing on the ground
+                    if (Mathf.Abs(transform.position.x - opponentTransform.position.x) <= xAttackDist)
+                        ChangeState(State.Punch);
+
+                }
             }
-
         }
 
     }

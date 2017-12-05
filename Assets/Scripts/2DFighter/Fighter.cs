@@ -10,6 +10,8 @@ using UnityEngine.UI;
 /// </summary>
 public abstract class Fighter : MonoBehaviour {
 
+    // TODO : talk to other group(s) about attributes and interaction with world
+
     #region Member declarations
 
     // states for both player and enemy
@@ -33,7 +35,7 @@ public abstract class Fighter : MonoBehaviour {
     protected float maxHealth;
     protected float stamina;
     protected float maxStamina;
-    public float strength; //will translate to damage
+    //protected float strength; //will translate to damage
     
     // members we can set from editor.
     public float speed;
@@ -48,15 +50,16 @@ public abstract class Fighter : MonoBehaviour {
 
     // members that will not be overriden
     private bool initialGroundedCheck;
-    private float punchBoxOffset = 0.75f;   // needs to be public if different for different enemies (will be overriden in this case)
+    private float punchBoxOffset = 0.75f;
     private static float groundCheckDelay = 0.05f;
     private static float groundedDist = 0.85f;
-    private static float punchBeginDelay = 0.25f;   // needs to be public if different for different enemies (will be overriden in this case)
-    private static float punchEndDelay = 0.15f;     // needs to be public if different for different enemies (will be overriden in this case)
+    private static float punchBeginDelay = 0.25f;
+    private static float punchEndDelay = 0.15f;
     private static float rollTime = 0.25f;
     private static float knockbackTime = 0.15f;
     private Camera cam;
     private bool waitForCooldown;
+    private bool knockedBack;
     #endregion
 
 
@@ -140,6 +143,7 @@ public abstract class Fighter : MonoBehaviour {
         cam = GameObject.FindObjectOfType<Camera>();
         state = State.Stand;
         waitForCooldown = false;
+        knockedBack = false;
 
 	}
     #endregion
@@ -240,8 +244,7 @@ public abstract class Fighter : MonoBehaviour {
 
             state = newState;
 
-            switch (state)
-            {
+            switch (state) {
 
                 case State.Stand:
                     rgb.velocity = Vector2.zero;
@@ -261,6 +264,10 @@ public abstract class Fighter : MonoBehaviour {
                 case State.Roll:
                     alreadyRolling = false;
                     stamina -= rollCost;
+                    break;
+
+                case State.Knockback:
+                    knockedBack = true;
                     break;
                 
             }
@@ -347,31 +354,39 @@ public abstract class Fighter : MonoBehaviour {
 
         StartCoroutine(DelayTransitionFromKnockback());
 
-        float translateDist = knockbackDist;
-        // distance from player's position.x to x-coordinate of edge of collider
-        float halfWidth = gameObject.GetComponent<CapsuleCollider2D>().bounds.size.x / 2;
+        if (knockedBack) {
 
-        if (transform.position.x < opponentTransform.position.x) {   // Fighter is to left of opponent
+            float translateDist = knockbackDist;
+            // distance from player's position.x to x-coordinate of edge of collider
+            float halfWidth = gameObject.GetComponent<CapsuleCollider2D>().bounds.size.x / 2;
 
-            float leftEdge = cam.ViewportToWorldPoint(Vector2.zero).x;
+            if (transform.position.x < opponentTransform.position.x)
+            {   // Fighter is to left of opponent
 
-            // if translating by knockbackDist puts Fighter beyond camera's left edge, adjust translateDist
-            if (transform.position.x - halfWidth - knockbackDist < leftEdge)
-                translateDist = leftEdge - (transform.position.x - halfWidth);
+                float leftEdge = cam.ViewportToWorldPoint(Vector2.zero).x;
+
+                // if translating by knockbackDist puts Fighter beyond camera's left edge, adjust translateDist
+                if (transform.position.x - halfWidth - knockbackDist < leftEdge)
+                    translateDist = leftEdge - (transform.position.x - halfWidth);
+                else
+                    translateDist *= -1;
+
+            }
             else
-                translateDist *= -1;
+            {    // Fighter is to right of opponent
 
-        } else {    // Fighter is to right of opponent
+                float rightEdge = cam.ViewportToWorldPoint(Vector2.right).x;
 
-            float rightEdge = cam.ViewportToWorldPoint(Vector2.right).x;
+                // if translating by knockbackDist puts Fighter beyond camera's right edge, adjust translateDist
+                if (transform.position.x + halfWidth + knockbackDist > rightEdge)
+                    translateDist = rightEdge - (transform.position.x + halfWidth);
 
-            // if translating by knockbackDist puts Fighter beyond camera's right edge, adjust translateDist
-            if (transform.position.x + halfWidth + knockbackDist > rightEdge)
-                translateDist = rightEdge - (transform.position.x + halfWidth);
+            }
+
+            gameObject.transform.Translate(Vector2.right * translateDist);
+            knockedBack = false;
 
         }
-
-        gameObject.transform.Translate(Vector2.right * translateDist);
 
     }
     #endregion
@@ -474,7 +489,7 @@ public abstract class Fighter : MonoBehaviour {
     protected IEnumerator DelayTransitionFromKnockback() {
 
         yield return new WaitForSeconds(knockbackTime);
-        ChangeState(State.Knockback);
+        ChangeState(State.Stand);
 
     }
     #endregion
