@@ -5,7 +5,7 @@ using UnityEngine;
 public class GetWater : MonoBehaviour {
 
 	private GameObject player;
-	public GameObject lake; 
+	public GameObject lake = null; 
 //	private GameObject lakeTile = null;
 
 	// Use this for initialization
@@ -25,8 +25,12 @@ public class GetWater : MonoBehaviour {
 //}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		if (col.tag == "Lake") {
+		lake = col.gameObject; 
+		var currentWater = lake.GetComponent<MaxWater> (); 
+		if (col.tag == "Lake" && currentWater != null) {
 			ItemsInInventory.num_water++;
+			currentWater.waterTaken (1);
+			Debug.Log (currentWater);
 			//lakeTile = col.gameObject;
 		}
 	}
@@ -34,6 +38,12 @@ public class GetWater : MonoBehaviour {
 //	void OnTriggerExit2D(Collider2D col) {
 //		lakeTile = null;
 //	}
+
+
+	void OnTriggerExit2D(Collider2D col) {
+		//	touchingTree = false;
+		lake = null;
+	}
 }
 		
 

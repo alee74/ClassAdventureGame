@@ -21,7 +21,7 @@ static public class EventSystem {
         List<CampEvent> events = new List<CampEvent>(numEvents);
         for(int i = 0; i < numEvents; ++i)
         {
-            events[i] = CampEvent.GenerateRandom();
+            events.Add(CampEvent.GenerateRandom());
         }
         return events;
     }
