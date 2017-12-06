@@ -30,7 +30,26 @@ public class RoadGen : MonoBehaviour {
 
     public GameObject roadTile;
 	public GameObject buildingTile;
-    void Start() {
+
+    public int width = 200;
+    public int height = 200;
+
+    private int w = 2000;
+    private int h = 2000;
+
+    private int[,] arr = new int[2000,2000];
+
+    private WorldPersist persist;
+
+    void GenerateWorld() {
+        persist = GetComponent<WorldPersist>();
+        for(int i = 0; i < w; i++)
+        {
+            for(int j = 0; j < h; j++)
+            {
+                arr[i, j] = 0;
+            }
+        }
         GenerateRoads();
     }
 
@@ -40,29 +59,26 @@ public class RoadGen : MonoBehaviour {
     private void GenerateRoads() {
         Vector2 pos = new Vector2(0, 0);
         float ang = 0;
-
         string lsys = IterateN(initString, iterations);
         foreach (char c in lsys) {
             if (c == 'F') {
                 Vector2 delta = new Vector2(Mathf.Cos(ang * Mathf.Deg2Rad), Mathf.Sin(ang * Mathf.Deg2Rad));
                 for (int i = 0; i < fwdDist; ++i) {
-                    PlaceTile(pos);
-					if (i == (int)fwdDist / 2) {
-						//print ((int)Mathf.Abs (ang) % 360);
+                    arr[(int) Mathf.Round(pos.x) + w/2, (int) Mathf.Round(pos.y) + h/2] = 1;
+                    if (i == (int)fwdDist / 2) {
 						switch ((int)Mathf.Abs(ang)%360) {
 							case 90:
 								PlaceBuilding (pos + new Vector2 (distFromRoad, 0));
-								break;
+                                break;
 							case 0:
-							PlaceBuilding (pos + new Vector2 (0, distFromRoad));
-								break;
+							    PlaceBuilding (pos + new Vector2 (0, distFromRoad));
+                                break;
 							case 270:
-							PlaceBuilding (pos + new Vector2 (-distFromRoad, 0));
-								break;
+							    PlaceBuilding (pos + new Vector2 (-distFromRoad, 0));
+                                break;
 							case 180:
-							PlaceBuilding (pos + new Vector2 (0, -distFromRoad));
-								break;
-								
+							    PlaceBuilding (pos + new Vector2 (0, -distFromRoad));
+                                break;
 						}
 						//PlaceBuilding (pos);
 					}
@@ -74,21 +90,31 @@ public class RoadGen : MonoBehaviour {
                 ang -= 90;
             }
         }
+        for(int i = 0; i < w; i++)
+        {
+            for (int j = 0; j < h; j++)
+            {
+                if(arr[i, j] == 1)
+                {
+                    PlaceTile(new Vector2(i - w / 2, j - h / 2));
+                }
+            }
+        }
     }
 
     /// <summary>
     /// Places a road tile at the given position.
     /// </summary>
     private void PlaceTile(Vector2 pos) {
-        Instantiate(roadTile, pos, Quaternion.identity);
+        var road = Instantiate(roadTile, pos, Quaternion.identity);
+        persist.PersistObject(road);
     }
 
 	private void PlaceBuilding(Vector2 pos){
 		bool buildingCollide = Physics2D.OverlapBox(pos, buildingBox.size, buildingMask);
 		if (Random.Range (0f, 1f) > 0.85f && !buildingCollide) {
-			
-			Instantiate (buildingTile, pos, Quaternion.identity);
-
+			var building = Instantiate (buildingTile, pos, Quaternion.identity);
+            persist.PersistObject(building);
 		}
 	}
 

@@ -32,7 +32,7 @@ public class EventHandler : MonoBehaviour {
 
     public void displayEvent(CampEvent e)
     {
-        eventText.text = e.description;
+        eventText.text = e.message;
         foodVal.text = e.food.ToString();
         woodVal.text = e.wood.ToString();
         waterVal.text = e.water.ToString();

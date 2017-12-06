@@ -63,7 +63,7 @@ public class CampController : MonoBehaviour {
         CampEvent ce = new CampEvent();
         ce.food = -100 * CharInfo.characters.Count;
         ce.water = -100 * CharInfo.characters.Count;
-        ce.description = "Your characters consumed resources.";
+        ce.message = "Your characters consumed resources.";
         return ce;
     }
     void updateUI()
