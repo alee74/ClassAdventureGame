@@ -18,8 +18,12 @@ public class Armory : MonoBehaviour {
 
     void addOneStrength(Character character)
     {
-        character.strength += 1;
-        Debug.Log("Added strength to player");
+        if(character.getMaxStrength() < character.strength)
+        {
+            character.strength += 1;
+            Debug.Log("Added strength to player");
+        }
+        
     }
 
 }

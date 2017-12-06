@@ -9,34 +9,33 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1710420843930068}
+  m_RootGameObject: {fileID: 1074688328391588}
   m_IsPrefabParent: 1
---- !u!1 &1710420843930068
+--- !u!1 &1074688328391588
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4703498371173372}
-  - component: {fileID: 114512694249895116}
-  - component: {fileID: 114037628389116564}
-  - component: {fileID: 114444985504410850}
-  - component: {fileID: 114796807743201496}
-  - component: {fileID: 114874541188710388}
+  - component: {fileID: 4113121565995310}
+  - component: {fileID: 114965338056884636}
+  - component: {fileID: 114292508366927628}
+  - component: {fileID: 114330898339266778}
+  - component: {fileID: 114790116344542602}
   m_Layer: 0
-  m_Name: WorldGenCtrl
+  m_Name: WorldGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4703498371173372
+--- !u!4 &4113121565995310
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1710420843930068}
+  m_GameObject: {fileID: 1074688328391588}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -44,13 +43,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114037628389116564
+--- !u!114 &114292508366927628
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1710420843930068}
+  m_GameObject: {fileID: 1074688328391588}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d27a4b79b4f462fb4294aec5fc91ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 4
+  grassTile: {fileID: 1055207035764748, guid: d96d52bac3f3b4d8a9fd5c8d3e8181cd, type: 2}
+--- !u!114 &114330898339266778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1074688328391588}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9c5b2388f36ae541aaa88937c0d4c58, type: 3}
   m_Name: 
@@ -62,13 +74,13 @@ MonoBehaviour:
   treeChance: 0.5
   treeIters: 10
   maxTrees: 500
---- !u!114 &114444985504410850
+--- !u!114 &114790116344542602
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1710420843930068}
-  m_Enabled: 1
+  m_GameObject: {fileID: 1074688328391588}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1f2ba4cc63180f42a98768258e7cc3c, type: 3}
   m_Name: 
@@ -79,12 +91,12 @@ MonoBehaviour:
   woodPrefab: {fileID: 1265768160282354, guid: a14ac0d24dcbd4b2b809f95c979b3fc4, type: 2}
   waterPrefab: {fileID: 1449739745534148, guid: 2f6e19e2d0f29bc45a2195bbfee10371,
     type: 2}
---- !u!114 &114512694249895116
+--- !u!114 &114965338056884636
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1710420843930068}
+  m_GameObject: {fileID: 1074688328391588}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 665e7e152c12b5d439e9a5dc163be03b, type: 3}
@@ -92,43 +104,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initString: ABC
   fwdDist: 5
-  iterations: 16
+  iterations: 12
   buildingMask:
     serializedVersion: 2
     m_Bits: 0
   roadMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   buildingBox: {fileID: 61692611562174816, guid: 1f3221a70310fb64da3f3bbeaf5dd150,
     type: 2}
   distFromRoad: 1.16
-  roadTile: {fileID: 1887153398033988, guid: b3bd0c05c47cb454bbe019a9a8af6dd6, type: 2}
+  lastTile: {fileID: 0}
+  roadTile: {fileID: 1526639436595440, guid: 37a34f0f655a3404ba9e2c5bfec0a8df, type: 2}
   buildingTile: {fileID: 1048077656158398, guid: 1f3221a70310fb64da3f3bbeaf5dd150,
     type: 2}
-  width: 200
-  height: 200
---- !u!114 &114796807743201496
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1710420843930068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67f4d780f0c7be4469ee8532acfdd512, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seafab: {fileID: 1295896070826534, guid: 452b8e456cb065f4d9530a23c051196a, type: 2}
-  lakeZoneSize: 700
-  lakeChance: 0.99
---- !u!114 &114874541188710388
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1710420843930068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c33c1dda5c419a4283c27c6a37d5a4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

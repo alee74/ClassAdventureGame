@@ -108,64 +108,18 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &1029620824
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4703498371173372, guid: e4af5a4ada058e94588564c75627f980, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4703498371173372, guid: e4af5a4ada058e94588564c75627f980, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4703498371173372, guid: e4af5a4ada058e94588564c75627f980, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4703498371173372, guid: e4af5a4ada058e94588564c75627f980, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4703498371173372, guid: e4af5a4ada058e94588564c75627f980, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4703498371173372, guid: e4af5a4ada058e94588564c75627f980, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4703498371173372, guid: e4af5a4ada058e94588564c75627f980, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4703498371173372, guid: e4af5a4ada058e94588564c75627f980, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1710420843930068, guid: e4af5a4ada058e94588564c75627f980, type: 2}
-      propertyPath: m_Name
-      value: WorldGenCtrl (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: e4af5a4ada058e94588564c75627f980, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &1059259983
+--- !u!1 &1106169001
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1059259988}
-  - component: {fileID: 1059259987}
-  - component: {fileID: 1059259986}
-  - component: {fileID: 1059259985}
-  - component: {fileID: 1059259984}
+  - component: {fileID: 1106169006}
+  - component: {fileID: 1106169005}
+  - component: {fileID: 1106169004}
+  - component: {fileID: 1106169003}
+  - component: {fileID: 1106169002}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -173,33 +127,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1059259984
+--- !u!81 &1106169002
 AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1059259983}
+  m_GameObject: {fileID: 1106169001}
   m_Enabled: 1
---- !u!124 &1059259985
+--- !u!124 &1106169003
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1059259983}
+  m_GameObject: {fileID: 1106169001}
   m_Enabled: 1
---- !u!92 &1059259986
+--- !u!92 &1106169004
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1059259983}
+  m_GameObject: {fileID: 1106169001}
   m_Enabled: 1
---- !u!20 &1059259987
+--- !u!20 &1106169005
 Camera:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1059259983}
+  m_GameObject: {fileID: 1106169001}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -214,7 +168,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 100
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -230,12 +184,12 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!4 &1059259988
+--- !u!4 &1106169006
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1059259983}
+  m_GameObject: {fileID: 1106169001}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
