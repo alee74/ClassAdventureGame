@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4192614312393502}
   - component: {fileID: 212821012316301704}
   - component: {fileID: 61965751857510366}
+  - component: {fileID: 114361559088572024}
   m_Layer: 0
   m_Name: LakeTile
   m_TagString: Lake
@@ -66,6 +67,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114361559088572024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1295896070826534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca4e5423aa764ff88fea2bbf86b4a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxWater: 5
+  currentWater: 0
 --- !u!212 &212821012316301704
 SpriteRenderer:
   m_ObjectHideFlags: 1
