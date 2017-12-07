@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour {
 
 	Vector3 pos;                             
-	float speed = 5.0f;   
+	static public float speed = 5.0f;   
 	float inputX;
 	float inputY;
 	private Animator anim;
