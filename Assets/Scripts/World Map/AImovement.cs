@@ -34,9 +34,13 @@ public class AImovement : MonoBehaviour {
 			Debug.Log ("chooser " + chooser);
 			if (chooser > 0) {
 				inputY = Random.Range(-1f,1f);
+				inputX = 0;
 			} else if(chooser < 0) {
 				inputX = Random.Range(-1f,1f);
+				inputY = 0;
 			}
+			Debug.Log ("INPUT X " + inputX);
+			Debug.Log ("INPUT Y " + inputY);
 			timer = 2f;
 		}
 		
