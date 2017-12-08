@@ -10,7 +10,7 @@ public class AImovement : MonoBehaviour {
 	float inputX;
 	float inputY;
 	private Animator anim;
-	float timer = 3f;
+	float timer = 2f;
 	float chooser;
 
 
@@ -27,17 +27,18 @@ public class AImovement : MonoBehaviour {
 	}
 
 	void Update () {
-		Debug.Log ("timer is going" + timer);
+	//	Debug.Log ("timer is going" + timer);
 		timer -= Time.deltaTime;
 		if (timer < 0) {
 			chooser = Random.Range(-1f, 1f);
-			
-			if (chooser < 0) {
-				inputX = Random.Range(-5f,5f);
-			}
+			Debug.Log ("chooser " + chooser);
 			if (chooser > 0) {
-				inputY = Random.Range(-5f,5f);
+				inputY = Random.Range(-1f,1f);
+			} else if(chooser < 0) {
+				inputX = Random.Range(-1f,1f);
 			}
+			timer = 2f;
+		}
 		
 
 		if (inputX > 0 && !facingRight) {
@@ -45,44 +46,52 @@ public class AImovement : MonoBehaviour {
 		}  else if (inputX < 0 && facingRight) {
 			Flip ();
 		}
-		
-		if (inputX > 0) {
-				Debug.Log ("move right");
-				theRigidBody.AddForce (Vector2.right * speed);
-				//theRigidBody.velocity = transform.position.x * speed;
-			//theRigidBody.velocity = new Vector3 (Mathf.Abs(inputX) * speed, 0f, 0f);
-			anim.SetBool("WalkingSide", true);
-			anim.SetBool("WalkingBack", false);
-			anim.SetBool("isSurprised", false);
-			
-		} else if (inputX < 0) {
-				Debug.Log ("move left");
-				//theRigidBody.velocity = -transform.position.x * speed;
-				theRigidBody.AddForce (Vector2.left * speed);
-			//theRigidBody.velocity = new Vector3 (Mathf.Abs(inputX) * speed, 0f, 0f);
-			anim.SetBool("WalkingSide", true);
-			anim.SetBool("WalkingBack", false);
-			anim.SetBool("isSurprised", false);
-		} else if (inputY < 0) {
-				Debug.Log ("move up");
-				theRigidBody.AddForce (Vector2.up * speed);
-				//theRigidBody.velocity = transform.position.y * speed;
-			//theRigidBody.velocity = new Vector3 (0f, Mathf.Abs(inputY) * speed, 0f);
-			anim.SetBool("WalkingBack", true);
-			anim.SetBool("isSurprised", false);
-			anim.SetBool("WalkingSide", false);
-		} else if (inputY > 0) {
-				Debug.Log ("move down");
-				//theRigidBody.velocity = transform.position.y * speed;
-				theRigidBody.AddForce (Vector2.down * speed);
-			//theRigidBody.velocity = new Vector3 (0f, Mathf.Abs(inputY) * speed, 0f);
-			anim.SetBool("WalkingBack", false);
-			anim.SetBool("WalkingSide", false);
-			anim.SetBool("isSurprised", false);
-		} 
 
-			timer = 3f;
-		}
+	
+			if (inputX > 0) {
+				//Debug.Log ("move right");
+				//	theRigidBody.AddForce (Vector2.right * speed);
+		
+				theRigidBody.transform.Translate (Vector2.right / speed);
+			
+				//theRigidBody.velocity = new Vector3 (Mathf.Abs(inputX) * speed, 0f, 0f);
+				anim.SetBool ("WalkingSide", true);
+				anim.SetBool ("WalkingBack", false);
+				anim.SetBool ("isSurprised", false);
+			
+			} else if (inputX < 0) {
+				//Debug.Log ("move left");
+		
+				theRigidBody.transform.Translate (Vector2.left / speed);
+			
+				//theRigidBody.AddForce (Vector2.left * speed);
+				//theRigidBody.velocity = new Vector3 (Mathf.Abs(inputX) * speed, 0f, 0f);
+				anim.SetBool ("WalkingSide", true);
+				anim.SetBool ("WalkingBack", false);
+				anim.SetBool ("isSurprised", false);
+			} else if (inputY < 0) {
+				//Debug.Log ("move up");
+
+				//	theRigidBody.AddForce (Vector2.up * speed);
+				theRigidBody.transform.Translate (Vector2.up / speed);
+			
+				//theRigidBody.velocity = new Vector3 (0f, Mathf.Abs(inputY) * speed, 0f);
+				anim.SetBool ("WalkingBack", true);
+				anim.SetBool ("isSurprised", false);
+				anim.SetBool ("WalkingSide", false);
+			} else if (inputY > 0) {
+				//Debug.Log ("move down");
+
+				theRigidBody.transform.Translate (Vector2.down / speed);
+				//	theRigidBody.AddForce (Vector2.down * speed);
+
+				//theRigidBody.velocity = new Vector3 (0f, Mathf.Abs(inputY) * speed, 0f);
+				anim.SetBool ("WalkingBack", false);
+				anim.SetBool ("WalkingSide", false);
+				anim.SetBool ("isSurprised", false);
+			} 
+
+		
 
 
 
@@ -96,20 +105,6 @@ public class AImovement : MonoBehaviour {
 		transform.localScale = theScale;
 
 	}
-
-	/*
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Collided with: " + collision.gameObject.name);
-        notHittingObst = false;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        Debug.Log("Stopped colliding with: " + collision.gameObject.name);
-        notHittingObst = true;
-    }
-    */
 
 
 	private void OnCollisionEnter2D(Collision2D collision)
