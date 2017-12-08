@@ -21,6 +21,8 @@ public class ItemInteraction : MonoBehaviour {
             Destroy(resource.gameObject);
             FightOutcome.wasInFight = true;
             NPCInteraction();
+		} else if(resource.gameObject.tag == "FNPC") {
+			PlayerMovement.speed = 5.0f;
 		} else if (resource.gameObject.tag == "CampLife") {
             //   PlayerPrefs.SetFloat("X", 0);
             // PlayerPrefs.SetFloat("Y", 0);

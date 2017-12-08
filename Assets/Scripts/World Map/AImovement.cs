@@ -115,7 +115,9 @@ public class AImovement : MonoBehaviour {
 	{
 		Debug.Log("Collided with: " + collision.gameObject.name);
 		//notHittingObst = false;
-		theRigidBody.velocity = new Vector2(0f,0f);
+		if (theRigidBody.gameObject.tag == "FNPC"){
+			theRigidBody.velocity = new Vector2 (0f, 0f);
+		}
 	}
 
 	private void OnCollisionExit2D(Collision2D collision)

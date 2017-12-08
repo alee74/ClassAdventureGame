@@ -12,6 +12,7 @@ TagManager:
   - CampLife
   - Tree
   - Lake
+  - FNPC
   layers:
   - Default
   - TransparentFX
