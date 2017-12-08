@@ -17,13 +17,15 @@ public class ItemInteraction : MonoBehaviour {
     }
     void OnTriggerEnter2D(Collider2D resource){
         if (resource.gameObject.tag == "NPC") {
+            PlayerMovement.speed = 5.0f;
             Destroy(resource.gameObject);
             FightOutcome.wasInFight = true;
             NPCInteraction();
 		} else if (resource.gameObject.tag == "CampLife") {
-         //   PlayerPrefs.SetFloat("X", 0);
-           // PlayerPrefs.SetFloat("Y", 0);
+            //   PlayerPrefs.SetFloat("X", 0);
+            // PlayerPrefs.SetFloat("Y", 0);
             //PlayerPrefs.SetFloat("Z", -1);
+            PlayerMovement.speed = 5.0f;
             ItemsInInventory.AddInventoryItemsToCampResource();
 			SceneManager.LoadScene ("T-MinusDays");
 		} else if (resource.gameObject.tag == "Event"){

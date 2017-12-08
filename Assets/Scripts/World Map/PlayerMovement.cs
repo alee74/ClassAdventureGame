@@ -27,7 +27,8 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
 		inputX = Input.GetAxis ("Horizontal");
 		inputY = Input.GetAxis ("Vertical");
-
+        Debug.Log("InpuX = " + inputX);
+        Debug.Log("InputY = " + inputY);
 		if (inputX > 0 && !facingRight) {
 			Flip ();
 		}  else if (inputX < 0 && facingRight) {
@@ -35,7 +36,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		/*
         if (notHittingObst)
-        {
+        {788
         */
 		if (inputX > 0) {
 			theRigidBody.velocity = new Vector3 (inputX * speed, 0f, 0f);
