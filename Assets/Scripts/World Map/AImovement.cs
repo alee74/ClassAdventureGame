@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class AImovement : MonoBehaviour {
 
 	Vector3 pos;                             
-	float speed = 20.0f;   
+	float speed = 50.0f;   
 	float inputX;
 	float inputY;
 	private Animator anim;
