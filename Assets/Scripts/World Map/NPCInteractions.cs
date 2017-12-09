@@ -23,7 +23,7 @@ public class NPCInteractions : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "FNPC")
+        if (collision.tag == "FNPC" || collision.tag == "NPC")
         {
             Debug.Log("Colliding with npc");
             Event npc = collision.GetComponent<EventTile>().tileEvent;
