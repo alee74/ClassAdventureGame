@@ -5,9 +5,12 @@ using UnityEngine;
 public class CutWood : MonoBehaviour {
 
 	private GameObject tree = null;
+	private AudioSource aud; 
+	public AudioClip cut_wood; 
 
 	// Use this for initialization
 	void Start () {
+		aud = GetComponent<AudioSource> (); 
 	}
 
 	void Update() {
@@ -16,6 +19,8 @@ public class CutWood : MonoBehaviour {
 			var treehealth = tree.GetComponent<TreeHealth> ();
 			if (treehealth != null) {
 				treehealth.DamageTaken (1); 
+				aud.clip = cut_wood;
+				aud.Play ();
 			}
 		}
 	}

@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour {
 	float inputY;
 	private Animator anim;
 
+	private AudioSource aud; 
+	public AudioClip walk; 
 
 	bool facingRight = true;
 
@@ -21,6 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 		//pos = transform.position; 
 		theRigidBody = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
+		aud = GetComponent<AudioSource> ();
 
 	}
 
@@ -63,7 +66,17 @@ public class PlayerMovement : MonoBehaviour {
 			theRigidBody.velocity = new Vector3 (0f, 0f, 0f);
 		}
 
+		if (Input.GetButtonDown ("Horizontal")) {
+			aud.clip = walk;
+			aud.Play (); 
+			aud.loop = true; 
+		}
 
+		if (Input.GetButtonDown ("Vertical")) {
+			aud.clip = walk;
+			aud.Play (); 
+			aud.loop = true; 
+		}
 		//}
 
 
