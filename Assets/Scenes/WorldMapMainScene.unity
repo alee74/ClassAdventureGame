@@ -1271,9 +1271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b06e329bc9f7b4e9d7fe32cd8c54dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 15
+  runSpeed: 10
   decRate: 10
-  incRate: 5
+  incRate: 10
 --- !u!224 &876929511 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224545602662442220, guid: 38d7e2d9b8657c04cb7daba96688144e,
