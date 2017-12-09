@@ -27,8 +27,6 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
 		inputX = Input.GetAxis ("Horizontal");
 		inputY = Input.GetAxis ("Vertical");
-        Debug.Log("InpuX = " + inputX);
-        Debug.Log("InputY = " + inputY);
 		if (inputX > 0 && !facingRight) {
 			Flip ();
 		}  else if (inputX < 0 && facingRight) {

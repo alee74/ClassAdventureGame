@@ -36,7 +36,8 @@ public class PlayerRun : MonoBehaviour {
         } 
         else
         {
-            if (Input.GetKey(KeyCode.LeftShift) && CanRun())
+            if (Input.GetKey(KeyCode.LeftShift) && CanRun() && 
+                (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) ))
             {
                 PlayerMovement.speed = runSpeed;
                 PlayerInfoForWorldMap.stamina -= (decRate*Time.deltaTime);
