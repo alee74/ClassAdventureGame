@@ -18,9 +18,9 @@ public class ItemInteraction : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D resource){
         if (resource.gameObject.tag == "NPC") {
             PlayerMovement.speed = 5.0f;
-            Destroy(resource.gameObject);
             FightOutcome.wasInFight = true;
-            NPCInteraction();
+            StartCoroutine(WaitForKeyDown(KeyCode.Space,resource));
+
 		} else if(resource.gameObject.tag == "FNPC") {
 			PlayerMovement.speed = 5.0f;
 		} else if (resource.gameObject.tag == "CampLife") {
@@ -62,10 +62,11 @@ public class ItemInteraction : MonoBehaviour {
         }
 	}
 
-	void NPCInteraction(){
+    void NPCInteraction(){
 		//generate a random number
 		//choose between a series of interactions
 		//maybe generate whether it was positive or negative here?
+
         PlayerPrefs.SetFloat("X", transform.position.x);
 		PlayerPrefs.SetFloat("Y", transform.position.y);
 		PlayerPrefs.SetFloat("Z", transform.position.z);
@@ -82,6 +83,16 @@ public class ItemInteraction : MonoBehaviour {
         PlayerPrefs.SetFloat("X", 0);
         PlayerPrefs.SetFloat("Y", 0);
         PlayerPrefs.SetFloat("Z", -1);
+    }
+
+    IEnumerator WaitForKeyDown(KeyCode keyCode,Collider2D resource)
+    {
+        while (!Input.GetKeyDown(keyCode))
+        {
+            yield return null;
+        }
+        Destroy(resource.gameObject);
+        NPCInteraction();
     }
 
 }
