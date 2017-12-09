@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpControl: 0
-  duration: 50
+  duration: 100
 --- !u!114 &447282618
 MonoBehaviour:
   m_ObjectHideFlags: 0
