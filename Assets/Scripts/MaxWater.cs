@@ -5,12 +5,10 @@ using UnityEngine;
 public class MaxWater : MonoBehaviour {
 
 	public int currentWater;
-	private GameObject player; 
 
 	// Use this for initialization
 	void Start () { 
-		currentWater = 5;  
-		player = GameObject.Find ("Player"); 
+		currentWater = 5;
 	}
 	
 	// Update is called once per frame

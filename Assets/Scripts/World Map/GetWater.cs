@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class GetWater : MonoBehaviour {
 
-	private GameObject player;
 	public GameObject lake = null; 
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.Find ("Player");
+		
 	}
 
 	void OnCollisionEnter2D(Collision2D col) {
