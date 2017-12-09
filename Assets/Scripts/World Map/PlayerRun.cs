@@ -17,7 +17,6 @@ public class PlayerRun : MonoBehaviour {
     void Start () {
         staminaBar = GameObject.Find("StaminaBar").GetComponent<Image>();
         rechargeLimit = PlayerInfoForWorldMap.stamina / 3;
-        Debug.Log(rechargeLimit);
 	}
 
 

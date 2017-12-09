@@ -12,10 +12,12 @@ public class EVENTTILETEST : MonoBehaviour {
         eventTile = GameObject.Find("EventTile");
         eventTileScript = eventTile.GetComponent<EventTile>();
         eventTileScript.tileEvent = EncounterCharacterEvent.GenerateRandom();
-	}
+
+        Debug.Log(eventTileScript.tileEvent.description);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-
+        
 	}
 }
