@@ -26,7 +26,7 @@ public class TMinusDaysScript : MonoBehaviour {
         }
         else
         {
-            TMinusText.text = "Placeholder you have survived text";
+            TMinusText.text = "The Avatar has returned and restored balance to the world. You and your party have been saved.";
         }
 
 		if (daysLeft == 0) 
