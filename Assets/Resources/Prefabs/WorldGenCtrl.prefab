@@ -55,7 +55,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c5b2388f36ae541aaa88937c0d4c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treefab: {fileID: 1857971025636802, guid: 63eee001837cd9b4ab64f15ff76470d7, type: 2}
   treeZoneSize: 200
   numForests: 30
   treeRad: 10
@@ -102,7 +101,7 @@ MonoBehaviour:
   buildingBox: {fileID: 61692611562174816, guid: 1f3221a70310fb64da3f3bbeaf5dd150,
     type: 2}
   distFromRoad: 1.16
-  buildingTile: {fileID: 1048077656158398, guid: 1f3221a70310fb64da3f3bbeaf5dd150,
+  buildingTile: {fileID: 1991751563577112, guid: 346281e10db294568b8ee623d7472824,
     type: 2}
   width: 200
   height: 200
