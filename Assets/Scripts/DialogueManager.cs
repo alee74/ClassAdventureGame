@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour {
 
 	public GameObject dBox;
-	public Text dText;
-
+	public GameObject dText;
 
 	public bool active;
 
@@ -24,11 +22,4 @@ public class DialogueManager : MonoBehaviour {
 			active = false;
 			}
 	}
-	public void ShowBox(string dialogue)
-	{
-		active = true;
-		dBox.SetActive(true);
-		dText.text = dialogue;
-	}
-
 }
