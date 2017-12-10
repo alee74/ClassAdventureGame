@@ -11,21 +11,9 @@ public class Barracks : MonoBehaviour {
         //character = GetComponent<CharInfo>();
         if (col.gameObject.tag == "Player")
         {
-            Debug.Log("Player Entered Barracks");
             ui.SetActive(true);
         }
         
-        if (character.stamina  < character.getMaxStamina())
-        {
-            character.stamina += character.getMaxStamina() - character.stamina;
-            Debug.Log("Stamina restored");
-        }
-        else
-        {
-
-            Debug.Log("Your Stamina Is Full");
-
-        }
     }
     void OnTriggerExit2D(Collider2D col)
     {
