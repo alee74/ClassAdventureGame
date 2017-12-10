@@ -55,7 +55,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c5b2388f36ae541aaa88937c0d4c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treefab: {fileID: 1857971025636802, guid: 63eee001837cd9b4ab64f15ff76470d7, type: 2}
   treeZoneSize: 200
   numForests: 30
   treeRad: 10
