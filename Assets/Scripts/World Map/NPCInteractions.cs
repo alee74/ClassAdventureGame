@@ -6,13 +6,17 @@ using UnityEngine.UI;
 public class NPCInteractions : MonoBehaviour {
     //This function should make a dialogue box popup when you touch it
 
-    private Text dialogueTxt;
+    public Image dialogueBox;
+    public Text dialogueTxt;
+    
     private DialogueBoxController dialogueBoxControllerScript;
 
 	// Use this for initialization
 	void Start () {
-        dialogueTxt = GameObject.Find("DialogueText").GetComponent<Text>();
-        dialogueBoxControllerScript = GameObject.Find("DialogueBox").GetComponent<DialogueBoxController>();
+        //dialogueTxt = GameObject.Find("DialogueText").GetComponent<Text>();
+        //dialogueBoxControllerScript = GameObject.Find("DialogueBox").GetComponent<DialogueBoxController>();
+
+        dialogueBoxControllerScript = dialogueBox.GetComponent<DialogueBoxController>();
 
     }
 	
@@ -23,9 +27,10 @@ public class NPCInteractions : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.tag == "FNPC" || collision.tag == "NPC")
         {
-            Debug.Log("Colliding with npc");
+            Debug.Log("Colliding with " + collision.name);
             Event npc = collision.GetComponent<EventTile>().tileEvent;
             dialogueTxt.text = npc.description;
             dialogueBoxControllerScript.SetDialogue(true);
