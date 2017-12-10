@@ -2134,7 +2134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1415165205
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2251,6 +2251,16 @@ Prefab:
       propertyPath: dialogueTxt
       value: 
       objectReference: {fileID: 1389608181}
+    - target: {fileID: 114772817826576748, guid: 029e858bcc6837248b121a17b8daaf2d,
+        type: 2}
+      propertyPath: encounterDesc
+      value: 
+      objectReference: {fileID: 1389608181}
+    - target: {fileID: 114772817826576748, guid: 029e858bcc6837248b121a17b8daaf2d,
+        type: 2}
+      propertyPath: encounterDialogue
+      value: 
+      objectReference: {fileID: 935544893}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 029e858bcc6837248b121a17b8daaf2d, type: 2}
   m_IsPrefabParent: 0
@@ -2809,7 +2819,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1814556293
 RectTransform:
   m_ObjectHideFlags: 0
