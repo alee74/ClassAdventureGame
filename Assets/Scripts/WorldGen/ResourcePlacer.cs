@@ -15,7 +15,7 @@ public class ResourcePlacer : MonoBehaviour {
 
 	void GenerateWorld () {
 		//print (EventSystem.GetEventTiles (0, 20, 1));
-		events = new List<GameObject>(EventSystem.GetEventTiles(0,100,1));
+		events = new List<GameObject>(EventSystem.GetEventTiles(0,200,1));
 		Vector2 pos = new Vector2(-resourceRadius, -resourceRadius);
 		placeEvents ();
 		for (int i = -resourceRadius; i < resourceRadius; i++) {
@@ -34,8 +34,8 @@ public class ResourcePlacer : MonoBehaviour {
 		print (events.Count);
 		float rRadius = resourceRadius;
 		for (int i = 0; i < events.Count; i++) {
-			var randX = Random.Range (0f,rRadius); 
-			var randY = Random.Range (0f,rRadius); 
+			var randX = Random.Range (0f,rRadius) - rRadius/2f; 
+			var randY = Random.Range (0f,rRadius) - rRadius/2f; 
 			events [i].transform.position = new Vector3(randX,randY,0);
 
 		}

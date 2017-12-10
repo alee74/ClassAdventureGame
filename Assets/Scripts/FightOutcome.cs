@@ -5,6 +5,7 @@ using UnityEngine;
 public static class FightOutcome {
 
     public static Character currentlyFighting;
+	public static Character NPCcurrentlyFighting;
     public static bool wasInFight;
     public static bool wonFight;
 
