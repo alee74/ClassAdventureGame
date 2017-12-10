@@ -25,12 +25,23 @@ public class NPCInteractions : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         EncounterCharacterEvent npc;
+        string npcType = "";
+        string giftFromFriend = "";
 
         if (collision.tag == "FNPC" || collision.tag == "NPC")
         {
+            if (collision.tag == "FNPC")
+            {
+                npcType = "Friend ";
+                giftFromFriend = " And has given you gifts.";
+            } 
+            else
+            {
+                npcType = "Enemy ";
+            }
             npc = collision.GetComponent<EventTile>().tileEvent;
             encounterDesc.text = npc.name + " " + npc.description;
-            encounterDialogue.text = npc.encounterDialog;
+            encounterDialogue.text = npcType + npc.character.name + " says: " + npc.encounterDialog + giftFromFriend;
             dialogueBoxControllerScript.SetDialogue(true);
         }
     }
