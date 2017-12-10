@@ -9,6 +9,7 @@ public class ItemInteraction : MonoBehaviour {
 
     private Character currChara;
 
+    private float rand;
 	private AudioSource aud; 
 	public AudioClip pickup_item; 
 
@@ -76,15 +77,22 @@ public class ItemInteraction : MonoBehaviour {
         }
 	}
 
-    void NPCInteraction(){
-		//generate a random number
-		//choose between a series of interactions
-		//maybe generate whether it was positive or negative here?
-
+    void NPCInteraction()
+    {
+        //generate a random number
+        //choose between a series of interactions
+        //maybe generate whether it was positive or negative here?
+        rand = Random.Range(0f, 1f);
         PlayerPrefs.SetFloat("X", transform.position.x);
-		PlayerPrefs.SetFloat("Y", transform.position.y);
-		PlayerPrefs.SetFloat("Z", transform.position.z);
-		SceneManager.LoadScene ("2dFighting");
+        PlayerPrefs.SetFloat("Y", transform.position.y);
+        PlayerPrefs.SetFloat("Z", transform.position.z);
+        if (rand < .33){
+            SceneManager.LoadScene("2DFighterStage0");
+        }else if (rand > .66){
+            SceneManager.LoadScene("2DFighterStage1");
+        } else {
+            SceneManager.LoadScene("2DFighterStage2");
+        }
 	}
 
 	void EventInteraction(){
