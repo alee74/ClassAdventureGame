@@ -9,11 +9,16 @@ public class ItemInteraction : MonoBehaviour {
 
     private Character currChara;
 
+	private AudioSource aud; 
+	public AudioClip pickup_item; 
+
     private void Start()
     {
         currChara = CharInfo.getCurrentCharacter();
         transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), PlayerPrefs.GetFloat("Z"));
         //ONLY UNCOMMENT IF NEEDED FOR TESTING //transform.position = new Vector3(0, 0, -1);
+
+		aud = GetComponent<AudioSource> (); 
     }
     void OnTriggerEnter2D(Collider2D resource){
         if (resource.gameObject.tag == "NPC") {
@@ -40,6 +45,10 @@ public class ItemInteraction : MonoBehaviour {
             {
                 // if you can still carry stuff
                 Destroy(resource.gameObject);
+
+				aud.clip = pickup_item;
+				aud.Play ();
+
                 switch (resource.gameObject.tag)
                 {
                     case "Food":

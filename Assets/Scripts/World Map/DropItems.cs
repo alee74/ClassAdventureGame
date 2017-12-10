@@ -5,11 +5,13 @@ using UnityEngine;
 public class DropItems : MonoBehaviour {
 	public GameObject resource;
 	private ItemsInInventory itemsInInventoryScript;
+
 	// Use this for initialization
 	void Start () {
 		itemsInInventoryScript = /*GameObject.Find("Main Camera").*/GetComponent<ItemsInInventory>();
 		//itemsInInventoryScript
 		Debug.Log(GameObject.Find("Player").gameObject.transform.position.x);
+
 	}
 	
 	// Update is called once per frame

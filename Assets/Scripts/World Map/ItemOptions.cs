@@ -15,11 +15,15 @@ public class ItemOptions : MonoBehaviour {
     private GameObject player;
     private Character currChara;
 
+	private AudioSource aud; 
+
     // Use this for initialization
     void Start () {
         currItemTag = "null";
         player = GameObject.Find("Player");
         currChara = CharInfo.getCurrentCharacter();
+
+		aud = GetComponent<AudioSource> ();
 	}
 
     public void OnClick()
@@ -44,6 +48,7 @@ public class ItemOptions : MonoBehaviour {
                 {
                     ItemsInInventory.num_food--;
                     Instantiate(food, newPos, Quaternion.identity);
+					aud.Play (); 
 
                 }
                 break;
@@ -52,6 +57,7 @@ public class ItemOptions : MonoBehaviour {
                 {
                     ItemsInInventory.num_water--;
                     Instantiate(water, newPos, Quaternion.identity);
+					aud.Play (); 
                 }
                 break;
             case "Wood":
@@ -59,6 +65,7 @@ public class ItemOptions : MonoBehaviour {
                 {
                     ItemsInInventory.num_wood--;
                     Instantiate(wood, newPos, Quaternion.identity);
+					aud.Play (); 
 
                 }
                 break;
