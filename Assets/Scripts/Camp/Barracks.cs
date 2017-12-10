@@ -14,17 +14,6 @@ public class Barracks : MonoBehaviour {
             ui.SetActive(true);
         }
         
-        if (character.stamina  < character.getMaxStamina())
-        {
-            character.stamina += character.getMaxStamina() - character.stamina;
-            Debug.Log("Stamina restored");
-        }
-        else
-        {
-
-            Debug.Log("Your Stamina Is Full");
-
-        }
     }
     void OnTriggerExit2D(Collider2D col)
     {

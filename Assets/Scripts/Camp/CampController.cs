@@ -33,17 +33,38 @@ public class CampController : MonoBehaviour {
             campEvents.Add(ce);
             foreach (CampEvent camp in campEvents)
             {
-                Debug.Log(camp.food);
                 ResourceInfo.addFoodStock(camp.food);
                 ResourceInfo.addWaterStock(camp.water);
                 ResourceInfo.addWoodStock(camp.wood);
             }
+            increaseStamina();
             displayCampEvents();
             updateUI();
         }
-        
-
     }
+    private void increaseStamina()
+    {
+        Character current = CharInfo.getCurrentCharacter();
+        foreach (Character c in CharInfo.characters)
+        {
+            int staminaInc = 40;
+            if (c != current)
+            {
+                if (c.stamina != c.getMaxStamina())
+                {
+                    if (staminaInc + c.stamina > c.getMaxStamina())
+                    {
+                        c.stamina = c.getMaxStamina();
+                    }
+                    else
+                    {
+                        c.stamina += staminaInc;
+                    }
+                }
+            }
+        }
+    }
+
     private void Update()
     {
         updateUI();
