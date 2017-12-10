@@ -13,9 +13,14 @@ public class ResourcePlacer : MonoBehaviour {
 
 	private List<GameObject> events; 
 
+
+	void Start() {
+		GenerateWorld ();
+	}
+
 	void GenerateWorld () {
 		//print (EventSystem.GetEventTiles (0, 20, 1));
-		events = new List<GameObject>(EventSystem.GetEventTiles(0,200,1));
+		events = new List<GameObject>(EventSystem.GetEventTiles(0,100,1));
 		Vector2 pos = new Vector2(-resourceRadius, -resourceRadius);
 		placeEvents ();
 		for (int i = -resourceRadius; i < resourceRadius; i++) {
