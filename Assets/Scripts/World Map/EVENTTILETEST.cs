@@ -9,6 +9,8 @@ public class EVENTTILETEST : MonoBehaviour {
     private EventTile eventTileScript;
     //private EventTile eventTileScript2;
 
+	private Character fuq;
+
 	// Use this for initialization
 	void Start () {
         //after i push this, max carry wont work.... bc of naming of eventtiles
@@ -22,7 +24,12 @@ public class EVENTTILETEST : MonoBehaviour {
         eventTileScript2.tileEvent = EncounterCharacterEvent.GenerateRandom();
         */
 
-        Debug.Log(eventTileScript.tileEvent.character.name );
+		fuq = eventTileScript.tileEvent.character;
+		if (fuq == null) {
+			Debug.Log ("whattehfuckishap");
+		}
+
+        Debug.Log(eventTileScript.tileEvent.character.name);
         Debug.Log("Hostile = " + eventTileScript.tileEvent.character.isHostile);
         Debug.Log(eventTileScript.tileEvent.description);
         //Debug.Log(eventTileScript2.tileEvent.description);

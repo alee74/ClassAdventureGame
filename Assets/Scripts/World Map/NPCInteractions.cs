@@ -13,8 +13,8 @@ public class NPCInteractions : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //dialogueTxt = GameObject.Find("DialogueText").GetComponent<Text>();
-        //dialogueBoxControllerScript = GameObject.Find("DialogueBox").GetComponent<DialogueBoxController>();
+        //dialogueTxt = GameObject.Find("wowTxt").GetComponent<Text>();
+        //dialogueBoxControllerScript = GameObject.Find("wow").GetComponent<DialogueBoxController>();
 
         dialogueBoxControllerScript = dialogueBox.GetComponent<DialogueBoxController>();
 
