@@ -58,15 +58,15 @@ public class ItemInteraction : MonoBehaviour {
                 {
                     case "Food":
                         ItemsInInventory.num_food++;
-                        currChara.health -= 5;
+                        //currChara.health -= 5;
                         break;
                     case "Water":
                         ItemsInInventory.num_water++;
-                        currChara.stamina -= 5;
+                        //currChara.stamina -= 5;
                         break;
                     case "Wood":
                         ItemsInInventory.num_wood++;
-                        currChara.strength -= 5;
+                        //currChara.strength -= 5;
                         break;
                 }
             } else
