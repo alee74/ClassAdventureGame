@@ -25,7 +25,7 @@ public class EnemyFighter : Fighter {
     /// </summary>
     protected override void Start() {
 
-//		character = FightOutcome.currentlyFighting;
+		//character = FightOutcome.currentlyFighting;
         maxStamina = 10f;
         stamina = maxStamina;
         healthSlider = GameObject.Find("EnemyHealth").GetComponent<Slider>();

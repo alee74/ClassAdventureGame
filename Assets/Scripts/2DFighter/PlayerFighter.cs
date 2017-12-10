@@ -135,8 +135,8 @@ public class PlayerFighter : Fighter {
 
 
       	FightOutcome.wonFight = win;
-//		FightOutcome.LoseItemsAfterLosingFight ();
-//		FightOutcome.currentlyFighting = NULL;
+		FightOutcome.LoseItemsAfterLosingFight();
+		FightOutcome.currentlyFighting = null;
 
     }
     #endregion

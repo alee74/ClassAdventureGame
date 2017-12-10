@@ -144,9 +144,9 @@ public abstract class Fighter : MonoBehaviour {
         state = State.Stand;
         waitForCooldown = false;
         knockedBack = false;
-		maxHealth = character.getMaxHealth();
-		health = character.health;
-		damage = character.strength;
+		maxHealth = 150f;//character.getMaxHealth();
+		health = maxHealth;//character.health;
+		damage = 20f;//character.strength;
 
 	}
     #endregion
