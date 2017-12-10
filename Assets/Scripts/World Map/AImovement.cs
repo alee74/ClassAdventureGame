@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class AImovement : MonoBehaviour {
 
 	Vector3 pos;                             
-	float speed = 0.25f;   
+	float speed = 25f;   
 	float inputX;
 	float inputY;
 	private Animator anim;
@@ -53,7 +53,7 @@ public class AImovement : MonoBehaviour {
 			if (inputX > 0) {
 				//Debug.Log ("move right");
 				//	theRigidBody.AddForce (Vector2.right * speed);
-		
+			Debug.Log("right:" + Vector2.right / speed);
 				theRigidBody.transform.Translate (Vector2.right / speed);
 			
 				//theRigidBody.velocity = new Vector3 (Mathf.Abs(inputX) * speed, 0f, 0f);
@@ -63,7 +63,7 @@ public class AImovement : MonoBehaviour {
 			
 			} else if (inputX < 0) {
 				//Debug.Log ("move left");
-		
+			Debug.Log("Left: " + Vector2.left / speed);
 				theRigidBody.transform.Translate (Vector2.left / speed);
 			
 				//theRigidBody.AddForce (Vector2.left * speed);
@@ -73,7 +73,7 @@ public class AImovement : MonoBehaviour {
 				anim.SetBool ("isSurprised", false);
 			} else if (inputY < 0) {
 				//Debug.Log ("move up");
-
+			Debug.Log("Up: " + Vector2.up / speed);
 				//	theRigidBody.AddForce (Vector2.up * speed);
 				theRigidBody.transform.Translate (Vector2.up / speed);
 			
@@ -83,7 +83,7 @@ public class AImovement : MonoBehaviour {
 				anim.SetBool ("WalkingSide", false);
 			} else if (inputY > 0) {
 				//Debug.Log ("move down");
-
+			Debug.Log("Down: " + Vector2.down / speed);
 				theRigidBody.transform.Translate (Vector2.down / speed);
 				//	theRigidBody.AddForce (Vector2.down * speed);
 
