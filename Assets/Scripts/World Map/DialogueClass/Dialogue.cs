@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Dialogue {
+public class Dialogue_NoVideo {
 
     private string dialogueStr;
     private Queue<char> dialogueQueue;
 
-    public Dialogue(string _dialogueStr)
+    public Dialogue_NoVideo(string _dialogueStr)
     {
         dialogueStr = _dialogueStr;
     }
