@@ -22,23 +22,29 @@ public class UpgradeUIDisplayHandler : MonoBehaviour {
     {
         if (display != null)
         {
-            foreach (UpgradeContainer uc in display.upgradeContainer)
+            if(display.upgradeContainer != null)
             {
-                Transform newItem = Instantiate(prefab, gameObject.transform, false);
-                UpgradeItemDisplay fas = newItem.GetComponent<UpgradeItemDisplay>();
-                fas.setValue(uc);
-                fas.nextPanel = nextList;
-                fas.upgradeMainPanel = upgradeMainPanel;
-                children.Add(newItem);
+                foreach (UpgradeContainer uc in display.upgradeContainer)
+                {
+                    Transform newItem = Instantiate(prefab, gameObject.transform, false);
+                    UpgradeItemDisplay fas = newItem.GetComponent<UpgradeItemDisplay>();
+                    fas.setValue(uc);
+                    fas.nextPanel = nextList;
+                    fas.upgradeMainPanel = upgradeMainPanel;
+                    children.Add(newItem);
+                }
             }
-            foreach (Upgrade u in display.upgrades)
+            if(display.upgrades != null)
             {
-                Transform newItem = Instantiate(prefab, gameObject.transform, false);
-                UpgradeItemDisplay fas = newItem.GetComponent<UpgradeItemDisplay>();
-                fas.setValue(u);
-                fas.nextPanel = nextList;
-                fas.upgradeMainPanel = upgradeMainPanel;
-                children.Add(newItem);
+                foreach (Upgrade u in display.upgrades)
+                {
+                    Transform newItem = Instantiate(prefab, gameObject.transform, false);
+                    UpgradeItemDisplay fas = newItem.GetComponent<UpgradeItemDisplay>();
+                    fas.setValue(u);
+                    fas.nextPanel = nextList;
+                    fas.upgradeMainPanel = upgradeMainPanel;
+                    children.Add(newItem);
+                }
             }
         }
     }
@@ -47,7 +53,7 @@ public class UpgradeUIDisplayHandler : MonoBehaviour {
     {
         foreach(Transform child in children)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
         display = uc;
         children = new List<Transform>();

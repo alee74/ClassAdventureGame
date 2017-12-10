@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CampController : MonoBehaviour {
     // Use this for initialization
     public static int day = -1;
+    public static List<Upgrade> upgrades = new List<Upgrade>();
 
     public Text foodNum;
     public Text waterNum;
@@ -17,7 +18,7 @@ public class CampController : MonoBehaviour {
 
 	void Start () {
         day += 1;
-        if (day == 100)
+        if (day == 30)
         {
             //Win Game
         }
@@ -52,17 +53,31 @@ public class CampController : MonoBehaviour {
 
     void firstDay()
     {
+        upgrades = new List<Upgrade>();
         ResourceInfo.setFoodStock(1000);
         ResourceInfo.setWaterStock(1000);
-        ResourceInfo.setWoodStock(100);
+        ResourceInfo.setWoodStock(1000);
         updateUI();
     }
 
     CampEvent consumeResources()
     {
+        float foodModifier = 1f;
+        float waterModifier = 1f;
+        foreach (Upgrade u in upgrades)
+        {
+            if(u.name == "Improve Storage")
+            {
+                foodModifier -= 0.2f;
+            }
+            if (u.name == "Improve Water Collection")
+            {
+                waterModifier -= 0.2f;
+            }
+        }
         CampEvent ce = new CampEvent();
-        ce.food = -100 * CharInfo.characters.Count;
-        ce.water = -100 * CharInfo.characters.Count;
+        ce.food = (int)Mathf.Round(-100f * foodModifier * CharInfo.characters.Count);
+        ce.water = (int)Mathf.Round(-100f * waterModifier * CharInfo.characters.Count); ;
         ce.message = "Your characters consumed resources.";
         return ce;
     }
