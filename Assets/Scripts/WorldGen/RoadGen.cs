@@ -28,7 +28,7 @@ public class RoadGen : MonoBehaviour {
 
 	public float distFromRoad = 1.16f;
 
-    public GameObject roadTile;
+    //public GameObject roadTile;
 	public GameObject buildingTile;
 
     public int width = 200;
@@ -36,6 +36,31 @@ public class RoadGen : MonoBehaviour {
 
     private int w = 2000;
     private int h = 2000;
+
+	// tile placement info *Reidlee*
+	private bool up;	// true if there is a tile "above" whichever is being checked
+	private bool down;	// etc.
+	private bool left;
+	private bool right;
+	private int count;
+	private string sprite;
+
+	// tile orientation info *Reidlee*
+	private Vector3 vinv = new Vector3(0,0,180);
+    private Vector3 vr = new Vector3(0,0,270);
+    private Vector3 vl = new Vector3(0,0,90);
+
+	// tile prefabs
+	public GameObject h1;
+	public GameObject h2;
+	public GameObject v1;
+	public GameObject v2;
+	public GameObject c1;
+	public GameObject c2;
+	public GameObject c3;
+	public GameObject c4;
+	public GameObject i3;
+	public GameObject i4;
 
     private int[,] arr = new int[2000,2000];
 
@@ -96,7 +121,40 @@ public class RoadGen : MonoBehaviour {
             {
                 if(arr[i, j] == 1)
                 {
+					resetChecks(); //resets vals that help pick right tile
+					if (arr[i-1,j] == 1) { left = true; count++; }
+					if (arr[i+1,j] == 1) { right = true; count ++; }
+					if (arr [i,j-1] == 1) { down = true; count ++; }
+					if (arr [i,j+1] == 1) { up = true; count ++; }
+
+					print("up = "+up+", down = "+down+", left = "+left+", right = "+right);
+
+					switch(count) {
+            			case 0:
+							PlaceTile(new Vector2(i-w/2,j-h/2),h1,false);
+                			break;
+            			case 1:
+                			if (up || down) PlaceTile(new Vector2(i-w/2,j-h/2),v1,false);
+                			else if (left || right) PlaceTile(new Vector2(i-w/2,j-h/2),h2,false);
+                			break;
+            			case 2:
+                			if (up && down) PlaceTile(new Vector2(i-w/2,j-h/2),v2,false);
+                			else if (left && right) PlaceTile(new Vector2(i-w/2,j-h/2),h1,false);
+                			else if (up && left) PlaceTile(new Vector2(i-w/2,j-h/2),c4,false);
+                			else if (up && right) PlaceTile(new Vector2(i-w/2,j-h/2),c3,false);
+                			else if (down && left) PlaceTile(new Vector2(i-w/2,j-h/2),c2,false);
+                			else if (down && right) PlaceTile(new Vector2(i-w/2,j-h/2),c1,false);
+                			break;
+            			case 3:
+                			PlaceTile(new Vector2(i-w/2,j-h/2),i3,true);
+                			break;
+            			case 4:
+                			PlaceTile(new Vector2(i-w/2,j-h/2),i4,false);
+                		break;
+        			}
+/*
                     PlaceTile(new Vector2(i - w / 2, j - h / 2));
+*/
                 }
             }
         }
@@ -105,9 +163,32 @@ public class RoadGen : MonoBehaviour {
     /// <summary>
     /// Places a road tile at the given position.
     /// </summary>
+/*
     private void PlaceTile(Vector2 pos) {
         var road = Instantiate(roadTile, pos, Quaternion.identity);
         persist.PersistObject(road);
+    }
+*/
+
+	private void resetChecks() {
+		count = 0;
+		up = false;
+		down = false;
+		left = false;
+		right = false;
+	}
+
+	// alternative place tile to get sprites right *Reidlee*
+	private void PlaceTile(Vector2 pos, GameObject tile, bool rotate) {
+		print("Place Tile Called");
+		var road = Instantiate(tile, pos, Quaternion.identity);
+		Debug.Log(road);
+		if (rotate && down) {
+			if (!up) road.transform.Rotate(vinv);
+			if (!left) road.transform.Rotate(vr);
+			if (!right) road.transform.Rotate(vl);
+		}
+		persist.PersistObject(road);
     }
 
 	private void PlaceBuilding(Vector2 pos){

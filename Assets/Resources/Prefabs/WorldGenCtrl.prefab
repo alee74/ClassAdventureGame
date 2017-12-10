@@ -102,11 +102,20 @@ MonoBehaviour:
   buildingBox: {fileID: 61692611562174816, guid: 1f3221a70310fb64da3f3bbeaf5dd150,
     type: 2}
   distFromRoad: 1.16
-  roadTile: {fileID: 1887153398033988, guid: b3bd0c05c47cb454bbe019a9a8af6dd6, type: 2}
   buildingTile: {fileID: 1048077656158398, guid: 1f3221a70310fb64da3f3bbeaf5dd150,
     type: 2}
   width: 200
   height: 200
+  h1: {fileID: 1213637125110960, guid: 678be8a823cf94cb3830bc1a69bb4df5, type: 2}
+  h2: {fileID: 1958467082821450, guid: 989245d6bd08f4210a9717aa6e108193, type: 2}
+  v1: {fileID: 1100161800633626, guid: 08bee18982742465a98ea33652292ff7, type: 2}
+  v2: {fileID: 1432455622136080, guid: 0430aa25780224ac7a8815ebb7eac78d, type: 2}
+  c1: {fileID: 1216793752164906, guid: adb6303e04b334a1297770fb02094a2e, type: 2}
+  c2: {fileID: 1421651474963664, guid: a1e6bd69344204e67a4477ec5fd6052a, type: 2}
+  c3: {fileID: 1206848414036460, guid: 5ad7698fae74548f380014dc8bbb1595, type: 2}
+  c4: {fileID: 1431010090894390, guid: acaef3c50c1754805bbbaf692d42cdbe, type: 2}
+  i3: {fileID: 1430697379232188, guid: 388c0a2a033b8471cbae11aa697d9cb3, type: 2}
+  i4: {fileID: 1990436621409884, guid: ace5a66e213a14a748a38e377415018e, type: 2}
 --- !u!114 &114796807743201496
 MonoBehaviour:
   m_ObjectHideFlags: 1

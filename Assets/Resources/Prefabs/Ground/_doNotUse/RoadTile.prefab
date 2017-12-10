@@ -258,9 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3513ffafaf70d4dfb99cdb1effba3a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roadMask:
+  layerMask:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 512
   delay: 0.01
   spriteScale: {x: 0.05, y: 0.05, z: 0}
   h1: {fileID: 21300002, guid: 9e4de217629544fab96661a8bac0b29e, type: 3}

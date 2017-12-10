@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TileAlignScript : MonoBehaviour {
 	
-	public LayerMask roadMask;
+	public LayerMask layerMask;
 	public float delay = 0.01f;
 	public Vector3 spriteScale = new Vector3 ( 0.05f, 0.05f, 0 );
 	private SpriteRenderer sr;
