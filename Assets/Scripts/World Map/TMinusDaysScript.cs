@@ -8,7 +8,7 @@ public class TMinusDaysScript : MonoBehaviour {
 
     public int daysToSurvive;
 
-    private Text TMinusText;
+	public Text TMinusText;
     private int daysLeft;
 
 	// Use this for initialization
@@ -28,6 +28,11 @@ public class TMinusDaysScript : MonoBehaviour {
         {
             TMinusText.text = "Placeholder you have survived text";
         }
+
+		if (daysLeft == 0) 
+		{
+			SceneManager.LoadScene ("WinScene"); 
+		}
     }
 
     private void ChangeScene()
