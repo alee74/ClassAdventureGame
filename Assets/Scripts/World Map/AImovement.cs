@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class AImovement : MonoBehaviour {
 
 	Vector3 pos;                             
-	float speed = 50.0f;   
+	float speed = 0.25f;   
 	float inputX;
 	float inputY;
 	private Animator anim;
@@ -27,6 +27,7 @@ public class AImovement : MonoBehaviour {
 	}
 
 	void Update () {
+		Debug.Log (speed);
 	//	Debug.Log ("timer is going" + timer);
 		timer -= Time.deltaTime;
 		if (timer < 0) {
