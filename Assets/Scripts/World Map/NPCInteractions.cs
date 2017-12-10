@@ -27,9 +27,7 @@ public class NPCInteractions : MonoBehaviour {
         {
             Debug.Log("Colliding with npc");
             Event npc = collision.GetComponent<EventTile>().tileEvent;
-            Debug.Log("!!!!!!!!!!!!!!!1");
             dialogueTxt.text = npc.description;
-            Debug.Log("??????????????????????");
             dialogueBoxControllerScript.SetDialogue(true);
         }
     }
