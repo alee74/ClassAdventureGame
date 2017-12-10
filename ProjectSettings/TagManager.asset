@@ -13,6 +13,11 @@ TagManager:
   - Tree
   - Lake
   - FNPC
+  - Edge
+  - PlayerFist
+  - KillerGround
+  - Enemy
+  - EnemyFist
   layers:
   - Default
   - TransparentFX
@@ -25,8 +30,8 @@ TagManager:
   - Background
   - Ground
   - Characters
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
