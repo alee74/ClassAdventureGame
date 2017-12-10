@@ -29,7 +29,8 @@ public class RoadGen : MonoBehaviour {
 	public float distFromRoad = 1.16f;
 
     //public GameObject roadTile;
-	public GameObject buildingTile;
+	//public GameObject buildingTile;
+	private GameObject[] buildingTiles;
 
     public int width = 200;
     public int height = 200;
@@ -65,6 +66,10 @@ public class RoadGen : MonoBehaviour {
     private int[,] arr = new int[2000,2000];
 
     private WorldPersist persist;
+
+	void Awake() {
+
+	}
 
     void GenerateWorld() {
         persist = GetComponent<WorldPersist>();
