@@ -31,7 +31,8 @@ public class ItemInteraction : MonoBehaviour {
             ItemsInInventory.num_food = ItemsInInventory.num_food + Random.Range(1,10);
             ItemsInInventory.num_water= ItemsInInventory.num_water + Random.Range(1, 10);
             ItemsInInventory.num_wood= ItemsInInventory.num_wood + Random.Range(1, 10);
-            Destroy(resource);
+            //Destroy(resource.gameObject);
+
 		} else if (resource.gameObject.tag == "CampLife") {
              PlayerPrefs.SetFloat("X", 0);
              PlayerPrefs.SetFloat("Y", 0);
@@ -100,6 +101,7 @@ public class ItemInteraction : MonoBehaviour {
 
     IEnumerator WaitForKeyDown(KeyCode keyCode,Collider2D resource)
     {
+        Debug.Log("Starting IEnum");
         while (!Input.GetKeyDown(keyCode))
         {
             yield return null;
