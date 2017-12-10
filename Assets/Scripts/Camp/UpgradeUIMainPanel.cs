@@ -50,7 +50,6 @@ public class UpgradeUIMainPanel : MonoBehaviour {
     }
     public void handleClick()
     {
-        Debug.Log(ResourceInfo.getWoodStock());
         if(ResourceInfo.getWoodStock() >= display.cost)
         {
             ResourceInfo.subWoodStock(display.cost);

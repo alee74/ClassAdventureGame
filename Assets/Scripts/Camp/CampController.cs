@@ -44,6 +44,10 @@ public class CampController : MonoBehaviour {
         
 
     }
+    private void Update()
+    {
+        updateUI();
+    }
 
     void displayCampEvents()
     {

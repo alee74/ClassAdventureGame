@@ -10,6 +10,10 @@ public class CharDisplayMainPanel : MonoBehaviour {
     public Text staminaText;
     public Text strengthText;
 
+    public Text healCost;
+
+    public Button healCharacter;
+
     public Button setCharacter;
 
     private Character currentCharacter;
@@ -20,6 +24,7 @@ public class CharDisplayMainPanel : MonoBehaviour {
     {
         updatePanel();
         setCharacter.onClick.AddListener(changeCharacter);
+        healCharacter.onClick.AddListener(handleHealCharacter);
     }
 
 
@@ -39,6 +44,17 @@ public class CharDisplayMainPanel : MonoBehaviour {
             staminaText.text = "Stamina: " + currentCharacter.stamina + "/" + currentCharacter.getMaxStamina();
             strengthText.text = "Strength: " + currentCharacter.strength + "/" + currentCharacter.getMaxStrength();
 
+            if(currentCharacter.health != currentCharacter.getMaxHealth())
+            {
+                healCost.text = "Cost: " + (currentCharacter.getMaxHealth() - currentCharacter.health) + " wood";
+                healCharacter.interactable = true;
+            }
+            else
+            {
+                healCost.text = "";
+                healCharacter.interactable = false;
+            }
+
             if (CharInfo.currentCharacter == characterPosition)
             {
                 setCharacter.interactable = false;
@@ -54,6 +70,9 @@ public class CharDisplayMainPanel : MonoBehaviour {
             characterText.text = "";
             staminaText.text = "";
             strengthText.text = "";
+            healCost.text = "";
+            healCharacter.interactable = false;
+            setCharacter.interactable = false;
         }
 
     }
@@ -61,6 +80,16 @@ public class CharDisplayMainPanel : MonoBehaviour {
     private void changeCharacter()
     {
         CharInfo.currentCharacter = characterPosition;
+        updatePanel();
+    }
+
+    private void handleHealCharacter()
+    {
+        if (ResourceInfo.getWoodStock() >= currentCharacter.getMaxHealth() - currentCharacter.health)
+        {
+            ResourceInfo.subWoodStock(currentCharacter.getMaxHealth() - currentCharacter.health);
+            currentCharacter.health = currentCharacter.getMaxHealth();
+        }
         updatePanel();
     }
 
