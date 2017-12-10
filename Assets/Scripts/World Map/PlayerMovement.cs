@@ -64,6 +64,8 @@ public class PlayerMovement : MonoBehaviour {
 			anim.SetBool("movingUp", false);
 			anim.SetBool("movingSide", false);
 			theRigidBody.velocity = new Vector3 (0f, 0f, 0f);
+
+			aud.loop = false; 
 		}
 
 		if (Input.GetButtonDown ("Horizontal")) {
@@ -74,11 +76,9 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (Input.GetButtonDown ("Vertical")) {
 			aud.clip = walk;
-			aud.Play (); 
+			aud.Play ();  
 			aud.loop = true; 
 		}
-		//}
-
 
 		//transform.position = pos;   // Move there
 	}
