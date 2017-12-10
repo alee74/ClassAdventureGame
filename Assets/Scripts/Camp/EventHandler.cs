@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class EventHandler : MonoBehaviour {
 
     public Text foodVal;
@@ -32,8 +32,7 @@ public class EventHandler : MonoBehaviour {
 
     public void displayEvent(CampEvent e)
     {
-        Debug.Log(e.description);
-        eventText.text = e.description;
+        eventText.text = e.message;
         foodVal.text = e.food.ToString();
         woodVal.text = e.wood.ToString();
         waterVal.text = e.water.ToString();
@@ -49,6 +48,11 @@ public class EventHandler : MonoBehaviour {
         }
         else
         {
+            if(ResourceInfo.getFoodStock() < 0 || ResourceInfo.getWaterStock() < 0 || CharInfo.characters.Count == 0)
+            {
+                CampController.day = -1;
+                SceneManager.LoadScene("GameOver");
+            }
             gameObject.SetActive(false);
         }
     }

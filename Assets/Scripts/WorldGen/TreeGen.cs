@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TreeGen : MonoBehaviour {
-    public GameObject treefab;
+    //public GameObject treefab;
+	private GameObject[] treefabs;
 
     /// <summary>
     /// Size of the square area around 0, 0 where trees will be spawned.
@@ -23,6 +24,13 @@ public class TreeGen : MonoBehaviour {
 
     private WorldPersist persist;
 
+	void Awake() {
+		treefabs = new GameObject[26];
+		for (int i=0;i<26;i++) {
+			treefabs[i] = (GameObject)Resources.Load("Prefabs/Trees/Tree ("+i.ToString()+")");
+		}
+	}
+
     void GenerateWorld() {
         persist = GetComponent<WorldPersist>();
         for (int i = 0; i < numForests; ++i) {
@@ -41,7 +49,7 @@ public class TreeGen : MonoBehaviour {
         }
 
         foreach (var pos in forest) {
-            var tree = Instantiate(treefab, pos, Quaternion.identity);
+            var tree = Instantiate(treefabs[(int)Random.Range(0,26)], pos, Quaternion.identity);
             persist.PersistObject(tree);
         }
     }

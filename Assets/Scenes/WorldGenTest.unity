@@ -151,6 +151,12 @@ Prefab:
       propertyPath: m_Name
       value: WorldGenCtrl (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114512694249895116, guid: e4af5a4ada058e94588564c75627f980,
+        type: 2}
+      propertyPath: roadTile
+      value: 
+      objectReference: {fileID: 1887153398033988, guid: b3bd0c05c47cb454bbe019a9a8af6dd6,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4af5a4ada058e94588564c75627f980, type: 2}
   m_IsPrefabParent: 0

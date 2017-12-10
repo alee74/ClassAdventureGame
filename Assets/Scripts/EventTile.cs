@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class EventTile : MonoBehaviour {
 
-    public Event tileEvent;
+    public EncounterCharacterEvent tileEvent;
 
 }
