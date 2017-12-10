@@ -28,8 +28,11 @@ public class NPCInteractions : MonoBehaviour {
         string npcType = "";
         string giftFromFriend = "";
 
+
         if (collision.tag == "FNPC" || collision.tag == "NPC")
         {
+            npc = collision.GetComponent<EventTile>().tileEvent;
+
             if (collision.tag == "FNPC")
             {
                 npcType = "Friend ";
@@ -37,9 +40,10 @@ public class NPCInteractions : MonoBehaviour {
             } 
             else
             {
+                // collided with enemy
                 npcType = "Enemy ";
+                FightOutcome.NPCcurrentlyFighting = npc.character;
             }
-            npc = collision.GetComponent<EventTile>().tileEvent;
             encounterDesc.text = npc.name + " " + npc.description;
             encounterDialogue.text = npcType + npc.character.name + " says: " + npc.encounterDialog + giftFromFriend;
             dialogueBoxControllerScript.SetDialogue(true);
