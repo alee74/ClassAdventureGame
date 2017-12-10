@@ -7,17 +7,14 @@ public class NPCInteractions : MonoBehaviour {
     //This function should make a dialogue box popup when you touch it
 
     public Image dialogueBox;
-    public Text dialogueTxt;
+    public Text encounterDesc;
+    public Text encounterDialogue;
     
     private DialogueBoxController dialogueBoxControllerScript;
 
 	// Use this for initialization
 	void Start () {
-        //dialogueTxt = GameObject.Find("wowTxt").GetComponent<Text>();
-        //dialogueBoxControllerScript = GameObject.Find("wow").GetComponent<DialogueBoxController>();
-
         dialogueBoxControllerScript = dialogueBox.GetComponent<DialogueBoxController>();
-
     }
 	
 	// Update is called once per frame
@@ -27,12 +24,13 @@ public class NPCInteractions : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        EncounterCharacterEvent npc;
+
         if (collision.tag == "FNPC" || collision.tag == "NPC")
         {
-            Debug.Log("Colliding with " + collision.name);
-            Event npc = collision.GetComponent<EventTile>().tileEvent;
-            dialogueTxt.text = npc.description;
+            npc = collision.GetComponent<EventTile>().tileEvent;
+            encounterDesc.text = npc.name + " " + npc.description;
+            encounterDialogue.text = npc.encounterDialog;
             dialogueBoxControllerScript.SetDialogue(true);
         }
     }
