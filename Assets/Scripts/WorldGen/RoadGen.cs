@@ -75,7 +75,6 @@ public class RoadGen : MonoBehaviour {
                 arr[i, j] = 0;
             }
         }
-        print(arr[0, 0]);
         GenerateRoads();
     }
 
@@ -106,6 +105,7 @@ public class RoadGen : MonoBehaviour {
 							    PlaceBuilding (pos + new Vector2 (0, -distFromRoad));
                                 break;
 						}
+						//PlaceBuilding (pos);
 					}
                     pos += delta;
                 }
