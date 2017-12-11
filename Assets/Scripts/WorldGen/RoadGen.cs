@@ -30,6 +30,7 @@ public class RoadGen : MonoBehaviour {
 
     //public GameObject roadTile;
 	public GameObject buildingTile;
+	public GameObject grassTile;
 	//private GameObject[] buildingTiles;
 
     public int width = 200;
@@ -67,12 +68,6 @@ public class RoadGen : MonoBehaviour {
 
     private WorldPersist persist;
 
-/*
-	void Awake() {
-
-	}
-*/
-
     void GenerateWorld() {
         persist = GetComponent<WorldPersist>();
         for(int i = 0; i < w; i++)
@@ -83,7 +78,20 @@ public class RoadGen : MonoBehaviour {
             }
         }
         GenerateRoads();
+		GenerateGrass();
     }
+
+	void GenerateGrass() {
+		for(int i = 0; i < w; i++)
+        {   
+            for(int j = 0; j < h; j++)
+            {   
+                if (arr[i, j] == 0) {
+					PlaceGrass(new Vector2(i-w/2,j-h/2));
+				}
+            }
+        }
+	}
 
     /// <summary>
     /// Generates a road system
@@ -134,7 +142,7 @@ public class RoadGen : MonoBehaviour {
 					if (arr [i,j-1] == 1) { down = true; count ++; }
 					if (arr [i,j+1] == 1) { up = true; count ++; }
 
-					print("up = "+up+", down = "+down+", left = "+left+", right = "+right);
+					//print("up = "+up+", down = "+down+", left = "+left+", right = "+right);
 
 					switch(count) {
             			case 0:
@@ -185,11 +193,16 @@ public class RoadGen : MonoBehaviour {
 		right = false;
 	}
 
+	private void PlaceGrass(Vector2 pos) {
+		var grass = Instantiate(grassTile, pos, Quaternion.identity);
+		persist.PersistObject(grass);
+	}
+
 	// alternative place tile to get sprites right *Reidlee*
 	private void PlaceTile(Vector2 pos, GameObject tile, bool rotate) {
-		print("Place Tile Called");
+		//print("Place Tile Called");
 		var road = Instantiate(tile, pos, Quaternion.identity);
-		Debug.Log(road);
+		//Debug.Log(road);
 		if (rotate && down) {
 			if (!up) road.transform.Rotate(vinv);
 			if (!left) road.transform.Rotate(vr);

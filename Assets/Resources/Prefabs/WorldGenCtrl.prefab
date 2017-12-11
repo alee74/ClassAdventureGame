@@ -103,6 +103,7 @@ MonoBehaviour:
   distFromRoad: 1.16
   buildingTile: {fileID: 1991751563577112, guid: 346281e10db294568b8ee623d7472824,
     type: 2}
+  grassTile: {fileID: 1533790502094558, guid: feff6523725e04c6280c6b98f49fd02d, type: 2}
   width: 200
   height: 200
   h1: {fileID: 1213637125110960, guid: 678be8a823cf94cb3830bc1a69bb4df5, type: 2}
