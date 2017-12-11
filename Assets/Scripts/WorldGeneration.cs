@@ -2,26 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadGen : MonoBehaviour {
-    /// <summary>
-    /// Initial string for the L-system.
-    /// </summary>
+public class WorldGeneration : MonoBehaviour {
     public string initString = "ABC";
-
-    /// <summary>
-    /// Distance to move forward when the L-system generates an F.
-    /// </summary>
     public float fwdDist = 5f;
-
-    /// <summary>
-    /// Number of iterations of the L-system used to generate roads.
-    /// </summary>
     public int iterations = 13;
 	public int grassDist = 5; // How many iterations of grass generation
 
-	/// <summary>
-	/// Layer masks for the layers building and road are on.
-	/// </summary>
 	public LayerMask buildingMask;
 	public LayerMask roadMask;
 
@@ -29,29 +15,14 @@ public class RoadGen : MonoBehaviour {
 
 	public float distFromRoad = 1.16f;
 
-	private Dictionary<Vector2,int> tileList = new Dictionary<Vector2,int>();
+	private Dictionary<Vector2,int> tileList = new Dictionary<Vector2,int>(); //0=grass,1=obstacle
 	private List<Vector2> process = new List<Vector2>();
-
-	//private GameObject[] buildingTiles;
-
-    public int width = 200;
-    public int height = 200;
 
     private int w = 2000;
     private int h = 2000;
 	
-	private int[,] arr = new int[2000,2000];
-
+	//private int[,] arr = new int[2000,2000];
     private WorldPersist persist;
-
-
-	// tile placement info *Reidlee*
-	private bool up;	// true if there is a tile "above" whichever is being checked
-	private bool down;	// etc.
-	private bool left;
-	private bool right;
-	private int count;
-	private string sprite;
 
 	// tile orientation info *Reidlee*
 	private Vector3 vinv = new Vector3(0,0,180);
@@ -59,8 +30,6 @@ public class RoadGen : MonoBehaviour {
     private Vector3 vl = new Vector3(0,0,90);
 
 	// tile information
-	private enum roadNums { h1, h2, v1, v2, c1, c2, c3, c4, i3, i4 };
-	private enum grassNums { tlc, ue, trc, ae, nb, le, ne, re, nt, blc, be, brc, nr, nl };
 	private GameObject[] grassTiles;
 	private GameObject[] roadTiles;
 	private GameObject[] buildingTiles;
@@ -69,6 +38,7 @@ public class RoadGen : MonoBehaviour {
 	private int btn = 1;
 
 	void Awake() {
+		directions = new bool[4];
 		grassTiles = new GameObject[gtn];
 		for (int i=0;i<gtn;i++) {
 			grassTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Grass/grass_"+i.toString());
@@ -79,37 +49,28 @@ public class RoadGen : MonoBehaviour {
 		}
 		buildingTiles = new GameObject[btn];
 		for (int i=0;i<btn;i++) {
-			buildingTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Buildings/building_"_i.toString());
+			buildingTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Buildings/building_"+i.toString());
 		}
 	}
 
     void GenerateWorld() {
         persist = GetComponent<WorldPersist>();
-        for(int i = 0; i < w; i++)
-        {
-            for(int j = 0; j < h; j++)
-            {
-                arr[i, j] = 0;
-            }
-        }
         GenerateRoads();
-		foreach (Vector2 pos in tileList) process.Add(pos);
+		//GenerateTrees();
 		GenerateGrass();
     }
-    /// <summary>
-    /// Generates a road system
-    /// </summary>
+
     private void GenerateRoads() {
-        Vector2 pos = new Vector2(0, 0);
-        float ang = 0;
+		var temp = List<Vector2>();
+        Vector2 pos = new Vector2(0,0);
+        int ang = 0;
         string lsys = IterateN(initString, iterations);
         foreach (char c in lsys) {
             if (c == 'F') {
                 Vector2 delta = new Vector2(Mathf.Cos(ang * Mathf.Deg2Rad), Mathf.Sin(ang * Mathf.Deg2Rad));
                 for (int i = 0; i < fwdDist; ++i) {
-                    arr[(int) Mathf.Round(pos.x) + w/2, (int) Mathf.Round(pos.y) + h/2] = 1;
                     if (i == (int)fwdDist / 2) {
-						switch ((int)Mathf.Abs(ang)%360) {
+						switch(ang) {
 							case 90:
 								PlaceBuilding (pos + new Vector2 (distFromRoad, 0));
                                 break;
@@ -123,89 +84,83 @@ public class RoadGen : MonoBehaviour {
 							    PlaceBuilding (pos + new Vector2 (0, -distFromRoad));
                                 break;
 						}
-						//PlaceBuilding (pos);
 					}
+					temp.Add(pos);
                     pos += delta;
                 }
             } else if (c == '+') {
-                ang += 90;
+				if (ang==270) ang = 0;
+                else ang += 90;
             } else if (c == '-') {
-                ang -= 90;
+                if (ang==0) ang = 270;
+				else ang -= 90;
             }
         }
-        for(int i = 0; i < w; i++)
-        {
-            for (int j = 0; j < h; j++)
-            {
-                if(arr[i, j] == 1)
-                {
-					resetChecks(); //resets vals that help pick right tile
-					if (arr[i-1,j] == 1) { left = true; count++; }
-					if (arr[i+1,j] == 1) { right = true; count ++; }
-					if (arr [i,j-1] == 1) { down = true; count ++; }
-					if (arr [i,j+1] == 1) { up = true; count ++; }
-
-					//print("up = "+up+", down = "+down+", left = "+left+", right = "+right);
-
-					switch(count) {
-            			case 0:
-							PlaceTile(new Vector2(i-w/2,j-h/2),h1,false);
-                			break;
-            			case 1:
-                			if (up || down) PlaceTile(new Vector2(i-w/2,j-h/2),v1,false);
-                			else if (left || right) PlaceTile(new Vector2(i-w/2,j-h/2),h2,false);
-                			break;
-            			case 2:
-                			if (up && down) PlaceTile(new Vector2(i-w/2,j-h/2),v2,false);
-                			else if (left && right) PlaceTile(new Vector2(i-w/2,j-h/2),h1,false);
-                			else if (up && left) PlaceTile(new Vector2(i-w/2,j-h/2),c4,false);
-                			else if (up && right) PlaceTile(new Vector2(i-w/2,j-h/2),c3,false);
-                			else if (down && left) PlaceTile(new Vector2(i-w/2,j-h/2),c2,false);
-                			else if (down && right) PlaceTile(new Vector2(i-w/2,j-h/2),c1,false);
-                			break;
-            			case 3:
-                			PlaceTile(new Vector2(i-w/2,j-h/2),i3,true);
-                			break;
-            			case 4:
-                			PlaceTile(new Vector2(i-w/2,j-h/2),i4,false);
-                		break;
-        			}
-/*
-                    PlaceTile(new Vector2(i - w / 2, j - h / 2));
-*/
-                }
-            }
-        }
+		foreach (Vector2 pos in temp) PlaceTile(
     }
 
 	void GenerateGrass() {
-		if (grassDist >0) {
-			foreach (Vector2 pos in process) {
-				if (arr[pos.x-1,pos.y] == 0) { PlaceGrass(new Vector2((pos.x-1)-w/2,(pos.y)-h/2)); }
-				if (arr[pos.x+1,pos.y] == 0) { PlaceGrass(new Vector2((pos.x+1)-w/2,(pos.y)-h/2)); }
-				if (arr[pos.x,pos.y-1] == 0) { PlaceGrass(new Vector2((pos.x)-w/2,(pos.y-1)-h/2)); }
-				if (arr[pos.x,pos.y+1] == 0) { PlaceGrass(new Vector2((pos.x)-w/2,(pos.y+1)-h/2)); }
-			}
+		var temp = new List<Vector2>();
+		if (grassDist>0) {
+			foreach (Vector2 pos in process) temp.AddRange(cardinals(pos));
+			process.Clear();
+			foreach (Vector2 pos in temp) PlaceGrass(pos);
+			grassDist--;
 		}
+		GenerateGrass();
+	}
+
+	private List<Vector2> cardinals(Vector2 pos) {
+		var temp = new List<Vector2>();
+		temp.Add(new Vector2((pos.x-1,pos.y)));
+		temp.Add(new Vector2((pos.x+1,pos.y)));
+		temp.Add(new Vector2((pos.x,pos.y-1)));
+		temp.Add(new Vector2((pos.x,pos.y+1)));
+		return temp;
 	}
 
 	private void PlaceGrass(Vector2 pos) {
-		var grass = Instantiate(grassTile, pos, Quaternion.identity);
-		persist.PersistObject(grass);
+		if (!tileList.Contains(pos)) {
+			tileList.Add(pos,0);
+			process.Add(pos);
+			var grass = Instantiate(grassTiles[BinCode(pos)], pos, Quaternion.identity);
+			persist.PersistObject(grass);
+		}
 	}
 
-	// alternative place tile to get sprites right *Reidlee*
-	private void PlaceTile(Vector2 pos, GameObject tile, bool rotate) {
-		process.Add(pos);
-		//print("Place Tile Called");
-		var road = Instantiate(tile, pos, Quaternion.identity);
-		//Debug.Log(road);
-		if (rotate && down) {
-			if (!up) road.transform.Rotate(vinv);
-			if (!left) road.transform.Rotate(vr);
-			if (!right) road.transform.Rotate(vl);
+	private int BinCode(Vector2 pos) {
+	int code = 0;
+		for (Vector2 dir in cardinals(pos)) {
+			code <<= 1;
+			var output;
+			if (tileList.tryGetValue(pos, out output)) {
+				code += output;
+			}
 		}
-		persist.PersistObject(road);
+		return code;
+	}
+
+	//private enum roadNums { h1, h2, v1, v2, c1, c2, c3, c4, i3, i4 };
+	//						   0   1   2   3   4   5   6  7   8   9
+	private int TileCode(Vector2 pos) {
+		switch(BinCode(pos)) {
+			case 3:
+				return (Random.Range(0,2));
+			case 12:
+				return (Random.Range(2,4));
+			case 6:
+				return 4;
+			case 
+		}
+	}
+
+	private void PlaceTile(Vector2 pos) {
+		if (!tileList.Contains(pos)) {
+			tileList.Add(pos,1);
+			process.Add(pos);
+			var road = Instantiate(roadTiles[TileCode(pos)], pos, Quaternion.identity);
+			persist.PersistObject(road);
+		}
     }
 
 	private void PlaceBuilding(Vector2 pos){
@@ -247,12 +202,4 @@ public class RoadGen : MonoBehaviour {
         }
         return next;
     }
-
-	private void resetChecks() {
-		count = 0;
-		up = false;
-		down = false;
-		left = false;
-		right = false;
-	}
 }
