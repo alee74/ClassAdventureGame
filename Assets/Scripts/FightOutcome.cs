@@ -13,7 +13,7 @@ public static class FightOutcome {
 
 
     // Update is called once per frame
-    static void LoseItemsAfterLosingFight () {
+    public static void LoseItemsAfterLosingFight () {
         if(wasInFight && !wonFight){
             ResourceInfo.setFoodStock(0);
             ResourceInfo.setWaterStock(0);
