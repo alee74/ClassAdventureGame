@@ -52,26 +52,35 @@ public class RoadGen : MonoBehaviour {
     private Vector3 vl = new Vector3(0,0,90);
 
 	// tile prefabs
-	public GameObject h1;
-	public GameObject h2;
-	public GameObject v1;
-	public GameObject v2;
-	public GameObject c1;
-	public GameObject c2;
-	public GameObject c3;
-	public GameObject c4;
-	public GameObject i3;
-	public GameObject i4;
+	private GameObject h1;
+	private GameObject h2;
+	private GameObject v1;
+	private GameObject v2;
+	private GameObject c1;
+	private GameObject c2;
+	private GameObject c3;
+	private GameObject c4;
+	private GameObject i3;
+	private GameObject i4;
 
     private int[,] arr = new int[2000,2000];
 
     private WorldPersist persist;
 
-/*
 	void Awake() {
-
+		int temp = 0;
+		h1 = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+temp++);
+		h2 = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+temp++);
+		v1 = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+temp++);
+		v2 = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+temp++);
+		h2 = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+temp++);
+		c1 = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+temp++);
+		c2 = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+temp++);
+		c3 = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+temp++);
+		c4 = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+temp++);
+		i3 = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+temp++);
+		i4 = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+temp++);
 	}
-*/
 
     void GenerateWorld() {
         persist = GetComponent<WorldPersist>();

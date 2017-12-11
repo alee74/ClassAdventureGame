@@ -11,57 +11,55 @@ public class WorldGeneration : MonoBehaviour {
 	public LayerMask buildingMask;
 	public LayerMask roadMask;
 
-	public BoxCollider2D buildingBox;
-
 	public float distFromRoad = 1.16f;
 
-	private Dictionary<Vector2,int> tileList = new Dictionary<Vector2,int>(); //0=grass,1=obstacle
-	private List<Vector2> process = new List<Vector2>();
-
-    private int w = 2000;
-    private int h = 2000;
-	
-	//private int[,] arr = new int[2000,2000];
     private WorldPersist persist;
 
-	// tile orientation info *Reidlee*
-	private Vector3 vinv = new Vector3(0,0,180);
-    private Vector3 vr = new Vector3(0,0,270);
-    private Vector3 vl = new Vector3(0,0,90);
-
 	// tile information
+	private Dictionary<Vector2,int> tileList;
+	private List<Vector2> process;
 	private GameObject[] grassTiles;
 	private GameObject[] roadTiles;
 	private GameObject[] buildingTiles;
 	private int gtn = 14; // "grass tile num" -> how many grass tiles
-	private int rtn = 10;
+	private int rtn = 13;
 	private int btn = 1;
 
-	void Awake() {
-		directions = new bool[4];
-		grassTiles = new GameObject[gtn];
-		for (int i=0;i<gtn;i++) {
-			grassTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Grass/grass_"+i.toString());
-		}
-		roadTiles = new GameObject[rtn];
-		for (int i=0;i<rtn;i++) {
-			roadTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+i.toString());
-		}
-		buildingTiles = new GameObject[btn];
-		for (int i=0;i<btn;i++) {
-			buildingTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Buildings/building_"+i.toString());
-		}
-	}
-
     void GenerateWorld() {
+print("Starting_GenerateWorld");		
         persist = GetComponent<WorldPersist>();
+print("test");
+		grassTiles = new GameObject[gtn];
+print("test");
+		tileList = new Dictionary<Vector2,int>();
+print("test");
+		process = new List<Vector2>();
+print("test");
+		for (int i=0;i<gtn;i++) {
+			grassTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Grass/grass_"+i);
+		}
+print("test");
+		roadTiles = new GameObject[rtn];
+print("test");
+		for (int i=0;i<rtn;i++) {
+			roadTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+i);
+		}
+print("test");
+		buildingTiles = new GameObject[btn];
+print("test");
+		for (int i=0;i<btn;i++) {
+			buildingTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Buildings/building_"+i);
+		}
+print("test");
         GenerateRoads();
-		//GenerateTrees();
+print("test");
 		GenerateGrass();
+print("Ending_GenerateWorld");
     }
 
     private void GenerateRoads() {
-		var temp = List<Vector2>();
+print("GenerateRoads");
+		var temp = new List<Vector2>();
         Vector2 pos = new Vector2(0,0);
         int ang = 0;
         string lsys = IterateN(initString, iterations);
@@ -96,10 +94,11 @@ public class WorldGeneration : MonoBehaviour {
 				else ang -= 90;
             }
         }
-		foreach (Vector2 pos in temp) PlaceTile(
+		foreach (Vector2 vec in temp) PlaceTile(vec);
     }
 
 	void GenerateGrass() {
+print("GenerateGrass "+grassDist);
 		var temp = new List<Vector2>();
 		if (grassDist>0) {
 			foreach (Vector2 pos in process) temp.AddRange(cardinals(pos));
@@ -110,52 +109,8 @@ public class WorldGeneration : MonoBehaviour {
 		GenerateGrass();
 	}
 
-	private List<Vector2> cardinals(Vector2 pos) {
-		var temp = new List<Vector2>();
-		temp.Add(new Vector2((pos.x-1,pos.y)));
-		temp.Add(new Vector2((pos.x+1,pos.y)));
-		temp.Add(new Vector2((pos.x,pos.y-1)));
-		temp.Add(new Vector2((pos.x,pos.y+1)));
-		return temp;
-	}
-
-	private void PlaceGrass(Vector2 pos) {
-		if (!tileList.Contains(pos)) {
-			tileList.Add(pos,0);
-			process.Add(pos);
-			var grass = Instantiate(grassTiles[BinCode(pos)], pos, Quaternion.identity);
-			persist.PersistObject(grass);
-		}
-	}
-
-	private int BinCode(Vector2 pos) {
-	int code = 0;
-		for (Vector2 dir in cardinals(pos)) {
-			code <<= 1;
-			var output;
-			if (tileList.tryGetValue(pos, out output)) {
-				code += output;
-			}
-		}
-		return code;
-	}
-
-	//private enum roadNums { h1, h2, v1, v2, c1, c2, c3, c4, i3, i4 };
-	//						   0   1   2   3   4   5   6  7   8   9
-	private int TileCode(Vector2 pos) {
-		switch(BinCode(pos)) {
-			case 3:
-				return (Random.Range(0,2));
-			case 12:
-				return (Random.Range(2,4));
-			case 6:
-				return 4;
-			case 
-		}
-	}
-
 	private void PlaceTile(Vector2 pos) {
-		if (!tileList.Contains(pos)) {
+		if (!tileList.ContainsKey(pos)) {
 			tileList.Add(pos,1);
 			process.Add(pos);
 			var road = Instantiate(roadTiles[TileCode(pos)], pos, Quaternion.identity);
@@ -164,16 +119,72 @@ public class WorldGeneration : MonoBehaviour {
     }
 
 	private void PlaceBuilding(Vector2 pos){
-		bool buildingCollide = Physics2D.OverlapBox(pos, buildingBox.size, buildingMask);
+		int temp = Random.Range(0,btn);
+		bool buildingCollide = Physics2D.OverlapBox(pos, buildingTiles[temp].GetComponent<BoxCollider2D>().size, buildingMask);
 		if (Random.Range (0f, 1f) > 0.85f && !buildingCollide) {
-			var building = Instantiate (buildingTile, pos, Quaternion.identity);
+			var building = Instantiate (buildingTiles[temp], pos, Quaternion.identity);
             persist.PersistObject(building);
 		}
 	}
 
-    /// <summary>
-    /// Runs n iterations of the L-system.
-    /// </summary>
+	private void PlaceGrass(Vector2 pos) {
+		if (!tileList.ContainsKey(pos)) {
+			tileList.Add(pos,0);
+			process.Add(pos);
+			var grass = Instantiate(grassTiles[BinCode(pos)], pos, Quaternion.identity);
+			persist.PersistObject(grass);
+		}
+	}
+
+
+	private List<Vector2> cardinals(Vector2 pos) {
+		var temp = new List<Vector2>();
+		temp.Add(new Vector2((pos.x-1),pos.y));
+		temp.Add(new Vector2((pos.x+1),pos.y));
+		temp.Add(new Vector2(pos.x,(pos.y-1)));
+		temp.Add(new Vector2(pos.x,(pos.y+1)));
+		return temp;
+	}
+
+	private int BinCode(Vector2 pos) {
+		int code = 0;
+		int output;
+		var temp = cardinals(pos);
+		foreach (Vector2 dir in temp) {
+			code += code;
+			if (tileList.TryGetValue(pos, out output)) {
+				code += output;
+			}
+		}
+		return code;
+	}
+
+	private int TileCode(Vector2 pos) {
+		switch(BinCode(pos)) {
+			case 3:
+				return (Random.Range(0,2));
+			case 12:
+				return (Random.Range(2,4));
+			case 6:
+				return 4;
+			case 5:
+				return 5;
+			case 10:
+				return 6;
+			case 9:
+				return 7;
+			case 11:
+				return 8;
+			case 13:
+				return 9;
+			case 7:
+				return 10;
+			case 14:
+				return 11;
+			default:
+				return 12;
+		}
+	}
     private string IterateN(string prev, int n) {
         for (int i = 0; i < n; ++i) {
             prev = Iterate(prev);
@@ -181,11 +192,6 @@ public class WorldGeneration : MonoBehaviour {
         return prev;
     }
 
-    /// <summary>
-    /// Takes a generated string and performs one iteration of the L system.
-    /// </summary>
-    /// <param name="prev">string to iterate on</param>
-    /// <returns>the next iteration of prev</returns>
     private string Iterate(string prev) {
         string next = "";
         foreach (char c in prev) {
