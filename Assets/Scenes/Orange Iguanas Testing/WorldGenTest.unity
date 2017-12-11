@@ -228,14 +228,22 @@ MonoBehaviour:
   initString: ABC
   fwdDist: 5
   iterations: 6
-  grassDist: 5
+  grassDist: 10
+  treeDist: 6
+  randTrees: 50
+  scope: 100
+  lakeChance: 8
+  lakeRandomness: 3
+  lakeSize: 5
+  trl: 0
+  trh: 14
+  lakeTile: {fileID: 1295896070826534, guid: 452b8e456cb065f4d9530a23c051196a, type: 2}
   buildingMask:
     serializedVersion: 2
     m_Bits: 0
   roadMask:
     serializedVersion: 2
     m_Bits: 512
-  buildingBox: {fileID: 0}
   distFromRoad: 1.16
 --- !u!4 &1434600583
 Transform:
