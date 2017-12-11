@@ -10,12 +10,8 @@ TagManager:
   - NPC
   - Event
   - CampLife
-  - Ground
-  - Enemy
-  - PlayerFist
-  - EnemyFist
-  - KillerGround
-  - Edge
+  - Tree
+  - Lake
   layers:
   - Default
   - TransparentFX
@@ -28,9 +24,9 @@ TagManager:
   - Background
   - Ground
   - Characters
-  - Player
-  - Enemy
-  - KillerGround
+  - 
+  - 
+  - 
   - 
   - 
   - 
