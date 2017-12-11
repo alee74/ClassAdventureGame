@@ -26,39 +26,26 @@ public class WorldGeneration : MonoBehaviour {
 	private int btn = 1;
 
     void GenerateWorld() {
-print("Starting_GenerateWorld");		
         persist = GetComponent<WorldPersist>();
-print("test");
 		grassTiles = new GameObject[gtn];
-print("test");
 		tileList = new Dictionary<Vector2,int>();
-print("test");
 		process = new List<Vector2>();
-print("test");
 		for (int i=0;i<gtn;i++) {
 			grassTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Grass/grass_"+i);
 		}
-print("test");
 		roadTiles = new GameObject[rtn];
-print("test");
 		for (int i=0;i<rtn;i++) {
 			roadTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+i);
 		}
-print("test");
 		buildingTiles = new GameObject[btn];
-print("test");
 		for (int i=0;i<btn;i++) {
 			buildingTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Buildings/building_"+i);
 		}
-print("test");
         GenerateRoads();
-print("test");
 		GenerateGrass();
-print("Ending_GenerateWorld");
     }
 
     private void GenerateRoads() {
-print("GenerateRoads");
 		var temp = new List<Vector2>();
         Vector2 pos = new Vector2(0,0);
         int ang = 0;
@@ -98,15 +85,14 @@ print("GenerateRoads");
     }
 
 	void GenerateGrass() {
-print("GenerateGrass "+grassDist);
-		var temp = new List<Vector2>();
 		if (grassDist>0) {
+			var temp = new List<Vector2>();
 			foreach (Vector2 pos in process) temp.AddRange(cardinals(pos));
 			process.Clear();
 			foreach (Vector2 pos in temp) PlaceGrass(pos);
 			grassDist--;
+			GenerateGrass();
 		}
-		GenerateGrass();
 	}
 
 	private void PlaceTile(Vector2 pos) {
