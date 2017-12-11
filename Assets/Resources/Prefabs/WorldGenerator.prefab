@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1719102403401906}
+  m_IsPrefabParent: 1
+--- !u!1 &1719102403401906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4724050134043720}
+  - component: {fileID: 114192664655924030}
+  - component: {fileID: 114073176536838304}
+  m_Layer: 0
+  m_Name: WorldGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4724050134043720
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1719102403401906}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114073176536838304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1719102403401906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c33c1dda5c419a4283c27c6a37d5a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114192664655924030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1719102403401906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12a1b8e0b11d4bdb861689c23d46d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initString: ABC
+  fwdDist: 5
+  iterations: 6
+  grassDist: 10
+  treeDist: 6
+  randTrees: 50
+  scope: 100
+  lakeChance: 8
+  lakeRandomness: 3
+  lakeSize: 5
+  trl: 0
+  trh: 14
+  lakeTile: {fileID: 1295896070826534, guid: 452b8e456cb065f4d9530a23c051196a, type: 2}
+  buildingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  roadMask:
+    serializedVersion: 2
+    m_Bits: 512
+  distFromRoad: 1.16
