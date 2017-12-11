@@ -17,7 +17,6 @@ public class RoadGen : MonoBehaviour {
     /// Number of iterations of the L-system used to generate roads.
     /// </summary>
     public int iterations = 13;
-	public int grassDist = 5; // How many iterations of grass generation
 
 	/// <summary>
 	/// Layer masks for the layers building and road are on.
@@ -29,9 +28,8 @@ public class RoadGen : MonoBehaviour {
 
 	public float distFromRoad = 1.16f;
 
-	private Dictionary<Vector2,int> tileList = new Dictionary<Vector2,int>();
-	private List<Vector2> process = new List<Vector2>();
-
+    //public GameObject roadTile;
+	public GameObject buildingTile;
 	//private GameObject[] buildingTiles;
 
     public int width = 200;
@@ -39,11 +37,6 @@ public class RoadGen : MonoBehaviour {
 
     private int w = 2000;
     private int h = 2000;
-	
-	private int[,] arr = new int[2000,2000];
-
-    private WorldPersist persist;
-
 
 	// tile placement info *Reidlee*
 	private bool up;	// true if there is a tile "above" whichever is being checked
@@ -58,30 +51,27 @@ public class RoadGen : MonoBehaviour {
     private Vector3 vr = new Vector3(0,0,270);
     private Vector3 vl = new Vector3(0,0,90);
 
-	// tile information
-	private enum roadNums { h1, h2, v1, v2, c1, c2, c3, c4, i3, i4 };
-	private enum grassNums { tlc, ue, trc, ae, nb, le, ne, re, nt, blc, be, brc, nr, nl };
-	private GameObject[] grassTiles;
-	private GameObject[] roadTiles;
-	private GameObject[] buildingTiles;
-	private int gtn = 14; // "grass tile num" -> how many grass tiles
-	private int rtn = 10;
-	private int btn = 1;
+	// tile prefabs
+	public GameObject h1;
+	public GameObject h2;
+	public GameObject v1;
+	public GameObject v2;
+	public GameObject c1;
+	public GameObject c2;
+	public GameObject c3;
+	public GameObject c4;
+	public GameObject i3;
+	public GameObject i4;
 
+    private int[,] arr = new int[2000,2000];
+
+    private WorldPersist persist;
+
+/*
 	void Awake() {
-		grassTiles = new GameObject[gtn];
-		for (int i=0;i<gtn;i++) {
-			grassTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Grass/grass_"+i.toString());
-		}
-		roadTiles = new GameObject[rtn];
-		for (int i=0;i<rtn;i++) {
-			roadTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Roads/road_"+i.toString());
-		}
-		buildingTiles = new GameObject[btn];
-		for (int i=0;i<btn;i++) {
-			buildingTiles[i] = (GameObject)Resources.Load("Prefabs/Tiles/Buildings/building_"_i.toString());
-		}
+
 	}
+*/
 
     void GenerateWorld() {
         persist = GetComponent<WorldPersist>();
@@ -93,9 +83,8 @@ public class RoadGen : MonoBehaviour {
             }
         }
         GenerateRoads();
-		foreach (Vector2 pos in tileList) process.Add(pos);
-		GenerateGrass();
     }
+
     /// <summary>
     /// Generates a road system
     /// </summary>
@@ -145,7 +134,7 @@ public class RoadGen : MonoBehaviour {
 					if (arr [i,j-1] == 1) { down = true; count ++; }
 					if (arr [i,j+1] == 1) { up = true; count ++; }
 
-					//print("up = "+up+", down = "+down+", left = "+left+", right = "+right);
+					print("up = "+up+", down = "+down+", left = "+left+", right = "+right);
 
 					switch(count) {
             			case 0:
@@ -178,28 +167,29 @@ public class RoadGen : MonoBehaviour {
         }
     }
 
-	void GenerateGrass() {
-		if (grassDist >0) {
-			foreach (Vector2 pos in process) {
-				if (arr[pos.x-1,pos.y] == 0) { PlaceGrass(new Vector2((pos.x-1)-w/2,(pos.y)-h/2)); }
-				if (arr[pos.x+1,pos.y] == 0) { PlaceGrass(new Vector2((pos.x+1)-w/2,(pos.y)-h/2)); }
-				if (arr[pos.x,pos.y-1] == 0) { PlaceGrass(new Vector2((pos.x)-w/2,(pos.y-1)-h/2)); }
-				if (arr[pos.x,pos.y+1] == 0) { PlaceGrass(new Vector2((pos.x)-w/2,(pos.y+1)-h/2)); }
-			}
-		}
-	}
+    /// <summary>
+    /// Places a road tile at the given position.
+    /// </summary>
+/*
+    private void PlaceTile(Vector2 pos) {
+        var road = Instantiate(roadTile, pos, Quaternion.identity);
+        persist.PersistObject(road);
+    }
+*/
 
-	private void PlaceGrass(Vector2 pos) {
-		var grass = Instantiate(grassTile, pos, Quaternion.identity);
-		persist.PersistObject(grass);
+	private void resetChecks() {
+		count = 0;
+		up = false;
+		down = false;
+		left = false;
+		right = false;
 	}
 
 	// alternative place tile to get sprites right *Reidlee*
 	private void PlaceTile(Vector2 pos, GameObject tile, bool rotate) {
-		process.Add(pos);
-		//print("Place Tile Called");
+		print("Place Tile Called");
 		var road = Instantiate(tile, pos, Quaternion.identity);
-		//Debug.Log(road);
+		Debug.Log(road);
 		if (rotate && down) {
 			if (!up) road.transform.Rotate(vinv);
 			if (!left) road.transform.Rotate(vr);
@@ -247,12 +237,4 @@ public class RoadGen : MonoBehaviour {
         }
         return next;
     }
-
-	private void resetChecks() {
-		count = 0;
-		up = false;
-		down = false;
-		left = false;
-		right = false;
-	}
 }
