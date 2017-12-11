@@ -27,7 +27,7 @@ public class TreeGen : MonoBehaviour {
 	void Awake() {
 		treefabs = new GameObject[26];
 		for (int i=0;i<26;i++) {
-			treefabs[i] = (GameObject)Resources.Load("Prefabs/Trees/Tree ("+i.ToString()+")");
+			treefabs[i] = (GameObject)Resources.Load("Prefabs/Tiles/Trees/tree_"+i.ToString());
 		}
 	}
 

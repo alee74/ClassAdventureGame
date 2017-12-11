@@ -241,6 +241,13 @@ Prefab:
       propertyPath: iterations
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1710420843930068, guid: e4af5a4ada058e94588564c75627f980, type: 2}
+      propertyPath: m_Name
+      value: Test
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114037628389116564, guid: e4af5a4ada058e94588564c75627f980, type: 2}
+    - {fileID: 114444985504410850, guid: e4af5a4ada058e94588564c75627f980, type: 2}
+    - {fileID: 114796807743201496, guid: e4af5a4ada058e94588564c75627f980, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: e4af5a4ada058e94588564c75627f980, type: 2}
   m_IsPrefabParent: 0
