@@ -11,7 +11,6 @@ using System;
 /// </summary>
 public class PlayerFighter : Fighter {
 
-    private Character character;
     private float staminaTimer;
     private int staminaLossPerMinute;
 
@@ -27,13 +26,10 @@ public class PlayerFighter : Fighter {
 
         maxStamina = 10f;
         character = CharInfo.getCurrentCharacter();
-        maxHealth = character.getMaxHealth();       
-        health = character.health;
         stamina = (character.stamina / character.getMaxStamina()) * maxStamina;
         healthSlider = GameObject.Find("PlayerHealth").GetComponent<Slider>();
 		staminaSlider = GameObject.Find("PlayerStamina").GetComponent<Slider>();
 		healthText = GameObject.Find ("PlayerHealthText").GetComponent<Text> ();
-        damage = character.strength;
         staminaTimer = 0f;
         staminaLossPerMinute = 30;
 
@@ -133,11 +129,14 @@ public class PlayerFighter : Fighter {
         int staminaLoss = (int)(staminaLossPerMinute * (staminaTimer % 60));
 
         if (character.stamina - staminaLoss >= 0)
-            character.stamina -= (int)(staminaLossPerMinute * (staminaTimer % 60));
+			character.stamina -= (int)(staminaLossPerMinute * ((staminaTimer / 60) + (staminaTimer % 60)));
         else
             character.stamina = 0;
 
-        //FightOutcome.wonFight = win;
+
+      	FightOutcome.wonFight = win;
+//		FightOutcome.LoseItemsAfterLosingFight ();
+//		FightOutcome.currentlyFighting = NULL;
 
     }
     #endregion
@@ -188,7 +187,7 @@ public class PlayerFighter : Fighter {
 
         float move = Input.GetAxis("Horizontal");
         bool jumping = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
-        bool punching = Input.GetKeyDown("space");
+		bool punching = Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.F);
         bool rolling = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
 
         if (!Grounded())

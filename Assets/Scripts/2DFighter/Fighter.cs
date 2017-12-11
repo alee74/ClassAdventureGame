@@ -29,18 +29,19 @@ public abstract class Fighter : MonoBehaviour {
     protected Fighter opponent;
     protected Transform opponentTransform;
     protected bool alreadyRolling;
+	protected Character character;
 
     //Game Values Fetched From Character Class
     protected float health;
     protected float maxHealth;
     protected float stamina;
     protected float maxStamina;
+	public float damage;
     
     // members we can set from editor.
     public float speed;
     public float jumpPower;
     public float rollPower;
-    public float damage;
     public float knockbackDist;
     public float recoverRate;   //rate to recover stamina at
     public float punchCost;     //stamina cost of a punch
@@ -143,6 +144,9 @@ public abstract class Fighter : MonoBehaviour {
         state = State.Stand;
         waitForCooldown = false;
         knockedBack = false;
+		maxHealth = character.getMaxHealth();
+		health = character.health;
+		damage = character.strength;
 
 	}
     #endregion
@@ -187,6 +191,7 @@ public abstract class Fighter : MonoBehaviour {
         }
 
         if (health <= 0) {
+			health = 1;
             Death();
             return;
         }

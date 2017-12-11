@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class EnemyFighter : Fighter {
 
-    private float xAttackDist = 2f;
+    private float xAttackDist = 1.5f;
     private float yAttackDist = 2f;
     private float jumpHeightDiff = 0.5f;
     public float distanceForJump = 1.5f;
@@ -25,8 +25,7 @@ public class EnemyFighter : Fighter {
     /// </summary>
     protected override void Start() {
 
-        maxHealth = 15f;
-        health = maxHealth;
+//		character = FightOutcome.currentlyFighting;
         maxStamina = 10f;
         stamina = maxStamina;
         healthSlider = GameObject.Find("EnemyHealth").GetComponent<Slider>();
