@@ -8,7 +8,7 @@ using UnityEngine;
 public class WorldPersist : MonoBehaviour {
     private const string PERSIST_PARENT_NAME = "PersistentWorld";
 
-    private static GameObject persistParent;
+    private static GameObject world;
 
     /// <summary>
     /// Causes the given GameObject to persist when the world map is loaded again later.
