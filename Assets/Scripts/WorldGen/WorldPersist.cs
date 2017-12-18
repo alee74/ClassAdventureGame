@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class WorldPersist : MonoBehaviour {
     private const string PERSIST_PARENT_NAME = "PersistentWorld";
-
+    private GameObject persistParent;
     private static GameObject world;
 
     /// <summary>
